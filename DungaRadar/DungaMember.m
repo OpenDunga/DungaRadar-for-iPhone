@@ -17,7 +17,7 @@
   userName_ = @"cig1n3t";
   dispName_ = @"ぎぎねっと";
   iconImageURL_ = [NSURL URLWithString:@"http://www.opendunga.net/thumb/8711916913726209.1.png"];
-  iconImage_ = [UIImage imageWithData:[NSData dataWithContentsOfURL:iconImageURL_]];
+  iconImage_ = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:iconImageURL_]];
   longitude_ = [[dictionary objectForKey:@"longitude"] doubleValue];
   latitude_ = [[dictionary objectForKey:@"latitude"] doubleValue];
   return self;
@@ -32,6 +32,13 @@
 
 - (NSString*)title{
   return dispName_;
+}
+
+- (void)dealloc{
+  [userName_ release];
+  [dispName_ release];
+  [iconImage_ release];
+  [super dealloc];
 }
 
 @end

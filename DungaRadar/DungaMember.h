@@ -22,8 +22,8 @@
 
 - (id)initWithDictionary:(NSDictionary*)dictionary;
 
-@property(readonly) NSString* userName;
-@property(readonly) NSString* dispName;
-@property(readonly) UIImage* iconImage;
+@property(readonly, copy) NSString* userName;
+@property(readonly, copy) NSString* dispName;
+@property(readonly, retain) UIImage* iconImage;
 
 @end

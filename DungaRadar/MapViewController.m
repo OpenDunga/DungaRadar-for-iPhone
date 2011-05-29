@@ -54,10 +54,15 @@
            fromLocation:(CLLocation *)oldLocation{
   NSNumber* lat = [NSNumber numberWithDouble:newLocation.coordinate.latitude];
   NSNumber* log = [NSNumber numberWithDouble:newLocation.coordinate.longitude];
-  NSLog(@"%f, %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
   NSDictionary* dictionary = [NSDictionary dictionaryWithObjectsAndKeys:lat, @"latitude", log, @"longitude", nil];
   DungaMember* me = [[DungaMember alloc] initWithDictionary:dictionary];
   [mapView_ addAnnotation:me];
+  // 縮尺を指定
+  MKCoordinateRegion cr = mapView_.region;
+  cr.center = [me coordinate];
+  cr.span.latitudeDelta = 0.01;
+  cr.span.longitudeDelta = 0.01;
+  [mapView_ setRegion:cr animated:NO];
 }
 
 - (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
@@ -70,7 +75,12 @@
     av = [[[MKAnnotationView alloc]
            initWithAnnotation:member reuseIdentifier:PinIdentifier] autorelease];
   }
-  av.image = member.iconImage;
+  CGSize newSize = CGSizeMake(32, 32);
+  UIGraphicsBeginImageContext(newSize);
+  [member.iconImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+  UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();
+  UIGraphicsEndImageContext();
+  av.image = resizedImage;
   return av;
 }
 
