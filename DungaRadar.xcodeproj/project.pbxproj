@@ -1,0 +1,304 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		079C6B041392040200528E69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B031392040200528E69 /* UIKit.framework */; };
+		079C6B061392040200528E69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B051392040200528E69 /* Foundation.framework */; };
+		079C6B081392040200528E69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B071392040200528E69 /* CoreGraphics.framework */; };
+		079C6B0E1392040200528E69 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B0C1392040200528E69 /* InfoPlist.strings */; };
+		079C6B111392040200528E69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B101392040200528E69 /* main.m */; };
+		079C6B141392040200528E69 /* DungaRadarAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B131392040200528E69 /* DungaRadarAppDelegate.m */; };
+		079C6B171392040200528E69 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B151392040200528E69 /* MainWindow.xib */; };
+		079C6B1A1392040200528E69 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B191392040200528E69 /* FirstViewController.m */; };
+		079C6B1D1392040200528E69 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B1C1392040200528E69 /* SecondViewController.m */; };
+		079C6B201392040200528E69 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B1E1392040200528E69 /* FirstView.xib */; };
+		079C6B231392040200528E69 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B211392040200528E69 /* SecondView.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		079C6AFF1392040200528E69 /* DungaRadar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungaRadar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		079C6B031392040200528E69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		079C6B051392040200528E69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		079C6B071392040200528E69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		079C6B0B1392040200528E69 /* DungaRadar-Info.plist */ = {isa = PBXFileReference; path = "DungaRadar-Info.plist"; sourceTree = "<group>"; };
+		079C6B0D1392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		079C6B0F1392040200528E69 /* DungaRadar-Prefix.pch */ = {isa = PBXFileReference; path = "DungaRadar-Prefix.pch"; sourceTree = "<group>"; };
+		079C6B101392040200528E69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		079C6B121392040200528E69 /* DungaRadarAppDelegate.h */ = {isa = PBXFileReference; path = DungaRadarAppDelegate.h; sourceTree = "<group>"; };
+		079C6B131392040200528E69 /* DungaRadarAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DungaRadarAppDelegate.m; sourceTree = "<group>"; };
+		079C6B161392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		079C6B181392040200528E69 /* FirstViewController.h */ = {isa = PBXFileReference; path = FirstViewController.h; sourceTree = "<group>"; };
+		079C6B191392040200528E69 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		079C6B1B1392040200528E69 /* SecondViewController.h */ = {isa = PBXFileReference; path = SecondViewController.h; sourceTree = "<group>"; };
+		079C6B1C1392040200528E69 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		079C6B1F1392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
+		079C6B221392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		079C6AFC1392040200528E69 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				079C6B041392040200528E69 /* UIKit.framework in Frameworks */,
+				079C6B061392040200528E69 /* Foundation.framework in Frameworks */,
+				079C6B081392040200528E69 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		079C6AF41392040100528E69 = {
+			isa = PBXGroup;
+			children = (
+				079C6B091392040200528E69 /* DungaRadar */,
+				079C6B021392040200528E69 /* Frameworks */,
+				079C6B001392040200528E69 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		079C6B001392040200528E69 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				079C6AFF1392040200528E69 /* DungaRadar.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		079C6B021392040200528E69 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				079C6B031392040200528E69 /* UIKit.framework */,
+				079C6B051392040200528E69 /* Foundation.framework */,
+				079C6B071392040200528E69 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		079C6B091392040200528E69 /* DungaRadar */ = {
+			isa = PBXGroup;
+			children = (
+				079C6B121392040200528E69 /* DungaRadarAppDelegate.h */,
+				079C6B131392040200528E69 /* DungaRadarAppDelegate.m */,
+				079C6B151392040200528E69 /* MainWindow.xib */,
+				079C6B181392040200528E69 /* FirstViewController.h */,
+				079C6B191392040200528E69 /* FirstViewController.m */,
+				079C6B1B1392040200528E69 /* SecondViewController.h */,
+				079C6B1C1392040200528E69 /* SecondViewController.m */,
+				079C6B1E1392040200528E69 /* FirstView.xib */,
+				079C6B211392040200528E69 /* SecondView.xib */,
+				079C6B0A1392040200528E69 /* Supporting Files */,
+			);
+			path = DungaRadar;
+			sourceTree = "<group>";
+		};
+		079C6B0A1392040200528E69 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				079C6B0B1392040200528E69 /* DungaRadar-Info.plist */,
+				079C6B0C1392040200528E69 /* InfoPlist.strings */,
+				079C6B0F1392040200528E69 /* DungaRadar-Prefix.pch */,
+				079C6B101392040200528E69 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		079C6AFE1392040200528E69 /* DungaRadar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 079C6B261392040200528E69 /* Build configuration list for PBXNativeTarget "DungaRadar" */;
+			buildPhases = (
+				079C6AFB1392040200528E69 /* Sources */,
+				079C6AFC1392040200528E69 /* Frameworks */,
+				079C6AFD1392040200528E69 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DungaRadar;
+			productName = DungaRadar;
+			productReference = 079C6AFF1392040200528E69 /* DungaRadar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		079C6AF61392040100528E69 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				ORGANIZATIONNAME = Kawaz;
+			};
+			buildConfigurationList = 079C6AF91392040100528E69 /* Build configuration list for PBXProject "DungaRadar" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 079C6AF41392040100528E69;
+			productRefGroup = 079C6B001392040200528E69 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				079C6AFE1392040200528E69 /* DungaRadar */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		079C6AFD1392040200528E69 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				079C6B0E1392040200528E69 /* InfoPlist.strings in Resources */,
+				079C6B171392040200528E69 /* MainWindow.xib in Resources */,
+				079C6B201392040200528E69 /* FirstView.xib in Resources */,
+				079C6B231392040200528E69 /* SecondView.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		079C6AFB1392040200528E69 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				079C6B111392040200528E69 /* main.m in Sources */,
+				079C6B141392040200528E69 /* DungaRadarAppDelegate.m in Sources */,
+				079C6B1A1392040200528E69 /* FirstViewController.m in Sources */,
+				079C6B1D1392040200528E69 /* SecondViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		079C6B0C1392040200528E69 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				079C6B0D1392040200528E69 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		079C6B151392040200528E69 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				079C6B161392040200528E69 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		079C6B1E1392040200528E69 /* FirstView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				079C6B1F1392040200528E69 /* en */,
+			);
+			name = FirstView.xib;
+			sourceTree = "<group>";
+		};
+		079C6B211392040200528E69 /* SecondView.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				079C6B221392040200528E69 /* en */,
+			);
+			name = SecondView.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		079C6B241392040200528E69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		079C6B251392040200528E69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		079C6B271392040200528E69 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DungaRadar/DungaRadar-Prefix.pch";
+				INFOPLIST_FILE = "DungaRadar/DungaRadar-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		079C6B281392040200528E69 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "DungaRadar/DungaRadar-Prefix.pch";
+				INFOPLIST_FILE = "DungaRadar/DungaRadar-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		079C6AF91392040100528E69 /* Build configuration list for PBXProject "DungaRadar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				079C6B241392040200528E69 /* Debug */,
+				079C6B251392040200528E69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		079C6B261392040200528E69 /* Build configuration list for PBXNativeTarget "DungaRadar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				079C6B271392040200528E69 /* Debug */,
+				079C6B281392040200528E69 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 079C6AF61392040100528E69 /* Project object */;
+}
