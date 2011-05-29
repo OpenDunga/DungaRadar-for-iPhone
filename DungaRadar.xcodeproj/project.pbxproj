@@ -14,10 +14,11 @@
 		079C6B111392040200528E69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B101392040200528E69 /* main.m */; };
 		079C6B141392040200528E69 /* DungaRadarAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B131392040200528E69 /* DungaRadarAppDelegate.m */; };
 		079C6B171392040200528E69 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B151392040200528E69 /* MainWindow.xib */; };
-		079C6B1A1392040200528E69 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B191392040200528E69 /* FirstViewController.m */; };
-		079C6B1D1392040200528E69 /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B1C1392040200528E69 /* SecondViewController.m */; };
-		079C6B201392040200528E69 /* FirstView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B1E1392040200528E69 /* FirstView.xib */; };
-		079C6B231392040200528E69 /* SecondView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B211392040200528E69 /* SecondView.xib */; };
+		079C6B2C1392046800528E69 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B2A1392046800528E69 /* MapViewController.m */; };
+		079C6B2D1392046800528E69 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B2B1392046800528E69 /* MapView.xib */; };
+		07AE415A1392061D0087D526 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AE41581392061D0087D526 /* ConfigurationViewController.m */; };
+		07AE415B1392061D0087D526 /* ConfigurationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07AE41591392061D0087D526 /* ConfigurationView.xib */; };
+		07AE416D139211CA0087D526 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416C139211CA0087D526 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,19 +26,20 @@
 		079C6B031392040200528E69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		079C6B051392040200528E69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		079C6B071392040200528E69 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		079C6B0B1392040200528E69 /* DungaRadar-Info.plist */ = {isa = PBXFileReference; path = "DungaRadar-Info.plist"; sourceTree = "<group>"; };
+		079C6B0B1392040200528E69 /* DungaRadar-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "DungaRadar-Info.plist"; sourceTree = "<group>"; };
 		079C6B0D1392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		079C6B0F1392040200528E69 /* DungaRadar-Prefix.pch */ = {isa = PBXFileReference; path = "DungaRadar-Prefix.pch"; sourceTree = "<group>"; };
+		079C6B0F1392040200528E69 /* DungaRadar-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DungaRadar-Prefix.pch"; sourceTree = "<group>"; };
 		079C6B101392040200528E69 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		079C6B121392040200528E69 /* DungaRadarAppDelegate.h */ = {isa = PBXFileReference; path = DungaRadarAppDelegate.h; sourceTree = "<group>"; };
+		079C6B121392040200528E69 /* DungaRadarAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DungaRadarAppDelegate.h; sourceTree = "<group>"; };
 		079C6B131392040200528E69 /* DungaRadarAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DungaRadarAppDelegate.m; sourceTree = "<group>"; };
 		079C6B161392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		079C6B181392040200528E69 /* FirstViewController.h */ = {isa = PBXFileReference; path = FirstViewController.h; sourceTree = "<group>"; };
-		079C6B191392040200528E69 /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
-		079C6B1B1392040200528E69 /* SecondViewController.h */ = {isa = PBXFileReference; path = SecondViewController.h; sourceTree = "<group>"; };
-		079C6B1C1392040200528E69 /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
-		079C6B1F1392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstView.xib; sourceTree = "<group>"; };
-		079C6B221392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondView.xib; sourceTree = "<group>"; };
+		079C6B291392046800528E69 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		079C6B2A1392046800528E69 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		079C6B2B1392046800528E69 /* MapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
+		07AE41571392061D0087D526 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigurationViewController.h; path = ../ConfigurationViewController.h; sourceTree = "<group>"; };
+		07AE41581392061D0087D526 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationViewController.m; path = ../ConfigurationViewController.m; sourceTree = "<group>"; };
+		07AE41591392061D0087D526 /* ConfigurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigurationView.xib; path = ../ConfigurationView.xib; sourceTree = "<group>"; };
+		07AE416C139211CA0087D526 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +47,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07AE416D139211CA0087D526 /* MapKit.framework in Frameworks */,
 				079C6B041392040200528E69 /* UIKit.framework in Frameworks */,
 				079C6B061392040200528E69 /* Foundation.framework in Frameworks */,
 				079C6B081392040200528E69 /* CoreGraphics.framework in Frameworks */,
@@ -57,6 +60,7 @@
 		079C6AF41392040100528E69 = {
 			isa = PBXGroup;
 			children = (
+				07AE416C139211CA0087D526 /* MapKit.framework */,
 				079C6B091392040200528E69 /* DungaRadar */,
 				079C6B021392040200528E69 /* Frameworks */,
 				079C6B001392040200528E69 /* Products */,
@@ -87,13 +91,13 @@
 				079C6B121392040200528E69 /* DungaRadarAppDelegate.h */,
 				079C6B131392040200528E69 /* DungaRadarAppDelegate.m */,
 				079C6B151392040200528E69 /* MainWindow.xib */,
-				079C6B181392040200528E69 /* FirstViewController.h */,
-				079C6B191392040200528E69 /* FirstViewController.m */,
-				079C6B1B1392040200528E69 /* SecondViewController.h */,
-				079C6B1C1392040200528E69 /* SecondViewController.m */,
-				079C6B1E1392040200528E69 /* FirstView.xib */,
-				079C6B211392040200528E69 /* SecondView.xib */,
 				079C6B0A1392040200528E69 /* Supporting Files */,
+				079C6B291392046800528E69 /* MapViewController.h */,
+				079C6B2A1392046800528E69 /* MapViewController.m */,
+				079C6B2B1392046800528E69 /* MapView.xib */,
+				07AE41571392061D0087D526 /* ConfigurationViewController.h */,
+				07AE41581392061D0087D526 /* ConfigurationViewController.m */,
+				07AE41591392061D0087D526 /* ConfigurationView.xib */,
 			);
 			path = DungaRadar;
 			sourceTree = "<group>";
@@ -161,8 +165,8 @@
 			files = (
 				079C6B0E1392040200528E69 /* InfoPlist.strings in Resources */,
 				079C6B171392040200528E69 /* MainWindow.xib in Resources */,
-				079C6B201392040200528E69 /* FirstView.xib in Resources */,
-				079C6B231392040200528E69 /* SecondView.xib in Resources */,
+				079C6B2D1392046800528E69 /* MapView.xib in Resources */,
+				07AE415B1392061D0087D526 /* ConfigurationView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,8 +179,8 @@
 			files = (
 				079C6B111392040200528E69 /* main.m in Sources */,
 				079C6B141392040200528E69 /* DungaRadarAppDelegate.m in Sources */,
-				079C6B1A1392040200528E69 /* FirstViewController.m in Sources */,
-				079C6B1D1392040200528E69 /* SecondViewController.m in Sources */,
+				079C6B2C1392046800528E69 /* MapViewController.m in Sources */,
+				07AE415A1392061D0087D526 /* ConfigurationViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -197,22 +201,6 @@
 				079C6B161392040200528E69 /* en */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		079C6B1E1392040200528E69 /* FirstView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				079C6B1F1392040200528E69 /* en */,
-			);
-			name = FirstView.xib;
-			sourceTree = "<group>";
-		};
-		079C6B211392040200528E69 /* SecondView.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				079C6B221392040200528E69 /* en */,
-			);
-			name = SecondView.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -297,6 +285,7 @@
 				079C6B281392040200528E69 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
