@@ -65,10 +65,10 @@
     cr.span.longitudeDelta = 0.01;
     [mapView_ setRegion:cr animated:NO];
     initialized_ = YES;
+    [mapView_ addAnnotation:me];
   }else{
     [mapView_ removeAnnotation:me];
   }
-  [mapView_ addAnnotation:me];
 }
 
 - (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{

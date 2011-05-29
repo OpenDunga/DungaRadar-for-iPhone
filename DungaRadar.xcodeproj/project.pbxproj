@@ -21,6 +21,7 @@
 		07AE416D139211CA0087D526 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416C139211CA0087D526 /* MapKit.framework */; };
 		07AE416F1392132D0087D526 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416E1392132C0087D526 /* CoreLocation.framework */; };
 		07AE4172139215390087D526 /* DungaMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AE4171139215390087D526 /* DungaMember.m */; };
+		07AE4175139234FB0087D526 /* MD5Extention.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AE4174139234FB0087D526 /* MD5Extention.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,8 @@
 		07AE416E1392132C0087D526 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		07AE4170139215390087D526 /* DungaMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DungaMember.h; sourceTree = "<group>"; };
 		07AE4171139215390087D526 /* DungaMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DungaMember.m; sourceTree = "<group>"; };
+		07AE4173139234FB0087D526 /* MD5Extention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MD5Extention.h; sourceTree = "<group>"; };
+		07AE4174139234FB0087D526 /* MD5Extention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MD5Extention.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +110,8 @@
 				07AE41591392061D0087D526 /* ConfigurationView.xib */,
 				07AE4170139215390087D526 /* DungaMember.h */,
 				07AE4171139215390087D526 /* DungaMember.m */,
+				07AE4173139234FB0087D526 /* MD5Extention.h */,
+				07AE4174139234FB0087D526 /* MD5Extention.m */,
 			);
 			path = DungaRadar;
 			sourceTree = "<group>";
@@ -191,6 +196,7 @@
 				079C6B2C1392046800528E69 /* MapViewController.m in Sources */,
 				07AE415A1392061D0087D526 /* ConfigurationViewController.m in Sources */,
 				07AE4172139215390087D526 /* DungaMember.m in Sources */,
+				07AE4175139234FB0087D526 /* MD5Extention.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
