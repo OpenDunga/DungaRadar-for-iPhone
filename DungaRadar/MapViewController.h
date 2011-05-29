@@ -10,6 +10,7 @@
 #import <MapKit/MKMapView.h>
 
 @interface MapViewController : UIViewController <MKMapViewDelegate, CLLocationManagerDelegate> {
+  BOOL initialized_;
   IBOutlet MKMapView* mapView_;
   CLLocationManager* locationManager_;
 }

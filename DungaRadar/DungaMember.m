@@ -34,6 +34,11 @@
   return dispName_;
 }
 
+- (BOOL)isEqual:(id)object{
+  DungaMember* member = (DungaMember*)object;
+  return userName_ == member.userName;
+}
+
 - (void)dealloc{
   [userName_ release];
   [dispName_ release];
