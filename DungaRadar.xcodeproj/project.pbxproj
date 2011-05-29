@@ -19,6 +19,8 @@
 		07AE415A1392061D0087D526 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AE41581392061D0087D526 /* ConfigurationViewController.m */; };
 		07AE415B1392061D0087D526 /* ConfigurationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07AE41591392061D0087D526 /* ConfigurationView.xib */; };
 		07AE416D139211CA0087D526 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416C139211CA0087D526 /* MapKit.framework */; };
+		07AE416F1392132D0087D526 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416E1392132C0087D526 /* CoreLocation.framework */; };
+		07AE4172139215390087D526 /* DungaMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AE4171139215390087D526 /* DungaMember.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,9 @@
 		07AE41581392061D0087D526 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationViewController.m; path = ../ConfigurationViewController.m; sourceTree = "<group>"; };
 		07AE41591392061D0087D526 /* ConfigurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigurationView.xib; path = ../ConfigurationView.xib; sourceTree = "<group>"; };
 		07AE416C139211CA0087D526 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		07AE416E1392132C0087D526 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		07AE4170139215390087D526 /* DungaMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DungaMember.h; sourceTree = "<group>"; };
+		07AE4171139215390087D526 /* DungaMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DungaMember.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				07AE416F1392132D0087D526 /* CoreLocation.framework in Frameworks */,
 				07AE416D139211CA0087D526 /* MapKit.framework in Frameworks */,
 				079C6B041392040200528E69 /* UIKit.framework in Frameworks */,
 				079C6B061392040200528E69 /* Foundation.framework in Frameworks */,
@@ -60,7 +66,6 @@
 		079C6AF41392040100528E69 = {
 			isa = PBXGroup;
 			children = (
-				07AE416C139211CA0087D526 /* MapKit.framework */,
 				079C6B091392040200528E69 /* DungaRadar */,
 				079C6B021392040200528E69 /* Frameworks */,
 				079C6B001392040200528E69 /* Products */,
@@ -78,6 +83,8 @@
 		079C6B021392040200528E69 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				07AE416E1392132C0087D526 /* CoreLocation.framework */,
+				07AE416C139211CA0087D526 /* MapKit.framework */,
 				079C6B031392040200528E69 /* UIKit.framework */,
 				079C6B051392040200528E69 /* Foundation.framework */,
 				079C6B071392040200528E69 /* CoreGraphics.framework */,
@@ -98,6 +105,8 @@
 				07AE41571392061D0087D526 /* ConfigurationViewController.h */,
 				07AE41581392061D0087D526 /* ConfigurationViewController.m */,
 				07AE41591392061D0087D526 /* ConfigurationView.xib */,
+				07AE4170139215390087D526 /* DungaMember.h */,
+				07AE4171139215390087D526 /* DungaMember.m */,
 			);
 			path = DungaRadar;
 			sourceTree = "<group>";
@@ -181,6 +190,7 @@
 				079C6B141392040200528E69 /* DungaRadarAppDelegate.m in Sources */,
 				079C6B2C1392046800528E69 /* MapViewController.m in Sources */,
 				07AE415A1392061D0087D526 /* ConfigurationViewController.m in Sources */,
+				07AE4172139215390087D526 /* DungaMember.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 //
 
 #import "MapViewController.h"
+#import "DungaMember.h"
 
 @implementation MapViewController
 
@@ -19,6 +20,7 @@
 }
 
 - (void)dealloc{
+  [locationManager_ release];
   [super dealloc];
 }
 
@@ -33,17 +35,43 @@
 
 - (void)viewDidLoad{
   [super viewDidLoad];
+  locationManager_ = [[CLLocationManager alloc] init];
+  locationManager_.delegate = self;
+  [locationManager_ startUpdatingLocation];
 }
 
 - (void)viewDidUnload{
+  [mapView_ release];
   [super viewDidUnload];
-  // Release any retained subviews of the main view.
-  // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
   // Return YES for supported orientations
   return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation 
+           fromLocation:(CLLocation *)oldLocation{
+  NSNumber* lat = [NSNumber numberWithDouble:newLocation.coordinate.latitude];
+  NSNumber* log = [NSNumber numberWithDouble:newLocation.coordinate.longitude];
+  NSLog(@"%f, %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+  NSDictionary* dictionary = [NSDictionary dictionaryWithObjectsAndKeys:lat, @"latitude", log, @"longitude", nil];
+  DungaMember* me = [[DungaMember alloc] initWithDictionary:dictionary];
+  [mapView_ addAnnotation:me];
+}
+
+- (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+  DungaMember* member = (DungaMember*)annotation;
+  NSString *PinIdentifier = [NSString stringWithFormat:@"Pin_%@", member.userName];
+  MKAnnotationView *av =
+  (MKAnnotationView*)
+  [mapView dequeueReusableAnnotationViewWithIdentifier:PinIdentifier];
+  if(av == nil){
+    av = [[[MKAnnotationView alloc]
+           initWithAnnotation:member reuseIdentifier:PinIdentifier] autorelease];
+  }
+  av.image = member.iconImage;
+  return av;
 }
 
 @end
