@@ -14,8 +14,6 @@
 - (void)pressLoginButton:(id)sender;
 @end
 
-const NSString* PASSWORD = @"hogehoge";
-
 @implementation ConfigurationViewController
 
 - (id)initWithStyle:(UITableViewStyle)style{
@@ -26,17 +24,10 @@ const NSString* PASSWORD = @"hogehoge";
 }
 
 - (void)dealloc{
+  [loginField_ release];
+  [passwordField_ release];
   [super dealloc];
 }
-
-- (void)didReceiveMemoryWarning{
-  // Releases the view if it doesn't have a superview.
-  [super didReceiveMemoryWarning];
-  
-  // Release any cached data, images, etc that aren't in use.
-}
-
-#pragma mark - View lifecycle
 
 - (void)viewDidLoad{
   [super viewDidLoad];
@@ -70,11 +61,14 @@ const NSString* PASSWORD = @"hogehoge";
     field.returnKeyType = UIReturnKeyDone;
     field.keyboardType = UIKeyboardTypeASCIICapable;
     field.textColor = [UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1];
+    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
     if(indexPath.row==0){
       cell.textLabel.text = @"ユーザー名";
+      loginField_ = [field retain];
     }else if(indexPath.row==1){
       cell.textLabel.text = @"パスワード";
       field.secureTextEntry = YES;
+      passwordField_ = [field retain];
     }
     [cell addSubview:field];
   }else{
@@ -97,8 +91,7 @@ const NSString* PASSWORD = @"hogehoge";
 
 - (void)pressLoginButton:(id)sender{
   HttpConnection* hc = [[[HttpConnection alloc] init] autorelease];
-  NSString* md5 = [(NSString*)PASSWORD toMD5];
-  [hc auth:@"cig1n3t" passwordHash:md5];
+  [hc auth:loginField_.text passwordHash:[passwordField_.text toMD5]];
 }
 
 @end

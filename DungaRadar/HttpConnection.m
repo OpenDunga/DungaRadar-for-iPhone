@@ -16,6 +16,12 @@ const NSString*	SERVER_SCHEME	= @"http";
 /** サーバーホスト。 */
 const NSString*	SERVER_HOST		= @"www.opendunga.net";
 
+/** HttpHeaderField **/
+/**
+ http.useragentを利用すると、cocoaの罠にはまるので便宜的にnamaco.
+**/
+const NSString* HEADER_FIELD = @"namaco";
+
 /** ユーザーエージェント。 */
 const NSString*	USER_AGENT		= @"DungaRadar/1.0";
 
@@ -26,36 +32,20 @@ const NSString* PATH_LOGIN		= @"/api/login";
 
 NSMutableData* loadedData = nil;
 
-- (id)initWithCoder:(NSCoder *)aDecoder{
-  if( (self = [super init]) ){
-    encryptedPassword_ = [[aDecoder decodeObjectForKey:@"PASSWD"] retain];
-    userId_            = [[aDecoder decodeObjectForKey:@"ID"] retain];
-  }
-  return self;
-}
-
-- (void)encodeWithCoder:(NSCoder *)aCoder{
-  [aCoder encodeObject:encryptedPassword_ forKey:@"PASSWD"];
-  [aCoder encodeObject:userId_ forKey:@"ID"];
-}
-
-- (BOOL)auth:(NSString *)userName passwordHash:(NSString *)passwordHash{
+- (void)auth:(NSString *)userName passwordHash:(NSString *)passwordHash{
   NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[HttpConnection buildURL:(NSString*)PATH_LOGIN]];
   [req addValue:(NSString*)USER_AGENT forHTTPHeaderField:@"http.useragent"];
   NSString* agent = [req valueForHTTPHeaderField:@"http.useragent"];
   NSString* encrypted = [passwordHash toEncrypted:agent];
-  NSLog(@"%@", agent);
-  NSDictionary* post = [NSDictionary dictionaryWithObjectsAndKeys:@"cig1n3t", @"user_name", encrypted, @"enc_password", passwordHash, @"password", nil];
+  NSDictionary* post = [NSDictionary dictionaryWithObjectsAndKeys:userName, @"user_name", encrypted, @"enc_password", passwordHash, @"password", nil];
   [self post:(NSString*)PATH_LOGIN params:post];
-  return YES;
 }
 
-- (NSString*)post:(NSString *)path params:(NSDictionary *)postParameters{
-  //NSMutableString* responseString = [NSMutableString string];
+- (void)post:(NSString *)path params:(NSDictionary *)postParameters{
   NSMutableURLRequest* httpPostRequest = [NSMutableURLRequest requestWithURL:[HttpConnection buildURL:path]];
   [httpPostRequest setHTTPMethod:@"POST"];
   NSData* requestData = [[postParameters dump] dataUsingEncoding:NSUTF8StringEncoding];
-  [httpPostRequest addValue:(NSString*)USER_AGENT forHTTPHeaderField:@"namaco"];
+  [httpPostRequest addValue:(NSString*)USER_AGENT forHTTPHeaderField:(NSString*)HEADER_FIELD];
   [httpPostRequest setHTTPBody:requestData];
   NSURLConnection* connect = [NSURLConnection connectionWithRequest:httpPostRequest delegate:self];
 }
