@@ -14,7 +14,6 @@
 - (id)initWithStyle:(UITableViewStyle)style{
   self = [super initWithStyle:UITableViewStyleGrouped];
   if (self) {
-    // Custom initialization
   }
   return self;
 }
@@ -34,12 +33,12 @@
 
 - (void)viewDidLoad{
   [super viewDidLoad];
-  
-  // Uncomment the following line to preserve selection between presentations.
-  // self.clearsSelectionOnViewWillAppear = NO;
-  
-  // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-  // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+  self.tableView.allowsSelection = NO;
+  UIButton* loginButton = [UIButton buttonWithType:111];
+  loginButton.frame = CGRectMake(10, 150, 300, 45);
+  [loginButton setTitle:@"OpenDungaにログイン" forState:UIControlStateNormal];
+  [loginButton setTintColor:[UIColor redColor]];
+  [self.view addSubview:loginButton];
 }
 
 - (void)viewDidUnload{
@@ -72,14 +71,10 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-#warning Potentially incomplete method implementation.
-  // Return the number of sections.
   return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-#warning Incomplete method implementation.
-  // Return the number of rows in the section.
   return 2;
 }
 
@@ -89,21 +84,23 @@
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
   }
-  
-  // Configure the cell...
-  UITextField* field = [[UITextField alloc] initWithFrame:CGRectMake(125, 12, 125, 25)];
-  field.delegate = self;
-  field.textAlignment = UITextAlignmentLeft;
-  field.returnKeyType = UIReturnKeyDone;
-  field.keyboardType = UIKeyboardTypeASCIICapable;
-  if(indexPath.row==0){
-    cell.textLabel.text = @"ユーザー名";
-  }else if(indexPath.row==1){
-    cell.textLabel.text = @"パスワード";
-    field.secureTextEntry = YES;
+  if(indexPath.section==0){
+    UITextField* field = [[UITextField alloc] initWithFrame:CGRectMake(125, 12, 125, 25)];
+    field.delegate = self;
+    field.textAlignment = UITextAlignmentLeft;
+    field.returnKeyType = UIReturnKeyDone;
+    field.keyboardType = UIKeyboardTypeASCIICapable;
+    field.textColor = [UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1];
+    if(indexPath.row==0){
+      cell.textLabel.text = @"ユーザー名";
+    }else if(indexPath.row==1){
+      cell.textLabel.text = @"パスワード";
+      field.secureTextEntry = YES;
+    }
+    [cell addSubview:field];
+  }else{
+    
   }
-  [cell addSubview:field];
-  
   return cell;
 }
 
@@ -160,7 +157,7 @@
 }
 
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section{
-  return @"ログイン設定";
+  return section == 0 ? @"ログイン設定" : @"";
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
@@ -170,7 +167,5 @@
   }
   return YES;
 }
-
-
 
 @end
