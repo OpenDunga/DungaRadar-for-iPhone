@@ -11,5 +11,5 @@
 
 @interface NSString (EncryptExtention)
 - (NSString*)toMD5;
-- (NSString*)toEncrypted:(NSString*)passwordHash userAgent:(NSString*)agent;
+- (NSString*)toEncrypted:(NSString*)agent;
 @end

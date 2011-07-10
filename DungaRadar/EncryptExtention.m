@@ -23,7 +23,7 @@
           ];  
 }
 
-- (NSString*)toEncrypted:(NSString *)passwordHash userAgent:(NSString *)agent{
+- (NSString*)toEncrypted:(NSString *)agent{
   NSString* key = [agent toMD5];
   
   int keyNum = 5;
@@ -42,7 +42,7 @@
   }
   
   NSMutableString* encrypted = [NSMutableString stringWithString:[key substringWithRange:NSMakeRange(0, 4)]];
-  [encrypted appendString:passwordHash]; 
+  [encrypted appendString:self]; 
   [encrypted appendString:[key substringWithRange:NSMakeRange(4, 4)]];
   
   NSMutableString* inserted = [NSMutableString string];

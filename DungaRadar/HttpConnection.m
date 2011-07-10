@@ -7,6 +7,7 @@
 //
 
 #import "HttpConnection.h"
+#import "EncryptExtention.h"
 #import "DictionaryExtention.h"
 
 /** サーバースキーマ。 */
@@ -38,16 +39,23 @@ NSMutableData* loadedData = nil;
   [aCoder encodeObject:userId_ forKey:@"ID"];
 }
 
-- (BOOL)auth:(NSString *)userName :(NSString *)passwordHash{
+- (BOOL)auth:(NSString *)userName passwordHash:(NSString *)passwordHash{
+  NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[HttpConnection buildURL:(NSString*)PATH_LOGIN]];
+  [req addValue:(NSString*)USER_AGENT forHTTPHeaderField:@"http.useragent"];
+  NSString* agent = [req valueForHTTPHeaderField:@"http.useragent"];
+  NSString* encrypted = [passwordHash toEncrypted:agent];
+  NSLog(@"%@", agent);
+  NSDictionary* post = [NSDictionary dictionaryWithObjectsAndKeys:@"cig1n3t", @"user_name", encrypted, @"enc_password", passwordHash, @"password", nil];
+  [self post:(NSString*)PATH_LOGIN params:post];
   return YES;
 }
 
 - (NSString*)post:(NSString *)path params:(NSDictionary *)postParameters{
   //NSMutableString* responseString = [NSMutableString string];
-  NSMutableURLRequest* httpPostRequest = [NSMutableURLRequest requestWithURL:[HttpConnection buildURL:(NSString*)PATH_LOGIN]];
+  NSMutableURLRequest* httpPostRequest = [NSMutableURLRequest requestWithURL:[HttpConnection buildURL:path]];
   [httpPostRequest setHTTPMethod:@"POST"];
   NSData* requestData = [[postParameters dump] dataUsingEncoding:NSUTF8StringEncoding];
-  [httpPostRequest setValue:(NSString*)USER_AGENT forHTTPHeaderField:@"http.useragent"];
+  [httpPostRequest addValue:(NSString*)USER_AGENT forHTTPHeaderField:@"namaco"];
   [httpPostRequest setHTTPBody:requestData];
   NSURLConnection* connect = [NSURLConnection connectionWithRequest:httpPostRequest delegate:self];
 }

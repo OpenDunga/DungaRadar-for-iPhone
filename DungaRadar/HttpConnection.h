@@ -16,7 +16,7 @@
 
 + (NSURL*)buildURL:(NSString*)path;
 
-- (BOOL)auth:(NSString*)userName:(NSString*)passwordHash;
+- (BOOL)auth:(NSString*)userName passwordHash:(NSString*)passwordHash;
 - (NSString*)post:(NSString*)path params:(NSDictionary*)postParameters;
 - (NSString*)get:(NSString*)path;
 

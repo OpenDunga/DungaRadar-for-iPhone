@@ -8,10 +8,13 @@
 
 #import "ConfigurationViewController.h"
 #import "HttpConnection.h"
+#import "EncryptExtention.h"
 
 @interface ConfigurationViewController()
 - (void)pressLoginButton:(id)sender;
 @end
+
+const NSString* PASSWORD = @"hogehoge";
 
 @implementation ConfigurationViewController
 
@@ -94,9 +97,8 @@
 
 - (void)pressLoginButton:(id)sender{
   HttpConnection* hc = [[[HttpConnection alloc] init] autorelease];
-  NSDictionary* post = [NSDictionary dictionaryWithObjectsAndKeys:@"cig1n3t", @"user_name", @"hogehoge", @"enc_password", @"hogehoge", @"password", nil];
-  NSLog(@"%@", [post description]);
-  [hc post:@"/api/login" params:post];
+  NSString* md5 = [(NSString*)PASSWORD toMD5];
+  [hc auth:@"cig1n3t" passwordHash:md5];
 }
 
 @end
