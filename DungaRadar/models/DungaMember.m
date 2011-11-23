@@ -10,40 +10,36 @@
 
 
 @implementation DungaMember
-@synthesize dispName=dispName_, userName=userName_, iconImage=iconImage_;
+@synthesize memberID=memberID_, memberDispName=memberDispName_, 
+timestamp=timestamp_, iconImage=iconImage_, location=location_;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary{
+- (id)initWithUserData:(NSDictionary *)userData{
+  //
+  // {"latitude":43.0838878,"longitude":141.3531251,"memberDispName":"ちくだ","memberID":47,"registeredTime":1310288033071}
   [super init];
-  userName_ = @"cig1n3t";
-  dispName_ = @"ぎぎねっと";
-  iconImageURL_ = [NSURL URLWithString:@"http://www.opendunga.net/thumb/8711916913726209.1.png"];
-  iconImage_ = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:iconImageURL_]];
-  longitude_ = [[dictionary objectForKey:@"longitude"] doubleValue];
-  latitude_ = [[dictionary objectForKey:@"latitude"] doubleValue];
+  if(self){
+    memberID_ = [(NSNumber*)[userData objectForKey:@"memberID"] intValue];
+    memberDispName_ = [(NSString*)[userData objectForKey:@"memberDispName"] retain];
+    NSURL* iconImageURL = [NSURL URLWithString:@"http://www.kawaz.org/storage/profiles/giginet/icon_4.middle.png"];
+    iconImage_ = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:iconImageURL]];
+    location_ = [[CLLocation alloc] initWithLatitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"latitude"] doubleValue] 
+                                           longitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"longitude"] doubleValue]];
+    timestamp_ = [[NSDate alloc] initWithTimeIntervalSince1970:(NSTimeInterval)[(NSNumber*)[userData objectForKey:@"registeredTime"] intValue]];
+  }
   return self;
 }
 
-- (CLLocationCoordinate2D)coordinate{
-  CLLocationCoordinate2D coordinate;
-  coordinate.longitude = longitude_;
-  coordinate.latitude = latitude_;
-  return coordinate;
-}
-
-- (NSString*)title{
-  return dispName_;
+- (void)dealloc{
+  [memberDispName_ release];
+  [timestamp_ release];
+  [iconImage_ release];
+  [location_ release];
+  [super dealloc];
 }
 
 - (BOOL)isEqual:(id)object{
   DungaMember* member = (DungaMember*)object;
-  return userName_ == member.userName;
-}
-
-- (void)dealloc{
-  [userName_ release];
-  [dispName_ release];
-  [iconImage_ release];
-  [super dealloc];
+  return memberID_ == member.memberID;
 }
 
 @end

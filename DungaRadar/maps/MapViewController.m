@@ -9,6 +9,11 @@
 #import "MapViewController.h"
 #import "DungaMember.h"
 
+@interface MapViewController()
+- (NSArray*)getAllMembers;
+- (BOOL)registerLocation:(double)lng latitude:(double)lat;
+@end
+
 @implementation MapViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -54,9 +59,9 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation 
            fromLocation:(CLLocation *)oldLocation{
   NSNumber* lat = [NSNumber numberWithDouble:newLocation.coordinate.latitude];
-  NSNumber* log = [NSNumber numberWithDouble:newLocation.coordinate.longitude];
-  NSDictionary* dictionary = [NSDictionary dictionaryWithObjectsAndKeys:lat, @"latitude", log, @"longitude", nil];
-  DungaMember* me = [[DungaMember alloc] initWithDictionary:dictionary];
+  NSNumber* lng = [NSNumber numberWithDouble:newLocation.coordinate.longitude];
+  NSDictionary* dictionary = [NSDictionary dictionaryWithObjectsAndKeys:lat, @"latitude", lng, @"longitude", nil];
+  DungaMember* me = [[DungaMember alloc] initWithUserData:dictionary];
   if(!initialized_){
     // 縮尺を指定
     MKCoordinateRegion cr = mapView_.region;
@@ -73,7 +78,7 @@
 
 - (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
   DungaMember* member = (DungaMember*)annotation;
-  NSString *PinIdentifier = [NSString stringWithFormat:@"Pin_%@", member.userName];
+  NSString *PinIdentifier = [NSString stringWithFormat:@"Pin_%@", member.memberDispName];
   MKAnnotationView *av =
   (MKAnnotationView*)
   [mapView dequeueReusableAnnotationViewWithIdentifier:PinIdentifier];
