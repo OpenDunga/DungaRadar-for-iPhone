@@ -31,6 +31,7 @@
 		078F5A58147CD5F200C2A958 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A4B147CD5F200C2A958 /* CJSONDeserializer.m */; };
 		078F5A59147CD5F200C2A958 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A4D147CD5F200C2A958 /* CJSONScanner.m */; };
 		078F5A5A147CD5F200C2A958 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A4F147CD5F200C2A958 /* CJSONSerializer.m */; };
+		078F5A5D147CD8BA00C2A958 /* DungaRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A5C147CD8BA00C2A958 /* DungaRegister.m */; };
 		079C6B041392040200528E69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B031392040200528E69 /* UIKit.framework */; };
 		079C6B061392040200528E69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B051392040200528E69 /* Foundation.framework */; };
 		079C6B081392040200528E69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B071392040200528E69 /* CoreGraphics.framework */; };
@@ -88,6 +89,8 @@
 		078F5A4E147CD5F200C2A958 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
 		078F5A4F147CD5F200C2A958 /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
 		078F5A50147CD5F200C2A958 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
+		078F5A5B147CD8BA00C2A958 /* DungaRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DungaRegister.h; path = models/DungaRegister.h; sourceTree = "<group>"; };
+		078F5A5C147CD8BA00C2A958 /* DungaRegister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DungaRegister.m; path = models/DungaRegister.m; sourceTree = "<group>"; };
 		079C6AFF1392040200528E69 /* DungaRadar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungaRadar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		079C6B031392040200528E69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		079C6B051392040200528E69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -156,6 +159,8 @@
 				075634D7147CA4D40090BFE9 /* DungaMember.m */,
 				075634D8147CA4D40090BFE9 /* HttpConnection.h */,
 				075634D9147CA4D40090BFE9 /* HttpConnection.m */,
+				078F5A5B147CD8BA00C2A958 /* DungaRegister.h */,
+				078F5A5C147CD8BA00C2A958 /* DungaRegister.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -392,6 +397,7 @@
 				078F5A58147CD5F200C2A958 /* CJSONDeserializer.m in Sources */,
 				078F5A59147CD5F200C2A958 /* CJSONScanner.m in Sources */,
 				078F5A5A147CD5F200C2A958 /* CJSONSerializer.m in Sources */,
+				078F5A5D147CD8BA00C2A958 /* DungaRegister.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

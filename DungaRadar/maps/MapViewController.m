@@ -10,15 +10,16 @@
 
 #import "MapViewController.h"
 #import "HttpConnection.h"
-#import "EncryptExtention.h"
+#import "DungaRegister.h"
 #import "DungaMember.h"
 
 const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
+const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
 
 @interface MapViewController()
 - (void)addMember:(DungaMember*)member;
 - (NSArray*)getAllMembers;
-- (BOOL)registerLocation:(double)lng latitude:(double)lat;
+- (BOOL)registerLocationWithLongitude:(double)lng andLatitude:(double)lat;
 @end
 
 @implementation MapViewController
@@ -73,10 +74,11 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
   NSNumber* lng = [NSNumber numberWithDouble:newLocation.coordinate.longitude];
   NSDictionary* dictionary = [NSDictionary dictionaryWithObjectsAndKeys:lat, @"latitude", lng, @"longitude", nil];
   
-  DungaMember* me = [[DungaMember alloc] initWithUserData:dictionary];
+  DungaMember* me = [[[DungaMember alloc] initWithUserData:dictionary] autorelease];
   if(!initialized_){
-    // 縮尺を指定
+    [self registerLocationWithLongitude:[lng doubleValue] andLatitude:[lat doubleValue]];
     [self addMember:me];
+    initialized_ = YES;
   }else{
     [mapView_ removeAnnotation:me];
   }
@@ -105,15 +107,12 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
   cr.span.latitudeDelta = 0.01;
   cr.span.longitudeDelta = 0.01;
   [mapView_ setRegion:cr animated:NO];
-  initialized_ = YES;
   [mapView_ addAnnotation:member];
 }
 
 - (NSArray*)getAllMembers{
   HttpConnection* hc = [HttpConnection instance];
-  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-  if([hc auth:(NSString*)[ud objectForKey:@"username"] 
- passwordHash:[(NSString*)[ud objectForKey:@"password"] toMD5]]){
+  if([DungaRegister auth]){
     NSError* err;
     NSDictionary* res = [NSDictionary dictionaryWithJSONString:[hc get:(NSString*)PATH_ALL_MEMBER_LOCATION 
                                                                     params:nil]
@@ -129,7 +128,18 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
   return [NSArray array];
 }
 
-- (BOOL)registerLocation:(double)lng latitude:(double)lat{
+- (BOOL)registerLocationWithLongitude:(double)lng andLatitude:(double)lat{
+  if([DungaRegister auth]){
+    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
+                            [NSString stringWithFormat:@"%f", lng], 
+                            @"longitude", 
+                            [NSString stringWithFormat:@"%f", lat],
+                            @"latitude",
+                            nil];
+    HttpConnection* hc = [HttpConnection instance];
+    [hc post:(NSString*)PATH_REGISTER_MEMBER_LOCATION params:params];
+    return YES;
+  }
   return NO;
 }
 
