@@ -6,10 +6,17 @@
 //  Copyright 2011 Kawaz. All rights reserved.
 //
 
+#import "NSDictionary_JSONExtensions.h"
+
 #import "MapViewController.h"
+#import "HttpConnection.h"
+#import "EncryptExtention.h"
 #import "DungaMember.h"
 
+const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
+
 @interface MapViewController()
+- (void)addMember:(DungaMember*)member;
 - (NSArray*)getAllMembers;
 - (BOOL)registerLocation:(double)lng latitude:(double)lat;
 @end
@@ -43,7 +50,12 @@
   initialized_ = NO;
   locationManager_ = [[CLLocationManager alloc] init];
   locationManager_.delegate = self;
-  [locationManager_ startUpdatingLocation];}
+  [locationManager_ startUpdatingLocation];
+  NSArray* members = [self getAllMembers];
+  for(DungaMember* member in members){
+    [self addMember:member];
+  }
+}
 
 - (void)viewDidUnload{
   [mapView_ release];
@@ -64,13 +76,7 @@
   DungaMember* me = [[DungaMember alloc] initWithUserData:dictionary];
   if(!initialized_){
     // 縮尺を指定
-    MKCoordinateRegion cr = mapView_.region;
-    cr.center = [me coordinate];
-    cr.span.latitudeDelta = 0.01;
-    cr.span.longitudeDelta = 0.01;
-    [mapView_ setRegion:cr animated:NO];
-    initialized_ = YES;
-    [mapView_ addAnnotation:me];
+    [self addMember:me];
   }else{
     [mapView_ removeAnnotation:me];
   }
@@ -93,8 +99,34 @@
   return av;
 }
 
+- (void)addMember:(DungaMember *)member{
+  MKCoordinateRegion cr = mapView_.region;
+  cr.center = [member coordinate];
+  cr.span.latitudeDelta = 0.01;
+  cr.span.longitudeDelta = 0.01;
+  [mapView_ setRegion:cr animated:NO];
+  initialized_ = YES;
+  [mapView_ addAnnotation:member];
+}
+
 - (NSArray*)getAllMembers{
-  return nil;
+  HttpConnection* hc = [HttpConnection instance];
+  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+  if([hc auth:(NSString*)[ud objectForKey:@"username"] 
+ passwordHash:[(NSString*)[ud objectForKey:@"password"] toMD5]]){
+    NSError* err;
+    NSDictionary* res = [NSDictionary dictionaryWithJSONString:[hc get:(NSString*)PATH_ALL_MEMBER_LOCATION 
+                                                                    params:nil]
+                                                            error:&err];
+    NSArray* memberInfos = (NSArray*)[res objectForKey:@"entries"];
+    NSMutableArray* members = [NSMutableArray array];
+    for(NSDictionary* userData in memberInfos){
+      DungaMember* member = [[DungaMember alloc] initWithUserData:userData];
+      [members addObject:member];
+    }
+    return members;
+  }
+  return [NSArray array];
 }
 
 - (BOOL)registerLocation:(double)lng latitude:(double)lat{

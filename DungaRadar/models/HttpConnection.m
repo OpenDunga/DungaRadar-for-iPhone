@@ -32,15 +32,17 @@ const NSString* PATH_LOGIN		= @"/api/login";
 
 NSMutableData* loadedData = nil;
 
-- (NSDictionary*)connectTo:(NSString *)path params:(NSDictionary *)postParameters method:(NSString *)method{
+- (NSDictionary*)connectTo:(NSString *)path params:(NSDictionary *)parameters method:(NSString *)method{
   /**
    Returns dictionary that has key data and response. 
    */
   NSMutableURLRequest* httpPostRequest = [NSMutableURLRequest requestWithURL:[self buildURL:path]];
   [httpPostRequest setHTTPMethod:method];
-  NSData* requestData = [[postParameters dump] dataUsingEncoding:NSUTF8StringEncoding];
+  if(parameters){
+    NSData* requestData = [[parameters dump] dataUsingEncoding:NSUTF8StringEncoding];
+    [httpPostRequest setHTTPBody:requestData];
+  }
   [httpPostRequest addValue:(NSString*)USER_AGENT forHTTPHeaderField:(NSString*)HEADER_FIELD];
-  [httpPostRequest setHTTPBody:requestData];
   NSURLResponse* res;
   NSError* err;
   NSData* data = [NSURLConnection sendSynchronousRequest:httpPostRequest 
