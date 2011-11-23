@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0757020E13C94961009119A3 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0757020D13C94961009119A3 /* HttpConnection.m */; };
-		0757021813C952C2009119A3 /* MIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0757021613C952C2009119A3 /* MIMViewController.m */; };
-		0757021B13C952E9009119A3 /* MIMView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0757021A13C952E9009119A3 /* MIMView.xib */; };
-		0757022413C9530C009119A3 /* SpotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0757022213C9530C009119A3 /* SpotViewController.m */; };
-		0757022713C9532D009119A3 /* SpotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0757022613C9532D009119A3 /* SpotView.xib */; };
-		0757022A13C969AF009119A3 /* EncryptExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 0757022913C969AF009119A3 /* EncryptExtention.m */; };
-		0757022D13C97B26009119A3 /* DictionaryExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 0757022C13C97B26009119A3 /* DictionaryExtention.m */; };
-		0757023013C97CD3009119A3 /* ArrayExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 0757022F13C97CD3009119A3 /* ArrayExtention.m */; };
+		075634CA147CA4790090BFE9 /* ConfigurationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634C7147CA4790090BFE9 /* ConfigurationView.xib */; };
+		075634CB147CA4790090BFE9 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634C9147CA4790090BFE9 /* ConfigurationViewController.m */; };
+		075634CF147CA48E0090BFE9 /* MIMView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634CC147CA48E0090BFE9 /* MIMView.xib */; };
+		075634D0147CA48E0090BFE9 /* MIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634CE147CA48E0090BFE9 /* MIMViewController.m */; };
+		075634D4147CA49B0090BFE9 /* SpotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634D1147CA49B0090BFE9 /* SpotView.xib */; };
+		075634D5147CA49B0090BFE9 /* SpotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634D3147CA49B0090BFE9 /* SpotViewController.m */; };
+		075634DA147CA4D40090BFE9 /* DungaMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634D7147CA4D40090BFE9 /* DungaMember.m */; };
+		075634DB147CA4D40090BFE9 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634D9147CA4D40090BFE9 /* HttpConnection.m */; };
+		075634E2147CA4DE0090BFE9 /* ArrayExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634DD147CA4DE0090BFE9 /* ArrayExtention.m */; };
+		075634E3147CA4DE0090BFE9 /* DictionaryExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634DF147CA4DE0090BFE9 /* DictionaryExtention.m */; };
+		075634E4147CA4DE0090BFE9 /* EncryptExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634E1147CA4DE0090BFE9 /* EncryptExtention.m */; };
+		075634E8147CA4E80090BFE9 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634E5147CA4E80090BFE9 /* MapView.xib */; };
+		075634E9147CA4E80090BFE9 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634E7147CA4E80090BFE9 /* MapViewController.m */; };
 		079C6B041392040200528E69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B031392040200528E69 /* UIKit.framework */; };
 		079C6B061392040200528E69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B051392040200528E69 /* Foundation.framework */; };
 		079C6B081392040200528E69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B071392040200528E69 /* CoreGraphics.framework */; };
@@ -22,30 +27,33 @@
 		079C6B111392040200528E69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B101392040200528E69 /* main.m */; };
 		079C6B141392040200528E69 /* DungaRadarAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B131392040200528E69 /* DungaRadarAppDelegate.m */; };
 		079C6B171392040200528E69 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B151392040200528E69 /* MainWindow.xib */; };
-		079C6B2C1392046800528E69 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B2A1392046800528E69 /* MapViewController.m */; };
-		079C6B2D1392046800528E69 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B2B1392046800528E69 /* MapView.xib */; };
-		07AE415A1392061D0087D526 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AE41581392061D0087D526 /* ConfigurationViewController.m */; };
-		07AE415B1392061D0087D526 /* ConfigurationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07AE41591392061D0087D526 /* ConfigurationView.xib */; };
 		07AE416D139211CA0087D526 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416C139211CA0087D526 /* MapKit.framework */; };
 		07AE416F1392132D0087D526 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416E1392132C0087D526 /* CoreLocation.framework */; };
-		07AE4172139215390087D526 /* DungaMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 07AE4171139215390087D526 /* DungaMember.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0757020C13C94961009119A3 /* HttpConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpConnection.h; sourceTree = "<group>"; };
-		0757020D13C94961009119A3 /* HttpConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpConnection.m; sourceTree = "<group>"; };
-		0757021513C952C2009119A3 /* MIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MIMViewController.h; sourceTree = "<group>"; };
-		0757021613C952C2009119A3 /* MIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MIMViewController.m; sourceTree = "<group>"; };
-		0757021A13C952E9009119A3 /* MIMView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MIMView.xib; sourceTree = "<group>"; };
-		0757022113C9530C009119A3 /* SpotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotViewController.h; sourceTree = "<group>"; };
-		0757022213C9530C009119A3 /* SpotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotViewController.m; sourceTree = "<group>"; };
-		0757022613C9532D009119A3 /* SpotView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpotView.xib; sourceTree = "<group>"; };
-		0757022813C969AF009119A3 /* EncryptExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EncryptExtention.h; sourceTree = "<group>"; };
-		0757022913C969AF009119A3 /* EncryptExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EncryptExtention.m; sourceTree = "<group>"; };
-		0757022B13C97B26009119A3 /* DictionaryExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DictionaryExtention.h; sourceTree = "<group>"; };
-		0757022C13C97B26009119A3 /* DictionaryExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DictionaryExtention.m; sourceTree = "<group>"; };
-		0757022E13C97CD3009119A3 /* ArrayExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArrayExtention.h; sourceTree = "<group>"; };
-		0757022F13C97CD3009119A3 /* ArrayExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArrayExtention.m; sourceTree = "<group>"; };
+		075634C7147CA4790090BFE9 /* ConfigurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigurationView.xib; path = configurations/ConfigurationView.xib; sourceTree = "<group>"; };
+		075634C8147CA4790090BFE9 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigurationViewController.h; path = configurations/ConfigurationViewController.h; sourceTree = "<group>"; };
+		075634C9147CA4790090BFE9 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationViewController.m; path = configurations/ConfigurationViewController.m; sourceTree = "<group>"; };
+		075634CC147CA48E0090BFE9 /* MIMView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MIMView.xib; path = MIM/MIMView.xib; sourceTree = "<group>"; };
+		075634CD147CA48E0090BFE9 /* MIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIMViewController.h; path = MIM/MIMViewController.h; sourceTree = "<group>"; };
+		075634CE147CA48E0090BFE9 /* MIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIMViewController.m; path = MIM/MIMViewController.m; sourceTree = "<group>"; };
+		075634D1147CA49B0090BFE9 /* SpotView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpotView.xib; path = spots/SpotView.xib; sourceTree = "<group>"; };
+		075634D2147CA49B0090BFE9 /* SpotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpotViewController.h; path = spots/SpotViewController.h; sourceTree = "<group>"; };
+		075634D3147CA49B0090BFE9 /* SpotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpotViewController.m; path = spots/SpotViewController.m; sourceTree = "<group>"; };
+		075634D6147CA4D40090BFE9 /* DungaMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DungaMember.h; path = models/DungaMember.h; sourceTree = "<group>"; };
+		075634D7147CA4D40090BFE9 /* DungaMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DungaMember.m; path = models/DungaMember.m; sourceTree = "<group>"; };
+		075634D8147CA4D40090BFE9 /* HttpConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpConnection.h; path = models/HttpConnection.h; sourceTree = "<group>"; };
+		075634D9147CA4D40090BFE9 /* HttpConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpConnection.m; path = models/HttpConnection.m; sourceTree = "<group>"; };
+		075634DC147CA4DE0090BFE9 /* ArrayExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrayExtention.h; path = utils/ArrayExtention.h; sourceTree = "<group>"; };
+		075634DD147CA4DE0090BFE9 /* ArrayExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArrayExtention.m; path = utils/ArrayExtention.m; sourceTree = "<group>"; };
+		075634DE147CA4DE0090BFE9 /* DictionaryExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DictionaryExtention.h; path = utils/DictionaryExtention.h; sourceTree = "<group>"; };
+		075634DF147CA4DE0090BFE9 /* DictionaryExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DictionaryExtention.m; path = utils/DictionaryExtention.m; sourceTree = "<group>"; };
+		075634E0147CA4DE0090BFE9 /* EncryptExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EncryptExtention.h; path = utils/EncryptExtention.h; sourceTree = "<group>"; };
+		075634E1147CA4DE0090BFE9 /* EncryptExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EncryptExtention.m; path = utils/EncryptExtention.m; sourceTree = "<group>"; };
+		075634E5147CA4E80090BFE9 /* MapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapView.xib; path = maps/MapView.xib; sourceTree = "<group>"; };
+		075634E6147CA4E80090BFE9 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = maps/MapViewController.h; sourceTree = "<group>"; };
+		075634E7147CA4E80090BFE9 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = maps/MapViewController.m; sourceTree = "<group>"; };
 		079C6AFF1392040200528E69 /* DungaRadar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungaRadar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		079C6B031392040200528E69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		079C6B051392040200528E69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -57,16 +65,8 @@
 		079C6B121392040200528E69 /* DungaRadarAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DungaRadarAppDelegate.h; sourceTree = "<group>"; };
 		079C6B131392040200528E69 /* DungaRadarAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DungaRadarAppDelegate.m; sourceTree = "<group>"; };
 		079C6B161392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		079C6B291392046800528E69 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
-		079C6B2A1392046800528E69 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
-		079C6B2B1392046800528E69 /* MapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapView.xib; sourceTree = "<group>"; };
-		07AE41571392061D0087D526 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigurationViewController.h; path = ../ConfigurationViewController.h; sourceTree = "<group>"; };
-		07AE41581392061D0087D526 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationViewController.m; path = ../ConfigurationViewController.m; sourceTree = "<group>"; };
-		07AE41591392061D0087D526 /* ConfigurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigurationView.xib; path = ../ConfigurationView.xib; sourceTree = "<group>"; };
 		07AE416C139211CA0087D526 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		07AE416E1392132C0087D526 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
-		07AE4170139215390087D526 /* DungaMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DungaMember.h; sourceTree = "<group>"; };
-		07AE4171139215390087D526 /* DungaMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DungaMember.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,68 +85,68 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0757020F13C951C3009119A3 /* Configuration */ = {
+		0757020F13C951C3009119A3 /* configurations */ = {
 			isa = PBXGroup;
 			children = (
-				07AE41571392061D0087D526 /* ConfigurationViewController.h */,
-				07AE41581392061D0087D526 /* ConfigurationViewController.m */,
-				07AE41591392061D0087D526 /* ConfigurationView.xib */,
+				075634C7147CA4790090BFE9 /* ConfigurationView.xib */,
+				075634C8147CA4790090BFE9 /* ConfigurationViewController.h */,
+				075634C9147CA4790090BFE9 /* ConfigurationViewController.m */,
 			);
-			name = Configuration;
+			name = configurations;
 			sourceTree = "<group>";
 		};
 		0757021013C951D1009119A3 /* MIM */ = {
 			isa = PBXGroup;
 			children = (
-				0757021A13C952E9009119A3 /* MIMView.xib */,
-				0757021513C952C2009119A3 /* MIMViewController.h */,
-				0757021613C952C2009119A3 /* MIMViewController.m */,
+				075634CC147CA48E0090BFE9 /* MIMView.xib */,
+				075634CD147CA48E0090BFE9 /* MIMViewController.h */,
+				075634CE147CA48E0090BFE9 /* MIMViewController.m */,
 			);
 			name = MIM;
 			sourceTree = "<group>";
 		};
-		0757021113C951E0009119A3 /* Spot */ = {
+		0757021113C951E0009119A3 /* spots */ = {
 			isa = PBXGroup;
 			children = (
-				0757022613C9532D009119A3 /* SpotView.xib */,
-				0757022113C9530C009119A3 /* SpotViewController.h */,
-				0757022213C9530C009119A3 /* SpotViewController.m */,
+				075634D1147CA49B0090BFE9 /* SpotView.xib */,
+				075634D2147CA49B0090BFE9 /* SpotViewController.h */,
+				075634D3147CA49B0090BFE9 /* SpotViewController.m */,
 			);
-			name = Spot;
+			name = spots;
 			sourceTree = "<group>";
 		};
-		0757021213C95270009119A3 /* model */ = {
+		0757021213C95270009119A3 /* models */ = {
 			isa = PBXGroup;
 			children = (
-				0757020C13C94961009119A3 /* HttpConnection.h */,
-				0757020D13C94961009119A3 /* HttpConnection.m */,
-				07AE4170139215390087D526 /* DungaMember.h */,
-				07AE4171139215390087D526 /* DungaMember.m */,
+				075634D6147CA4D40090BFE9 /* DungaMember.h */,
+				075634D7147CA4D40090BFE9 /* DungaMember.m */,
+				075634D8147CA4D40090BFE9 /* HttpConnection.h */,
+				075634D9147CA4D40090BFE9 /* HttpConnection.m */,
 			);
-			name = model;
+			name = models;
 			sourceTree = "<group>";
 		};
-		0757021313C95281009119A3 /* util */ = {
+		0757021313C95281009119A3 /* utils */ = {
 			isa = PBXGroup;
 			children = (
-				0757022813C969AF009119A3 /* EncryptExtention.h */,
-				0757022913C969AF009119A3 /* EncryptExtention.m */,
-				0757022B13C97B26009119A3 /* DictionaryExtention.h */,
-				0757022C13C97B26009119A3 /* DictionaryExtention.m */,
-				0757022E13C97CD3009119A3 /* ArrayExtention.h */,
-				0757022F13C97CD3009119A3 /* ArrayExtention.m */,
+				075634DC147CA4DE0090BFE9 /* ArrayExtention.h */,
+				075634DD147CA4DE0090BFE9 /* ArrayExtention.m */,
+				075634DE147CA4DE0090BFE9 /* DictionaryExtention.h */,
+				075634DF147CA4DE0090BFE9 /* DictionaryExtention.m */,
+				075634E0147CA4DE0090BFE9 /* EncryptExtention.h */,
+				075634E1147CA4DE0090BFE9 /* EncryptExtention.m */,
 			);
-			name = util;
+			name = utils;
 			sourceTree = "<group>";
 		};
-		0757021413C95297009119A3 /* Map */ = {
+		0757021413C95297009119A3 /* maps */ = {
 			isa = PBXGroup;
 			children = (
-				079C6B291392046800528E69 /* MapViewController.h */,
-				079C6B2A1392046800528E69 /* MapViewController.m */,
-				079C6B2B1392046800528E69 /* MapView.xib */,
+				075634E5147CA4E80090BFE9 /* MapView.xib */,
+				075634E6147CA4E80090BFE9 /* MapViewController.h */,
+				075634E7147CA4E80090BFE9 /* MapViewController.m */,
 			);
-			name = Map;
+			name = maps;
 			sourceTree = "<group>";
 		};
 		079C6AF41392040100528E69 = {
@@ -181,12 +181,12 @@
 		079C6B091392040200528E69 /* DungaRadar */ = {
 			isa = PBXGroup;
 			children = (
-				0757021413C95297009119A3 /* Map */,
-				0757021313C95281009119A3 /* util */,
-				0757021213C95270009119A3 /* model */,
-				0757021113C951E0009119A3 /* Spot */,
+				0757021413C95297009119A3 /* maps */,
+				0757021313C95281009119A3 /* utils */,
+				0757021213C95270009119A3 /* models */,
+				0757021113C951E0009119A3 /* spots */,
 				0757021013C951D1009119A3 /* MIM */,
-				0757020F13C951C3009119A3 /* Configuration */,
+				0757020F13C951C3009119A3 /* configurations */,
 				079C6B121392040200528E69 /* DungaRadarAppDelegate.h */,
 				079C6B131392040200528E69 /* DungaRadarAppDelegate.m */,
 				079C6B151392040200528E69 /* MainWindow.xib */,
@@ -258,10 +258,10 @@
 			files = (
 				079C6B0E1392040200528E69 /* InfoPlist.strings in Resources */,
 				079C6B171392040200528E69 /* MainWindow.xib in Resources */,
-				079C6B2D1392046800528E69 /* MapView.xib in Resources */,
-				07AE415B1392061D0087D526 /* ConfigurationView.xib in Resources */,
-				0757021B13C952E9009119A3 /* MIMView.xib in Resources */,
-				0757022713C9532D009119A3 /* SpotView.xib in Resources */,
+				075634CA147CA4790090BFE9 /* ConfigurationView.xib in Resources */,
+				075634CF147CA48E0090BFE9 /* MIMView.xib in Resources */,
+				075634D4147CA49B0090BFE9 /* SpotView.xib in Resources */,
+				075634E8147CA4E80090BFE9 /* MapView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,15 +274,15 @@
 			files = (
 				079C6B111392040200528E69 /* main.m in Sources */,
 				079C6B141392040200528E69 /* DungaRadarAppDelegate.m in Sources */,
-				079C6B2C1392046800528E69 /* MapViewController.m in Sources */,
-				07AE415A1392061D0087D526 /* ConfigurationViewController.m in Sources */,
-				07AE4172139215390087D526 /* DungaMember.m in Sources */,
-				0757020E13C94961009119A3 /* HttpConnection.m in Sources */,
-				0757021813C952C2009119A3 /* MIMViewController.m in Sources */,
-				0757022413C9530C009119A3 /* SpotViewController.m in Sources */,
-				0757022A13C969AF009119A3 /* EncryptExtention.m in Sources */,
-				0757022D13C97B26009119A3 /* DictionaryExtention.m in Sources */,
-				0757023013C97CD3009119A3 /* ArrayExtention.m in Sources */,
+				075634CB147CA4790090BFE9 /* ConfigurationViewController.m in Sources */,
+				075634D0147CA48E0090BFE9 /* MIMViewController.m in Sources */,
+				075634D5147CA49B0090BFE9 /* SpotViewController.m in Sources */,
+				075634DA147CA4D40090BFE9 /* DungaMember.m in Sources */,
+				075634DB147CA4D40090BFE9 /* HttpConnection.m in Sources */,
+				075634E2147CA4DE0090BFE9 /* ArrayExtention.m in Sources */,
+				075634E3147CA4DE0090BFE9 /* DictionaryExtention.m in Sources */,
+				075634E4147CA4DE0090BFE9 /* EncryptExtention.m in Sources */,
+				075634E9147CA4E80090BFE9 /* MapViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
