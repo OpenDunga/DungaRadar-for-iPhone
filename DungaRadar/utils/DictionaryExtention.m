@@ -11,12 +11,15 @@
 
 @implementation NSDictionary (DictionaryExtention)
 - (NSString*)dump{
-  NSMutableString* string = [NSMutableString string];
-  for(id key in [self allKeys]){
-    [string appendFormat:@"%@=%@&", key, [self objectForKey:key]];
+  if([self count]){
+    NSMutableString* string = [NSMutableString string];
+    for(id key in [self allKeys]){
+      [string appendFormat:@"%@=%@&", key, [self objectForKey:key]];
+    }
+    [string deleteCharactersInRange:NSMakeRange([string length]-1, 1)];
+    NSLog(@"%@", string);
+    return (NSString*)string;
   }
-  [string deleteCharactersInRange:NSMakeRange([string length]-1, 1)];
-  NSLog(@"%@", string);
-  return (NSString*)string;
+  return @"";
 }
 @end

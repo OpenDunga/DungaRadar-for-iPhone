@@ -24,17 +24,19 @@
 }
 
 - (void)dealloc{
-  [loginField_ release];
+  [usernameField_ release];
   [passwordField_ release];
   [super dealloc];
 }
 
 - (void)viewDidLoad{
   [super viewDidLoad];
+  usernameField_ = [[UITextField alloc] initWithFrame:CGRectMake(125, 12, 125, 25)];
+  passwordField_ = [[UITextField alloc] initWithFrame:CGRectMake(125, 12, 125, 25)];
   self.tableView.allowsSelection = NO;
   UIButton* loginButton = [UIButton buttonWithType:111];
   loginButton.frame = CGRectMake(10, 150, 300, 45);
-  [loginButton setTitle:@"OpenDungaにログイン" forState:UIControlStateNormal];
+  [loginButton setTitle:@"設定を保存する" forState:UIControlStateNormal];
   [loginButton setTintColor:[UIColor redColor]];
   [self.view addSubview:loginButton];
   [loginButton addTarget:self action:@selector(pressLoginButton:) forControlEvents:UIControlEventTouchUpInside];
@@ -54,21 +56,27 @@
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
     if(indexPath.section == 0){
-      UITextField* field = [[UITextField alloc] initWithFrame:CGRectMake(125, 12, 125, 25)];
+      UITextField* field;
+      NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+      if(indexPath.row == 0){
+        field = usernameField_;
+        cell.textLabel.text = @"ユーザー名";
+        if([ud stringForKey:@"username"]){
+          field.text = [ud stringForKey:@"username"];
+        }
+      }else if(indexPath.row ==1){
+        field = passwordField_;
+        cell.textLabel.text = @"パスワード";
+        field.secureTextEntry = YES;
+        if([ud stringForKey:@"password"]){
+          field.text = [ud stringForKey:@"password"];
+        }
+      }
       field.delegate = self;
       field.textAlignment = UITextAlignmentLeft;
       field.returnKeyType = UIReturnKeyDone;
       field.keyboardType = UIKeyboardTypeASCIICapable;
       field.textColor = [UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1];
-      NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-      if(indexPath.row == 0){
-        cell.textLabel.text = @"ユーザー名";
-        loginField_ = [field retain];
-      }else if(indexPath.row ==1){
-        cell.textLabel.text = @"パスワード";
-        field.secureTextEntry = YES;
-        passwordField_ = [field retain];
-      }
       [cell addSubview:field];
     }
   }
@@ -89,8 +97,11 @@
 
 - (void)pressLoginButton:(id)sender{
   HttpConnection* hc = [HttpConnection instance];
-  NSString* res = [hc auth:loginField_.text passwordHash:[passwordField_.text toMD5]];
+  NSString* res = [hc auth:usernameField_.text passwordHash:[passwordField_.text toMD5]];
   NSLog(@"%@", res);
+  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+  [ud setObject:usernameField_.text forKey:@"username"];
+  [ud setObject:passwordField_.text forKey:@"password"];
 }
 
 @end

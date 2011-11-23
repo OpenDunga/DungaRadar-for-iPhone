@@ -10,7 +10,7 @@
 
 
 @interface ConfigurationViewController : UITableViewController <UITextFieldDelegate>{
-  UITextField* loginField_;
+  UITextField* usernameField_;
   UITextField* passwordField_;
 }
 
