@@ -21,6 +21,7 @@
 		075634E8147CA4E80090BFE9 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634E5147CA4E80090BFE9 /* MapView.xib */; };
 		075634E9147CA4E80090BFE9 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634E7147CA4E80090BFE9 /* MapViewController.m */; };
 		075634EC147CAC780090BFE9 /* KWSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634EB147CAC780090BFE9 /* KWSingleton.m */; };
+		0771FE75147D019000DE2746 /* EditSpotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0771FE74147D019000DE2746 /* EditSpotViewController.m */; };
 		078F5A51147CD5F200C2A958 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A3A147CD5F200C2A958 /* CDataScanner.m */; };
 		078F5A52147CD5F200C2A958 /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A3D147CD5F200C2A958 /* CFilteringJSONSerializer.m */; };
 		078F5A53147CD5F200C2A958 /* CJSONDeserializer_BlocksExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A3F147CD5F200C2A958 /* CJSONDeserializer_BlocksExtensions.m */; };
@@ -69,6 +70,8 @@
 		075634E7147CA4E80090BFE9 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = maps/MapViewController.m; sourceTree = "<group>"; };
 		075634EA147CAC780090BFE9 /* KWSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KWSingleton.h; path = utils/KWSingleton.h; sourceTree = "<group>"; };
 		075634EB147CAC780090BFE9 /* KWSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KWSingleton.m; path = utils/KWSingleton.m; sourceTree = "<group>"; };
+		0771FE73147D019000DE2746 /* EditSpotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditSpotViewController.h; path = spots/EditSpotViewController.h; sourceTree = "<group>"; };
+		0771FE74147D019000DE2746 /* EditSpotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditSpotViewController.m; path = spots/EditSpotViewController.m; sourceTree = "<group>"; };
 		078F5A39147CD5F200C2A958 /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
 		078F5A3A147CD5F200C2A958 /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
 		078F5A3C147CD5F200C2A958 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
@@ -92,7 +95,7 @@
 		078F5A50147CD5F200C2A958 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
 		078F5A5B147CD8BA00C2A958 /* DungaRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DungaRegister.h; path = models/DungaRegister.h; sourceTree = "<group>"; };
 		078F5A5C147CD8BA00C2A958 /* DungaRegister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DungaRegister.m; path = models/DungaRegister.m; sourceTree = "<group>"; };
-		078F5A64147CE72600C2A958 /* UIImageExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; name = UIImageExtention.h; path = utils/UIImageExtention.h; sourceTree = "<group>"; };
+		078F5A64147CE72600C2A958 /* UIImageExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageExtention.h; path = utils/UIImageExtention.h; sourceTree = "<group>"; };
 		078F5A65147CE72700C2A958 /* UIImageExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageExtention.m; path = utils/UIImageExtention.m; sourceTree = "<group>"; };
 		079C6AFF1392040200528E69 /* DungaRadar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungaRadar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		079C6B031392040200528E69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -151,6 +154,8 @@
 				075634D1147CA49B0090BFE9 /* SpotView.xib */,
 				075634D2147CA49B0090BFE9 /* SpotViewController.h */,
 				075634D3147CA49B0090BFE9 /* SpotViewController.m */,
+				0771FE73147D019000DE2746 /* EditSpotViewController.h */,
+				0771FE74147D019000DE2746 /* EditSpotViewController.m */,
 			);
 			name = spots;
 			sourceTree = "<group>";
@@ -404,6 +409,7 @@
 				078F5A5A147CD5F200C2A958 /* CJSONSerializer.m in Sources */,
 				078F5A5D147CD8BA00C2A958 /* DungaRegister.m in Sources */,
 				078F5A66147CE72700C2A958 /* UIImageExtention.m in Sources */,
+				0771FE75147D019000DE2746 /* EditSpotViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
