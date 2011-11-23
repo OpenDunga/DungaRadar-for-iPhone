@@ -53,26 +53,24 @@
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-  }
-  if(indexPath.section==0){
-    UITextField* field = [[UITextField alloc] initWithFrame:CGRectMake(125, 12, 125, 25)];
-    field.delegate = self;
-    field.textAlignment = UITextAlignmentLeft;
-    field.returnKeyType = UIReturnKeyDone;
-    field.keyboardType = UIKeyboardTypeASCIICapable;
-    field.textColor = [UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1];
-    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-    if(indexPath.row==0){
-      cell.textLabel.text = @"ユーザー名";
-      loginField_ = [field retain];
-    }else if(indexPath.row==1){
-      cell.textLabel.text = @"パスワード";
-      field.secureTextEntry = YES;
-      passwordField_ = [field retain];
+    if(indexPath.section == 0){
+      UITextField* field = [[UITextField alloc] initWithFrame:CGRectMake(125, 12, 125, 25)];
+      field.delegate = self;
+      field.textAlignment = UITextAlignmentLeft;
+      field.returnKeyType = UIReturnKeyDone;
+      field.keyboardType = UIKeyboardTypeASCIICapable;
+      field.textColor = [UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1];
+      NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+      if(indexPath.row == 0){
+        cell.textLabel.text = @"ユーザー名";
+        loginField_ = [field retain];
+      }else if(indexPath.row ==1){
+        cell.textLabel.text = @"パスワード";
+        field.secureTextEntry = YES;
+        passwordField_ = [field retain];
+      }
+      [cell addSubview:field];
     }
-    [cell addSubview:field];
-  }else{
-    
   }
   return cell;
 }
@@ -90,8 +88,9 @@
 }
 
 - (void)pressLoginButton:(id)sender{
-  HttpConnection* hc = [[[HttpConnection alloc] init] autorelease];
-  [hc auth:loginField_.text passwordHash:[passwordField_.text toMD5]];
+  HttpConnection* hc = [HttpConnection instance];
+  NSString* res = [hc auth:loginField_.text passwordHash:[passwordField_.text toMD5]];
+  NSLog(@"%@", res);
 }
 
 @end

@@ -20,6 +20,7 @@
 		075634E4147CA4DE0090BFE9 /* EncryptExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634E1147CA4DE0090BFE9 /* EncryptExtention.m */; };
 		075634E8147CA4E80090BFE9 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634E5147CA4E80090BFE9 /* MapView.xib */; };
 		075634E9147CA4E80090BFE9 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634E7147CA4E80090BFE9 /* MapViewController.m */; };
+		075634EC147CAC780090BFE9 /* KWSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634EB147CAC780090BFE9 /* KWSingleton.m */; };
 		079C6B041392040200528E69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B031392040200528E69 /* UIKit.framework */; };
 		079C6B061392040200528E69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B051392040200528E69 /* Foundation.framework */; };
 		079C6B081392040200528E69 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B071392040200528E69 /* CoreGraphics.framework */; };
@@ -54,6 +55,8 @@
 		075634E5147CA4E80090BFE9 /* MapView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapView.xib; path = maps/MapView.xib; sourceTree = "<group>"; };
 		075634E6147CA4E80090BFE9 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MapViewController.h; path = maps/MapViewController.h; sourceTree = "<group>"; };
 		075634E7147CA4E80090BFE9 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = maps/MapViewController.m; sourceTree = "<group>"; };
+		075634EA147CAC780090BFE9 /* KWSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KWSingleton.h; path = utils/KWSingleton.h; sourceTree = "<group>"; };
+		075634EB147CAC780090BFE9 /* KWSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KWSingleton.m; path = utils/KWSingleton.m; sourceTree = "<group>"; };
 		079C6AFF1392040200528E69 /* DungaRadar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungaRadar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		079C6B031392040200528E69 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		079C6B051392040200528E69 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -129,6 +132,8 @@
 		0757021313C95281009119A3 /* utils */ = {
 			isa = PBXGroup;
 			children = (
+				075634EA147CAC780090BFE9 /* KWSingleton.h */,
+				075634EB147CAC780090BFE9 /* KWSingleton.m */,
 				075634DC147CA4DE0090BFE9 /* ArrayExtention.h */,
 				075634DD147CA4DE0090BFE9 /* ArrayExtention.m */,
 				075634DE147CA4DE0090BFE9 /* DictionaryExtention.h */,
@@ -283,6 +288,7 @@
 				075634E3147CA4DE0090BFE9 /* DictionaryExtention.m in Sources */,
 				075634E4147CA4DE0090BFE9 /* EncryptExtention.m in Sources */,
 				075634E9147CA4E80090BFE9 /* MapViewController.m in Sources */,
+				075634EC147CAC780090BFE9 /* KWSingleton.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

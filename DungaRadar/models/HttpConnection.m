@@ -32,62 +32,42 @@ const NSString* PATH_LOGIN		= @"/api/login";
 
 NSMutableData* loadedData = nil;
 
-- (void)auth:(NSString *)userName passwordHash:(NSString *)passwordHash{
-  NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[HttpConnection buildURL:(NSString*)PATH_LOGIN]];
+- (NSData*)connectTo:(NSString *)path params:(NSDictionary *)postParameters method:(NSString *)method{
+  NSMutableURLRequest* httpPostRequest = [NSMutableURLRequest requestWithURL:[self buildURL:path]];
+  [httpPostRequest setHTTPMethod:method];
+  NSData* requestData = [[postParameters dump] dataUsingEncoding:NSUTF8StringEncoding];
+  [httpPostRequest addValue:(NSString*)USER_AGENT forHTTPHeaderField:(NSString*)HEADER_FIELD];
+  [httpPostRequest setHTTPBody:requestData];
+  NSURLResponse* res;
+  NSError* err;
+  NSData* response = [NSURLConnection sendSynchronousRequest:httpPostRequest 
+                                           returningResponse:&res 
+                                                       error:&err];
+  return response;
+}
+
+- (NSString*)auth:(NSString *)userName passwordHash:(NSString *)passwordHash{
+  NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[self buildURL:(NSString*)PATH_LOGIN]];
   [req addValue:(NSString*)USER_AGENT forHTTPHeaderField:@"http.useragent"];
   NSString* agent = [req valueForHTTPHeaderField:@"http.useragent"];
   NSString* encrypted = [passwordHash toEncrypted:agent];
   NSDictionary* post = [NSDictionary dictionaryWithObjectsAndKeys:userName, @"user_name", encrypted, @"enc_password", passwordHash, @"password", nil];
-  [self post:(NSString*)PATH_LOGIN params:post];
+  return [self post:(NSString*)PATH_LOGIN params:post];
 }
 
-- (void)post:(NSString *)path params:(NSDictionary *)postParameters{
-  NSMutableURLRequest* httpPostRequest = [NSMutableURLRequest requestWithURL:[HttpConnection buildURL:path]];
-  [httpPostRequest setHTTPMethod:@"POST"];
-  NSData* requestData = [[postParameters dump] dataUsingEncoding:NSUTF8StringEncoding];
-  [httpPostRequest addValue:(NSString*)USER_AGENT forHTTPHeaderField:(NSString*)HEADER_FIELD];
-  [httpPostRequest setHTTPBody:requestData];
-  NSURLConnection* connect = [NSURLConnection connectionWithRequest:httpPostRequest delegate:self];
+- (NSString*)post:(NSString *)path params:(NSDictionary *)postParameters{
+  NSData* res = [self connectTo:path params:postParameters method:@"POST"];
+  return [[NSString alloc] initWithData:res encoding:NSUTF8StringEncoding];;
 }
 
-- (NSString*)get:(NSString *)path{
-  return @"";
+- (NSString*)get:(NSString *)path params:(NSDictionary *)getParameters{
+  NSData* res = [self connectTo:path params:getParameters method:@"GET"];
+  return [[NSString alloc] initWithData:res encoding:NSUTF8StringEncoding];;
 }
 
-+ (NSURL*)buildURL:(NSString *)path{
+- (NSURL*)buildURL:(NSString *)path{
   NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", (NSString*)SERVER_SCHEME, (NSString*)SERVER_HOST, (NSString*)path]];
   return url;
-}
-
-// 非同期通信 ヘッダーが返ってきた
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
-	// データを初期化
-	loadedData = [[NSMutableData alloc] initWithData:0];
-}
-
-// 非同期通信 ダウンロード中
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
-	// データを追加する
-	[loadedData appendData:data];
-}
-
-// 非同期通信 エラー
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-	NSString *error_str = [error localizedDescription];
-	UIAlertView *alertView = [[
-                            [UIAlertView alloc]
-                            initWithTitle : @"RequestError"
-                            message : error_str
-                            delegate : nil
-                            cancelButtonTitle : @"OK"
-                            otherButtonTitles : nil
-                            ] autorelease];
-	[alertView show];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
-  NSString* response = [[[NSString alloc] initWithData:loadedData encoding:NSUTF8StringEncoding] autorelease];
-  NSLog(@"%@", response);
 }
 
 @end

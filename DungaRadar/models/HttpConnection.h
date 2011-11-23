@@ -7,15 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KWSingleton.h"
 
-
-@interface HttpConnection : NSObject{
+@interface HttpConnection : KWSingleton{
 }
 
-+ (NSURL*)buildURL:(NSString*)path;
-
-- (void)auth:(NSString*)userName passwordHash:(NSString*)passwordHash;
-- (void)post:(NSString*)path params:(NSDictionary*)postParameters;
-- (NSString*)get:(NSString*)path;
+- (NSData*)connectTo:(NSString*)path params:(NSDictionary*)postParameters method:(NSString*)method;
+- (NSString*)auth:(NSString*)userName passwordHash:(NSString*)passwordHash;
+- (NSString*)post:(NSString*)path params:(NSDictionary*)postParameters;
+- (NSString*)get:(NSString*)path params:(NSDictionary*)getParameters;
+- (NSURL*)buildURL:(NSString*)path;
 
 @end
