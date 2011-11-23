@@ -37,6 +37,14 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   [super dealloc];
 }
 
+- (CLLocationCoordinate2D)coordinate{
+  return self.location.coordinate;
+}
+
+- (NSString*)title{
+  return self.memberDispName;
+}
+
 - (BOOL)isEqual:(id)object{
   DungaMember* member = (DungaMember*)object;
   return memberID_ == member.memberID;

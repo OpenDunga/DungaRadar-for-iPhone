@@ -43,8 +43,7 @@
   initialized_ = NO;
   locationManager_ = [[CLLocationManager alloc] init];
   locationManager_.delegate = self;
-  [locationManager_ startUpdatingLocation];
-}
+  [locationManager_ startUpdatingLocation];}
 
 - (void)viewDidUnload{
   [mapView_ release];
@@ -61,6 +60,7 @@
   NSNumber* lat = [NSNumber numberWithDouble:newLocation.coordinate.latitude];
   NSNumber* lng = [NSNumber numberWithDouble:newLocation.coordinate.longitude];
   NSDictionary* dictionary = [NSDictionary dictionaryWithObjectsAndKeys:lat, @"latitude", lng, @"longitude", nil];
+  
   DungaMember* me = [[DungaMember alloc] initWithUserData:dictionary];
   if(!initialized_){
     // 縮尺を指定
@@ -78,13 +78,11 @@
 
 - (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
   DungaMember* member = (DungaMember*)annotation;
-  NSString *PinIdentifier = [NSString stringWithFormat:@"Pin_%@", member.memberDispName];
-  MKAnnotationView *av =
-  (MKAnnotationView*)
-  [mapView dequeueReusableAnnotationViewWithIdentifier:PinIdentifier];
-  if(av == nil){
+  NSString* identifier = [NSString stringWithFormat:@"Pin_%@", member.memberDispName];
+  MKAnnotationView *av = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+  if(!av){
     av = [[[MKAnnotationView alloc]
-           initWithAnnotation:member reuseIdentifier:PinIdentifier] autorelease];
+           initWithAnnotation:member reuseIdentifier:identifier] autorelease];
   }
   CGSize newSize = CGSizeMake(32, 32);
   UIGraphicsBeginImageContext(newSize);
@@ -93,6 +91,14 @@
   UIGraphicsEndImageContext();
   av.image = resizedImage;
   return av;
+}
+
+- (NSArray*)getAllMembers{
+  return nil;
+}
+
+- (BOOL)registerLocation:(double)lng latitude:(double)lat{
+  return NO;
 }
 
 @end
