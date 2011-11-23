@@ -32,7 +32,10 @@ const NSString* PATH_LOGIN		= @"/api/login";
 
 NSMutableData* loadedData = nil;
 
-- (NSData*)connectTo:(NSString *)path params:(NSDictionary *)postParameters method:(NSString *)method{
+- (NSDictionary*)connectTo:(NSString *)path params:(NSDictionary *)postParameters method:(NSString *)method{
+  /**
+   Returns dictionary that has key data and response. 
+   */
   NSMutableURLRequest* httpPostRequest = [NSMutableURLRequest requestWithURL:[self buildURL:path]];
   [httpPostRequest setHTTPMethod:method];
   NSData* requestData = [[postParameters dump] dataUsingEncoding:NSUTF8StringEncoding];
@@ -40,28 +43,35 @@ NSMutableData* loadedData = nil;
   [httpPostRequest setHTTPBody:requestData];
   NSURLResponse* res;
   NSError* err;
-  NSData* response = [NSURLConnection sendSynchronousRequest:httpPostRequest 
+  NSData* data = [NSURLConnection sendSynchronousRequest:httpPostRequest 
                                            returningResponse:&res 
                                                        error:&err];
-  return response;
+  return [NSDictionary dictionaryWithObjectsAndKeys:data, @"data", res, @"response", nil];
 }
 
-- (NSString*)auth:(NSString *)userName passwordHash:(NSString *)passwordHash{
+- (BOOL)auth:(NSString *)userName passwordHash:(NSString *)passwordHash{
   NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[self buildURL:(NSString*)PATH_LOGIN]];
   [req addValue:(NSString*)USER_AGENT forHTTPHeaderField:@"http.useragent"];
   NSString* agent = [req valueForHTTPHeaderField:@"http.useragent"];
   NSString* encrypted = [passwordHash toEncrypted:agent];
-  NSDictionary* post = [NSDictionary dictionaryWithObjectsAndKeys:userName, @"user_name", encrypted, @"enc_password", passwordHash, @"password", nil];
-  return [self post:(NSString*)PATH_LOGIN params:post];
+  NSDictionary* post = [NSDictionary dictionaryWithObjectsAndKeys:userName, 
+                        @"user_name", encrypted, 
+                        @"enc_password", passwordHash, 
+                        @"password", nil];
+  NSURLResponse* res = (NSURLResponse*)[[self connectTo:(NSString*)PATH_LOGIN 
+                                                 params:post method:@"POST"] 
+                                        objectForKey:@"response"];
+  NSHTTPURLResponse* urlRes = (NSHTTPURLResponse*)res;
+  return (urlRes.statusCode == 200);
 }
 
 - (NSString*)post:(NSString *)path params:(NSDictionary *)postParameters{
-  NSData* res = [self connectTo:path params:postParameters method:@"POST"];
+  NSData* res = (NSData*)[[self connectTo:path params:postParameters method:@"POST"] objectForKey:@"data"];
   return [[NSString alloc] initWithData:res encoding:NSUTF8StringEncoding];;
 }
 
 - (NSString*)get:(NSString *)path params:(NSDictionary *)getParameters{
-  NSData* res = [self connectTo:path params:getParameters method:@"GET"];
+  NSData* res = (NSData*)[[self connectTo:path params:getParameters method:@"GET"] objectForKey:@"data"];
   return [[NSString alloc] initWithData:res encoding:NSUTF8StringEncoding];;
 }
 

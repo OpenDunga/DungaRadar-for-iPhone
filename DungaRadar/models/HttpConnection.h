@@ -12,8 +12,8 @@
 @interface HttpConnection : KWSingleton{
 }
 
-- (NSData*)connectTo:(NSString*)path params:(NSDictionary*)postParameters method:(NSString*)method;
-- (NSString*)auth:(NSString*)userName passwordHash:(NSString*)passwordHash;
+- (NSDictionary*)connectTo:(NSString*)path params:(NSDictionary*)postParameters method:(NSString*)method;
+- (BOOL)auth:(NSString*)userName passwordHash:(NSString*)passwordHash;
 - (NSString*)post:(NSString*)path params:(NSDictionary*)postParameters;
 - (NSString*)get:(NSString*)path params:(NSDictionary*)getParameters;
 - (NSURL*)buildURL:(NSString*)path;

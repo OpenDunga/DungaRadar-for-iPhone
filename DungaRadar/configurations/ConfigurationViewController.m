@@ -97,11 +97,21 @@
 
 - (void)pressLoginButton:(id)sender{
   HttpConnection* hc = [HttpConnection instance];
-  NSString* res = [hc auth:usernameField_.text passwordHash:[passwordField_.text toMD5]];
-  NSLog(@"%@", res);
-  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-  [ud setObject:usernameField_.text forKey:@"username"];
-  [ud setObject:passwordField_.text forKey:@"password"];
+  BOOL result = [hc auth:usernameField_.text passwordHash:[passwordField_.text toMD5]];
+  NSString* alert;
+  if(result){
+    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+    [ud setObject:usernameField_.text forKey:@"username"];
+    [ud setObject:passwordField_.text forKey:@"password"];
+    alert = @"ログインに成功しました";
+  }else{
+    alert = @"なんか上手くいかなかったっぽいです･･････";
+  }
+  UIAlertView* resultAlert = [[[UIAlertView alloc] initWithTitle:@"DungaRadar" 
+                                                        message:alert delegate:nil 
+                                              cancelButtonTitle:@"キャンセル" 
+                                              otherButtonTitles:@"OK", nil] autorelease];
+  [resultAlert show];
 }
 
 @end
