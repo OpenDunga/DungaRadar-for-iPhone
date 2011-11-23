@@ -92,12 +92,7 @@ const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
     av = [[[MKAnnotationView alloc]
            initWithAnnotation:member reuseIdentifier:identifier] autorelease];
   }
-  CGSize newSize = CGSizeMake(32, 32);
-  UIGraphicsBeginImageContext(newSize);
-  [member.iconImage drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-  UIImage* resizedImage = UIGraphicsGetImageFromCurrentImageContext();
-  UIGraphicsEndImageContext();
-  av.image = resizedImage;
+  av.image = member.iconImage;
   return av;
 }
 
