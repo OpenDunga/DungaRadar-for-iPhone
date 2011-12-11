@@ -17,12 +17,24 @@ const NSString* PATH_MEMBER_PROFILE_ICON_LOCATION	= @"/api/profile/icon/";
 @synthesize primaryKey=primaryKey_, dispName=dispName_, 
 timestamp=timestamp_, iconImage=iconImage_, location=location_;
 
+- (id)init {
+  self = [super init];
+  if(self) {
+    primaryKey_ = 0;
+    dispName_ = @"";
+    iconImage_ = nil;
+    location_ = [[CLLocation alloc] init];
+    timestamp_ = [[NSDate alloc] init];
+  }
+  return self;
+}
+
 - (id)initWithUserData:(NSDictionary *)userData{
   //
   // {"latitude":43.0838878,"longitude":141.3531251,"dispName":"ちくだ","memberID":47,"registeredTime":1310288033071}
-  [super init];
+  self = [super init];
   if(self){
-    primaryKey_ = [(NSNumber*)[userData objectForKey:@"primaryKey"] intValue];
+    primaryKey_ = [(NSNumber*)[userData objectForKey:@"memberID"] intValue];
     dispName_ = [(NSString*)[userData objectForKey:@"memberDispName"] retain];
     iconImage_ = nil;
     location_ = [[CLLocation alloc] initWithLatitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"latitude"] doubleValue] 

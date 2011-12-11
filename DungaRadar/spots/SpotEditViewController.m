@@ -7,6 +7,7 @@
 //
 
 #import "SpotEditViewController.h"
+#import "Me.h"
 
 @interface SpotEditViewController()
 - (void)pressSaveButton:(id)sender;
@@ -165,6 +166,8 @@
 
 - (void)pressSaveButton:(id)sender {
   NSString* result = [spot_ commit];
+  Me* me = [Me sharedMe];
+  self.spot.location = me.location;
   UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"スポットの追加" 
                                                   message:result 
                                                  delegate:nil

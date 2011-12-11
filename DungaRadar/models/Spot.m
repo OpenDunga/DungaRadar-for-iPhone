@@ -10,7 +10,7 @@
 #import "Spot.h"
 #import "DungaRegister.h"
 
-const NSString* VENUE_CREATION_PATH = @"/api/location/venue/new";
+const NSString* PATH_SPOT_CREATION = @"/api/location/venue/new";
 
 @implementation Spot
 @synthesize primaryKey=primaryKey_, scope=scope_, autoInform=autoInform_, 
@@ -62,7 +62,7 @@ dispName=dispName_, location=location_;
 
 - (NSString*)commit {
   if([DungaRegister authWithStorage]) {
-    return [DungaRegister post:(NSString*)VENUE_CREATION_PATH params:[self dump]];
+    return [DungaRegister post:(NSString*)PATH_SPOT_CREATION params:[self dump]];
   }
   return @"ログインに失敗しました"; // あとで直す
 }

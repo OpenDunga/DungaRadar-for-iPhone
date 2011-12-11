@@ -11,15 +11,13 @@
 #import "MapViewController.h"
 #import "HttpConnection.h"
 #import "DungaRegister.h"
-#import "DungaMember.h"
+#import "Me.h"
 
 const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
-const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
 
 @interface MapViewController()
 - (void)addMember:(DungaMember*)member;
 - (NSArray*)getAllMembers;
-- (BOOL)registerLocationWithLongitude:(double)lng andLatitude:(double)lat;
 @end
 
 @implementation MapViewController
@@ -37,10 +35,7 @@ const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
 }
 
 - (void)didReceiveMemoryWarning{
-  // Releases the view if it doesn't have a superview.
   [super didReceiveMemoryWarning];
-  
-  // Release any cached data, images, etc that aren't in use.
 }
 
 #pragma mark - View lifecycle
@@ -70,21 +65,10 @@ const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation 
            fromLocation:(CLLocation *)oldLocation{
-  NSNumber* lat = [NSNumber numberWithDouble:newLocation.coordinate.latitude];
-  NSNumber* lng = [NSNumber numberWithDouble:newLocation.coordinate.longitude];
-  NSDictionary* dictionary = [NSDictionary dictionaryWithObjectsAndKeys:lat, @"latitude", lng, @"longitude", nil];
-  
-  DungaMember* me = [[[DungaMember alloc] initWithUserData:dictionary] autorelease];
-  if(!initialized_){
-    [self registerLocationWithLongitude:[lng doubleValue] andLatitude:[lat doubleValue]];
-    [self addMember:me];
-    initialized_ = YES;
-  }else{
-    [mapView_ removeAnnotation:me];
-  }
+  Me* me = [Me sharedMe];
+  me.location = newLocation;
+  [me commit];
 }
-
-
 
 - (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
   DungaMember* member = (DungaMember*)annotation;
@@ -116,26 +100,13 @@ const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
     NSArray* memberInfos = (NSArray*)[res objectForKey:@"entries"];
     NSMutableArray* members = [NSMutableArray array];
     for(NSDictionary* userData in memberInfos){
-      DungaMember* member = [[DungaMember alloc] initWithUserData:userData];
+      DungaMember* member;
+      member = [[DungaMember alloc] initWithUserData:userData];
       [members addObject:member];
     }
     return members;
   }
   return [NSArray array];
-}
-
-- (BOOL)registerLocationWithLongitude:(double)lng andLatitude:(double)lat{
-  if([DungaRegister authWithStorage]){
-    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [NSString stringWithFormat:@"%f", lng], 
-                            @"longitude", 
-                            [NSString stringWithFormat:@"%f", lat],
-                            @"latitude",
-                            nil];
-    [DungaRegister post:(NSString*)PATH_REGISTER_MEMBER_LOCATION params:params];
-    return YES;
-  }
-  return NO;
 }
 
 @end

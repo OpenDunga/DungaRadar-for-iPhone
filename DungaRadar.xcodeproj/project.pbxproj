@@ -40,6 +40,7 @@
 		079C6B141392040200528E69 /* DungaRadarAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B131392040200528E69 /* DungaRadarAppDelegate.m */; };
 		079C6B171392040200528E69 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B151392040200528E69 /* MainWindow.xib */; };
 		07A4AFF41495582800B69C5E /* scopes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07A4AFF31495582800B69C5E /* scopes.plist */; };
+		07A4AFF7149565FF00B69C5E /* Me.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A4AFF6149565FF00B69C5E /* Me.m */; };
 		07AE416D139211CA0087D526 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416C139211CA0087D526 /* MapKit.framework */; };
 		07AE416F1392132D0087D526 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416E1392132C0087D526 /* CoreLocation.framework */; };
 		07D92E6014948EEB000ACA48 /* SpotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E5F14948EEB000ACA48 /* SpotView.xib */; };
@@ -110,6 +111,8 @@
 		079C6B131392040200528E69 /* DungaRadarAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DungaRadarAppDelegate.m; sourceTree = "<group>"; };
 		079C6B161392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		07A4AFF31495582800B69C5E /* scopes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = scopes.plist; path = resources/scopes.plist; sourceTree = "<group>"; };
+		07A4AFF5149565FE00B69C5E /* Me.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Me.h; path = models/Me.h; sourceTree = "<group>"; };
+		07A4AFF6149565FF00B69C5E /* Me.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Me.m; path = models/Me.m; sourceTree = "<group>"; };
 		07AE416C139211CA0087D526 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		07AE416E1392132C0087D526 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		07D92E5F14948EEB000ACA48 /* SpotView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpotView.xib; path = spots/SpotView.xib; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 				078F5A5C147CD8BA00C2A958 /* DungaRegister.m */,
 				07D92E671494A869000ACA48 /* Spot.h */,
 				07D92E681494A869000ACA48 /* Spot.m */,
+				07A4AFF5149565FE00B69C5E /* Me.h */,
+				07A4AFF6149565FF00B69C5E /* Me.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -436,6 +441,7 @@
 				078F5A66147CE72700C2A958 /* UIImageExtention.m in Sources */,
 				07D92E6514949950000ACA48 /* SpotEditViewController.m in Sources */,
 				07D92E691494A869000ACA48 /* Spot.m in Sources */,
+				07A4AFF7149565FF00B69C5E /* Me.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
