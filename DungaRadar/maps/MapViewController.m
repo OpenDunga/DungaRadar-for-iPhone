@@ -52,6 +52,7 @@ const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
   locationManager_ = [[CLLocationManager alloc] init];
   locationManager_.delegate = self;
   [locationManager_ startUpdatingLocation];
+  [locationManager_ startMonitoringSignificantLocationChanges];
   NSArray* members = [self getAllMembers];
   for(DungaMember* member in members){
     [self addMember:member];
@@ -83,6 +84,8 @@ const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
     [mapView_ removeAnnotation:me];
   }
 }
+
+
 
 - (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
   DungaMember* member = (DungaMember*)annotation;
