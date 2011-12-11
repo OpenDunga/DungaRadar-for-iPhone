@@ -44,13 +44,13 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   if(iconImage_){
     return iconImage_;
   }else{
-    if([DungaRegister auth]){
-      HttpConnection* hc = [HttpConnection instance];
-      NSData* icon = (NSData*)[[hc connectTo:[NSString stringWithFormat:@"%@%d", 
-                                    (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
-                                    memberID_] 
-                            params:nil 
-                            method:@"GET"] objectForKey:@"data"];
+    if([DungaRegister authWithStorage]){
+      NSData* icon = (NSData*)[[DungaRegister connectToDunga:[NSString stringWithFormat:@"%@%d", 
+                                                              (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
+                                                              memberID_] 
+                                                      params:nil 
+                                                      method:@"GET"] 
+                               objectForKey:@"data"];
       UIImage* origin = [[UIImage alloc] initWithData:icon];
       iconImage_ = [origin resize:CGSizeMake(32, 32) aspect:YES];
       return iconImage_;

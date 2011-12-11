@@ -106,11 +106,10 @@ const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
 }
 
 - (NSArray*)getAllMembers{
-  HttpConnection* hc = [HttpConnection instance];
-  if([DungaRegister auth]){
+  if([DungaRegister authWithStorage]){
     NSError* err;
-    NSDictionary* res = [NSDictionary dictionaryWithJSONString:[hc get:(NSString*)PATH_ALL_MEMBER_LOCATION 
-                                                                    params:nil]
+    NSDictionary* res = [NSDictionary dictionaryWithJSONString:[DungaRegister get:(NSString*)PATH_ALL_MEMBER_LOCATION 
+                                                                           params:nil]
                                                             error:&err];
     NSArray* memberInfos = (NSArray*)[res objectForKey:@"entries"];
     NSMutableArray* members = [NSMutableArray array];
@@ -124,15 +123,14 @@ const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
 }
 
 - (BOOL)registerLocationWithLongitude:(double)lng andLatitude:(double)lat{
-  if([DungaRegister auth]){
+  if([DungaRegister authWithStorage]){
     NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
                             [NSString stringWithFormat:@"%f", lng], 
                             @"longitude", 
                             [NSString stringWithFormat:@"%f", lat],
                             @"latitude",
                             nil];
-    HttpConnection* hc = [HttpConnection instance];
-    [hc post:(NSString*)PATH_REGISTER_MEMBER_LOCATION params:params];
+    [DungaRegister post:(NSString*)PATH_REGISTER_MEMBER_LOCATION params:params];
     return YES;
   }
   return NO;

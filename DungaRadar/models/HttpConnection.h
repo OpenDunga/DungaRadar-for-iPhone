@@ -12,10 +12,20 @@
 @interface HttpConnection : KWSingleton{
 }
 
-- (NSDictionary*)connectTo:(NSString*)path params:(NSDictionary*)postParameters method:(NSString*)method;
-- (BOOL)auth:(NSString*)userName passwordHash:(NSString*)passwordHash;
-- (NSString*)post:(NSString*)path params:(NSDictionary*)postParameters;
-- (NSString*)get:(NSString*)path params:(NSDictionary*)getParameters;
-- (NSURL*)buildURL:(NSString*)path;
-
++ (NSDictionary*)connectTo:(NSURL*)url
+                    params:(NSDictionary*)parameters 
+                    method:(NSString*)method 
+                 userAgent:(NSString*)ua 
+                httpHeader:(NSString*)header;
++ (NSString*)post:(NSURL*)url
+           params:(NSDictionary*)postParameters 
+        userAgent:(NSString*)ua 
+       httpHeader:(NSString*)header;
++ (NSString*)get:(NSURL*)url 
+          params:(NSDictionary*)getParameters
+       userAgent:(NSString*)ua 
+      httpHeader:(NSString*)header;
++ (NSURL*)buildURL:(NSString*)schema 
+              host:(NSString*)host 
+              path:(NSString*)path;
 @end

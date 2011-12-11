@@ -10,6 +10,14 @@
 
 @interface DungaRegister : NSObject
 
-+ (BOOL)auth;
++ (BOOL)auth:(NSString*)userName passwordHash:(NSString*)passwordHash;
++ (BOOL)authWithStorage;
 
++ (NSDictionary*)connectToDunga:(NSString *)path
+                         params:(NSDictionary *)parameters 
+                         method:(NSString *)method;
++ (NSString*)post:(NSString*)path
+           params:(NSDictionary*)postParameters;
++ (NSString*)get:(NSString*)path
+          params:(NSDictionary*)getParameters;
 @end

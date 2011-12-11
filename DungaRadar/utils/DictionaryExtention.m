@@ -17,7 +17,6 @@
       [string appendFormat:@"%@=%@&", key, [self objectForKey:key]];
     }
     [string deleteCharactersInRange:NSMakeRange([string length]-1, 1)];
-    NSLog(@"%@", string);
     return (NSString*)string;
   }
   return @"";

@@ -10,39 +10,25 @@
 #import "EncryptExtention.h"
 #import "DictionaryExtention.h"
 
-/** サーバースキーマ。 */
-const NSString*	SERVER_SCHEME	= @"http";
-
-/** サーバーホスト。 */
-const NSString*	SERVER_HOST		= @"www.opendunga.net";
-
-/** HttpHeaderField **/
-/**
- http.useragentを利用すると、cocoaの罠にはまるので便宜的にnamaco.
-**/
-const NSString* HEADER_FIELD = @"namaco";
-
-/** ユーザーエージェント。 */
-const NSString*	USER_AGENT		= @"DungaRadar/1.0";
-
-/** ログイン用URIのパス。 */
-const NSString* PATH_LOGIN		= @"/api/login";
-
 @implementation HttpConnection
 
 NSMutableData* loadedData = nil;
 
-- (NSDictionary*)connectTo:(NSString *)path params:(NSDictionary *)parameters method:(NSString *)method{
++ (NSDictionary*)connectTo:(NSURL *)url
+                    params:(NSDictionary *)parameters 
+                    method:(NSString *)method 
+                 userAgent:(NSString *)ua 
+                httpHeader:(NSString *)header {
   /**
    Returns dictionary that has key data and response. 
    */
-  NSMutableURLRequest* httpPostRequest = [NSMutableURLRequest requestWithURL:[self buildURL:path]];
+  NSMutableURLRequest* httpPostRequest = [NSMutableURLRequest requestWithURL:url];
   [httpPostRequest setHTTPMethod:method];
   if(parameters){
     NSData* requestData = [[parameters dump] dataUsingEncoding:NSUTF8StringEncoding];
     [httpPostRequest setHTTPBody:requestData];
   }
-  [httpPostRequest addValue:(NSString*)USER_AGENT forHTTPHeaderField:(NSString*)HEADER_FIELD];
+  [httpPostRequest addValue:(NSString*)ua forHTTPHeaderField:(NSString*)header];
   NSURLResponse* res;
   NSError* err;
   NSData* data = [NSURLConnection sendSynchronousRequest:httpPostRequest 
@@ -51,34 +37,32 @@ NSMutableData* loadedData = nil;
   return [NSDictionary dictionaryWithObjectsAndKeys:data, @"data", res, @"response", nil];
 }
 
-- (BOOL)auth:(NSString *)userName passwordHash:(NSString *)passwordHash{
-  NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[self buildURL:(NSString*)PATH_LOGIN]];
-  [req addValue:(NSString*)USER_AGENT forHTTPHeaderField:@"http.useragent"];
-  NSString* agent = [req valueForHTTPHeaderField:@"http.useragent"];
-  NSString* encrypted = [passwordHash toEncrypted:agent];
-  NSDictionary* post = [NSDictionary dictionaryWithObjectsAndKeys:userName, 
-                        @"user_name", encrypted, 
-                        @"enc_password", passwordHash, 
-                        @"password", nil];
-  NSURLResponse* res = (NSURLResponse*)[[self connectTo:(NSString*)PATH_LOGIN 
-                                                 params:post method:@"POST"] 
-                                        objectForKey:@"response"];
-  NSHTTPURLResponse* urlRes = (NSHTTPURLResponse*)res;
-  return (urlRes.statusCode == 200);
-}
-
-- (NSString*)post:(NSString *)path params:(NSDictionary *)postParameters{
-  NSData* res = (NSData*)[[self connectTo:path params:postParameters method:@"POST"] objectForKey:@"data"];
++ (NSString*)post:(NSURL *)url
+           params:(NSDictionary *)postParameters 
+        userAgent:(NSString *)ua 
+       httpHeader:(NSString *)header{
+  NSData* res = (NSData*)[[HttpConnection connectTo:url
+                                             params:postParameters 
+                                             method:@"POST" 
+                                          userAgent:ua 
+                                         httpHeader:header] objectForKey:@"data"];
   return [[NSString alloc] initWithData:res encoding:NSUTF8StringEncoding];;
 }
 
-- (NSString*)get:(NSString *)path params:(NSDictionary *)getParameters{
-  NSData* res = (NSData*)[[self connectTo:path params:getParameters method:@"GET"] objectForKey:@"data"];
++ (NSString*)get:(NSURL *)url
+          params:(NSDictionary *)getParameters 
+       userAgent:(NSString *)ua 
+      httpHeader:(NSString *)header {
+  NSData* res = (NSData*)[[HttpConnection connectTo:url
+                                             params:getParameters 
+                                             method:@"GET" 
+                                          userAgent:ua 
+                                         httpHeader:header] objectForKey:@"data"];
   return [[NSString alloc] initWithData:res encoding:NSUTF8StringEncoding];;
 }
 
-- (NSURL*)buildURL:(NSString *)path{
-  NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", (NSString*)SERVER_SCHEME, (NSString*)SERVER_HOST, (NSString*)path]];
++ (NSURL*)buildURL:(NSString *)schema host:(NSString *)host path:(NSString *)path {
+  NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", (NSString*)schema, (NSString*)host, (NSString*)path]];
   return url;
 }
 

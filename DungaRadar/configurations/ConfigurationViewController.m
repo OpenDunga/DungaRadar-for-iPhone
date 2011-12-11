@@ -7,7 +7,7 @@
 //
 
 #import "ConfigurationViewController.h"
-#import "HttpConnection.h"
+#import "DungaRegister.h"
 #import "EncryptExtention.h"
 
 @interface ConfigurationViewController()
@@ -96,8 +96,7 @@
 }
 
 - (void)pressLoginButton:(id)sender{
-  HttpConnection* hc = [HttpConnection instance];
-  BOOL result = [hc auth:usernameField_.text passwordHash:[passwordField_.text toMD5]];
+  BOOL result = [DungaRegister auth:usernameField_.text passwordHash:[passwordField_.text toMD5]];
   NSString* alert;
   if(result){
     NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
