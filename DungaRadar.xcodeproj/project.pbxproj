@@ -11,7 +11,6 @@
 		075634CB147CA4790090BFE9 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634C9147CA4790090BFE9 /* ConfigurationViewController.m */; };
 		075634CF147CA48E0090BFE9 /* MIMView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634CC147CA48E0090BFE9 /* MIMView.xib */; };
 		075634D0147CA48E0090BFE9 /* MIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634CE147CA48E0090BFE9 /* MIMViewController.m */; };
-		075634D4147CA49B0090BFE9 /* SpotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634D1147CA49B0090BFE9 /* SpotView.xib */; };
 		075634D5147CA49B0090BFE9 /* SpotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634D3147CA49B0090BFE9 /* SpotViewController.m */; };
 		075634DA147CA4D40090BFE9 /* DungaMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634D7147CA4D40090BFE9 /* DungaMember.m */; };
 		075634DB147CA4D40090BFE9 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634D9147CA4D40090BFE9 /* HttpConnection.m */; };
@@ -43,6 +42,7 @@
 		079C6B171392040200528E69 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B151392040200528E69 /* MainWindow.xib */; };
 		07AE416D139211CA0087D526 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416C139211CA0087D526 /* MapKit.framework */; };
 		07AE416F1392132D0087D526 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416E1392132C0087D526 /* CoreLocation.framework */; };
+		07D92E6014948EEB000ACA48 /* SpotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E5F14948EEB000ACA48 /* SpotView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,7 +52,6 @@
 		075634CC147CA48E0090BFE9 /* MIMView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MIMView.xib; path = MIM/MIMView.xib; sourceTree = "<group>"; };
 		075634CD147CA48E0090BFE9 /* MIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIMViewController.h; path = MIM/MIMViewController.h; sourceTree = "<group>"; };
 		075634CE147CA48E0090BFE9 /* MIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIMViewController.m; path = MIM/MIMViewController.m; sourceTree = "<group>"; };
-		075634D1147CA49B0090BFE9 /* SpotView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpotView.xib; path = spots/SpotView.xib; sourceTree = "<group>"; };
 		075634D2147CA49B0090BFE9 /* SpotViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpotViewController.h; path = spots/SpotViewController.h; sourceTree = "<group>"; };
 		075634D3147CA49B0090BFE9 /* SpotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpotViewController.m; path = spots/SpotViewController.m; sourceTree = "<group>"; };
 		075634D6147CA4D40090BFE9 /* DungaMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DungaMember.h; path = models/DungaMember.h; sourceTree = "<group>"; };
@@ -110,6 +109,7 @@
 		079C6B161392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		07AE416C139211CA0087D526 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		07AE416E1392132C0087D526 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		07D92E5F14948EEB000ACA48 /* SpotView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpotView.xib; path = spots/SpotView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -151,7 +151,7 @@
 		0757021113C951E0009119A3 /* spots */ = {
 			isa = PBXGroup;
 			children = (
-				075634D1147CA49B0090BFE9 /* SpotView.xib */,
+				07D92E5F14948EEB000ACA48 /* SpotView.xib */,
 				075634D2147CA49B0090BFE9 /* SpotViewController.h */,
 				075634D3147CA49B0090BFE9 /* SpotViewController.m */,
 				0771FE73147D019000DE2746 /* EditSpotViewController.h */,
@@ -373,8 +373,8 @@
 				079C6B171392040200528E69 /* MainWindow.xib in Resources */,
 				075634CA147CA4790090BFE9 /* ConfigurationView.xib in Resources */,
 				075634CF147CA48E0090BFE9 /* MIMView.xib in Resources */,
-				075634D4147CA49B0090BFE9 /* SpotView.xib in Resources */,
 				075634E8147CA4E80090BFE9 /* MapView.xib in Resources */,
+				07D92E6014948EEB000ACA48 /* SpotView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

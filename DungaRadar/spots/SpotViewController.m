@@ -10,10 +10,6 @@
 #import "EditSpotViewController.h"
 #import "SpotViewController.h"
 
-@interface SpotViewController()
-- (void)pressAddButton:(id)sender;
-@end
-
 @implementation SpotViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
@@ -39,21 +35,10 @@
 
 - (void)viewDidLoad{
   [super viewDidLoad];
-  UITableViewController* tableViewController = [[[UITableViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
-  tableViewController.title = @"スポット";
-  tableViewController.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] 
-                                                            initWithBarButtonSystemItem:UIBarButtonSystemItemAdd 
-                                                            target:self 
-                                                            action:@selector(pressAddButton:)] autorelease];
-  tableViewController.tableView.dataSource = self;
-  tableViewController.tableView.delegate = self;
-  [self pushViewController:tableViewController animated:NO];
 }
 
 - (void)viewDidUnload{
   [super viewDidUnload];
-  // Release any retained subviews of the main view.
-  // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
@@ -80,7 +65,8 @@
 
 - (void)pressAddButton:(id)sender{
   EditSpotViewController* addViewController = [[EditSpotViewController alloc] initWithStyle:UITableViewStyleGrouped];
-  [self pushViewController:addViewController animated:YES];
+  UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:addViewController] autorelease];
+  [self presentModalViewController:navigationController animated:YES];
 }
 
 @end

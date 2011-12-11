@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 
 
-@interface SpotViewController : UINavigationController <UITableViewDelegate, UITableViewDataSource> {
-    
+@interface SpotViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 }
+
+-(IBAction)pressAddButton:(id)sender;
 
 @end
