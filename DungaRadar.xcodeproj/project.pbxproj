@@ -44,6 +44,7 @@
 		07D92E6014948EEB000ACA48 /* SpotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E5F14948EEB000ACA48 /* SpotView.xib */; };
 		07D92E62149498C9000ACA48 /* spots.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E61149498C9000ACA48 /* spots.plist */; };
 		07D92E6514949950000ACA48 /* SpotEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D92E6414949950000ACA48 /* SpotEditViewController.m */; };
+		07D92E691494A869000ACA48 /* Spot.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D92E681494A869000ACA48 /* Spot.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -112,6 +113,8 @@
 		07D92E61149498C9000ACA48 /* spots.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = spots.plist; path = resources/spots.plist; sourceTree = "<group>"; };
 		07D92E6314949950000ACA48 /* SpotEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpotEditViewController.h; path = spots/SpotEditViewController.h; sourceTree = "<group>"; };
 		07D92E6414949950000ACA48 /* SpotEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpotEditViewController.m; path = spots/SpotEditViewController.m; sourceTree = "<group>"; };
+		07D92E671494A869000ACA48 /* Spot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Spot.h; path = models/Spot.h; sourceTree = "<group>"; };
+		07D92E681494A869000ACA48 /* Spot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Spot.m; path = models/Spot.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +174,8 @@
 				075634D9147CA4D40090BFE9 /* HttpConnection.m */,
 				078F5A5B147CD8BA00C2A958 /* DungaRegister.h */,
 				078F5A5C147CD8BA00C2A958 /* DungaRegister.m */,
+				07D92E671494A869000ACA48 /* Spot.h */,
+				07D92E681494A869000ACA48 /* Spot.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -422,6 +427,7 @@
 				078F5A5D147CD8BA00C2A958 /* DungaRegister.m in Sources */,
 				078F5A66147CE72700C2A958 /* UIImageExtention.m in Sources */,
 				07D92E6514949950000ACA48 /* SpotEditViewController.m in Sources */,
+				07D92E691494A869000ACA48 /* Spot.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,8 +11,8 @@
 
 @interface DungaMember : NSObject <MKAnnotation>{
  @private
-  int memberID_;
-  NSString* memberDispName_;
+  int primaryKey_;
+  NSString* dispName_;
   NSDate* timestamp_;
   UIImage* iconImage_;
   CLLocation* location_;
@@ -20,8 +20,8 @@
 
 - (id)initWithUserData:(NSDictionary*)userData;
 
-@property(readonly) int memberID;
-@property(readonly, copy) NSString* memberDispName;
+@property(readonly) int primaryKey;
+@property(readonly, copy) NSString* dispName;
 @property(readonly, retain) UIImage* iconImage;
 @property(readwrite, retain) CLLocation* location;
 @property(readonly, retain) NSDate* timestamp;

@@ -14,16 +14,16 @@
 const NSString* PATH_MEMBER_PROFILE_ICON_LOCATION	= @"/api/profile/icon/";
 
 @implementation DungaMember
-@synthesize memberID=memberID_, memberDispName=memberDispName_, 
+@synthesize primaryKey=primaryKey_, dispName=dispName_, 
 timestamp=timestamp_, iconImage=iconImage_, location=location_;
 
 - (id)initWithUserData:(NSDictionary *)userData{
   //
-  // {"latitude":43.0838878,"longitude":141.3531251,"memberDispName":"ちくだ","memberID":47,"registeredTime":1310288033071}
+  // {"latitude":43.0838878,"longitude":141.3531251,"dispName":"ちくだ","memberID":47,"registeredTime":1310288033071}
   [super init];
   if(self){
-    memberID_ = [(NSNumber*)[userData objectForKey:@"memberID"] intValue];
-    memberDispName_ = [(NSString*)[userData objectForKey:@"memberDispName"] retain];
+    primaryKey_ = [(NSNumber*)[userData objectForKey:@"primaryKey"] intValue];
+    dispName_ = [(NSString*)[userData objectForKey:@"memberDispName"] retain];
     iconImage_ = nil;
     location_ = [[CLLocation alloc] initWithLatitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"latitude"] doubleValue] 
                                            longitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"longitude"] doubleValue]];
@@ -33,7 +33,7 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
 }
 
 - (void)dealloc{
-  [memberDispName_ release];
+  [dispName_ release];
   [timestamp_ release];
   [iconImage_ release];
   [location_ release];
@@ -47,7 +47,7 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
     if([DungaRegister authWithStorage]){
       NSData* icon = (NSData*)[[DungaRegister connectToDunga:[NSString stringWithFormat:@"%@%d", 
                                                               (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
-                                                              memberID_] 
+                                                              primaryKey_] 
                                                       params:nil 
                                                       method:@"GET"] 
                                objectForKey:@"data"];
@@ -65,12 +65,12 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
 }
 
 - (NSString*)title{
-  return self.memberDispName;
+  return self.dispName;
 }
 
 - (BOOL)isEqual:(id)object{
   DungaMember* member = (DungaMember*)object;
-  return memberID_ == member.memberID;
+  return primaryKey_ == member.primaryKey;
 }
 
 @end

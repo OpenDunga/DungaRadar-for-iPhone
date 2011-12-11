@@ -27,7 +27,6 @@ const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-    // Custom initialization
   }
   return self;
 }
@@ -89,7 +88,7 @@ const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
 
 - (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
   DungaMember* member = (DungaMember*)annotation;
-  NSString* identifier = [NSString stringWithFormat:@"Pin_%@", member.memberDispName];
+  NSString* identifier = [NSString stringWithFormat:@"Pin_%@", member.dispName];
   MKAnnotationView *av = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
   if(!av){
     av = [[[MKAnnotationView alloc]
