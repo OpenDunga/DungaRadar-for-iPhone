@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SpotEditViewController : UITableViewController
+@interface SpotEditViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate>
 
 @end

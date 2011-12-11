@@ -61,21 +61,16 @@
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
-  // Return YES for supported orientations
   return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
 #pragma mark - Table view data source
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-  // Return the number of sections.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-  // Return the number of rows in the section.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
   return 3;
 }
 
@@ -86,74 +81,52 @@
   int row = indexPath.row;
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     NSString* cellName[] = {@"スポット名", @"範囲", @"自動通知"}; 
     if(row == 0){
-      cell.textLabel.text = @"スポット名";
+      UITextField* field = [[[UITextField alloc] initWithFrame:CGRectMake(0, 0, 170, 25)] autorelease];
+      field.textColor = [UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1];
+      cell.accessoryView = field;
     }else if(row == 1){
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-      cell.detailTextLabel.text = @"";
+      cell.detailTextLabel.text = @"コンビニサイズ";
+      cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     }else if(row == 2){
       UISwitch* sw = [[[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
-      [cell addSubview:sw];
+      cell.accessoryView = sw;
     }
     cell.textLabel.text = cellName[row];
   }
-  
-  // Configure the cell...
-  
   return cell;
 }
 
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  if(indexPath.row == 1){
+    UIPickerView* picker = [[[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+    picker.showsSelectionIndicator = YES;
+    picker.dataSource = self;
+    picker.delegate = self;
+    UIViewController* pickerController = [[[UIViewController alloc] init] autorelease];
+    [pickerController.view addSubview:picker];
+    pickerController.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
+    [self.navigationController pushViewController:pickerController animated:YES];
+  }
+}
 
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }   
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }   
- }
- */
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+  return 1;
+}
 
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+  NSString* path = [[NSBundle mainBundle] pathForResource:@"spots" ofType:@"plist"];
+  NSDictionary* spots = [NSDictionary dictionaryWithContentsOfFile:path];
+  return [(NSDictionary*)[spots objectForKey:@"root"] count];
+}
 
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-#pragma mark - Table view delegate
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-  // Navigation logic may go here. Create and push another view controller.
-  /*
-   <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-   // ...
-   // Pass the selected object to the new view controller.
-   [self.navigationController pushViewController:detailViewController animated:YES];
-   [detailViewController release];
-   */
+- (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+  NSString* path = [[NSBundle mainBundle] pathForResource:@"spots" ofType:@"plist"];
+  NSDictionary* spots = [NSDictionary dictionaryWithContentsOfFile:path];
+  return (NSString*)[[(NSDictionary*)[spots objectForKey:@"root"] allKeys] objectAtIndex:row];
 }
 
 - (void)pressCancelButton:(id)sender {

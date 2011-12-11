@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>root</key>
+	<dict>
+		<key>コンビニサイズ</key>
+		<integer>100</integer>
+		<key>図書館サイズ</key>
+		<integer>400</integer>
+		<key>ターミナル駅サイズ</key>
+		<integer>600</integer>
+		<key>総合スーパーサイズ</key>
+		<integer>1000</integer>
+		<key>公園サイズ</key>
+		<integer>2000</integer>
+		<key>空港サイズ</key>
+		<integer>4000</integer>
+	</dict>
+</dict>
+</plist>

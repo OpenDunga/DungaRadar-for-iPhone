@@ -42,7 +42,7 @@
 		07AE416D139211CA0087D526 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416C139211CA0087D526 /* MapKit.framework */; };
 		07AE416F1392132D0087D526 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416E1392132C0087D526 /* CoreLocation.framework */; };
 		07D92E6014948EEB000ACA48 /* SpotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E5F14948EEB000ACA48 /* SpotView.xib */; };
-		07D92E62149498C9000ACA48 /* spot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E61149498C9000ACA48 /* spot.plist */; };
+		07D92E62149498C9000ACA48 /* spots.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E61149498C9000ACA48 /* spots.plist */; };
 		07D92E6514949950000ACA48 /* SpotEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D92E6414949950000ACA48 /* SpotEditViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -109,7 +109,7 @@
 		07AE416C139211CA0087D526 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		07AE416E1392132C0087D526 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		07D92E5F14948EEB000ACA48 /* SpotView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpotView.xib; path = spots/SpotView.xib; sourceTree = "<group>"; };
-		07D92E61149498C9000ACA48 /* spot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = spot.plist; path = resources/spot.plist; sourceTree = "<group>"; };
+		07D92E61149498C9000ACA48 /* spots.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = spots.plist; path = resources/spots.plist; sourceTree = "<group>"; };
 		07D92E6314949950000ACA48 /* SpotEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpotEditViewController.h; path = spots/SpotEditViewController.h; sourceTree = "<group>"; };
 		07D92E6414949950000ACA48 /* SpotEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpotEditViewController.m; path = spots/SpotEditViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -325,7 +325,7 @@
 		07D92E6614949962000ACA48 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				07D92E61149498C9000ACA48 /* spot.plist */,
+				07D92E61149498C9000ACA48 /* spots.plist */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -386,7 +386,7 @@
 				075634CF147CA48E0090BFE9 /* MIMView.xib in Resources */,
 				075634E8147CA4E80090BFE9 /* MapView.xib in Resources */,
 				07D92E6014948EEB000ACA48 /* SpotView.xib in Resources */,
-				07D92E62149498C9000ACA48 /* spot.plist in Resources */,
+				07D92E62149498C9000ACA48 /* spots.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
