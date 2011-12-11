@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Spot.h"
 
-@interface SpotEditViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate>
+@interface SpotEditViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate>{
+  Spot* spot_;
+}
+
 
 @end

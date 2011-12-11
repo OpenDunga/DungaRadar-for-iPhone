@@ -9,39 +9,43 @@
 #import "SpotEditViewController.h"
 
 @interface SpotEditViewController()
+- (void)pressSaveButton:(id)sender;
 - (void)pressCancelButton:(id)sender;
 @end
 
 @implementation SpotEditViewController
 
-- (id)initWithStyle:(UITableViewStyle)style{
+- (id)initWithStyle:(UITableViewStyle)style {
   self = [super initWithStyle:style];
   if (self) {
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    spot_ = [[Spot alloc] init];
   }
   return self;
 }
 
-- (void)didReceiveMemoryWarning {
-  // Releases the view if it doesn't have a superview.
-  [super didReceiveMemoryWarning];
-  
-  // Release any cached data, images, etc that aren't in use.
+- (void)dealloc {
+  [spot_ release];
+  [super dealloc];
 }
 
-- (void)viewDidLoad{
+- (void)didReceiveMemoryWarning {
+  [super didReceiveMemoryWarning];
+}
+
+- (void)viewDidLoad {
   [super viewDidLoad];
+  self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+                                                                                          target:self 
+                                                                                          action:@selector(pressSaveButton:)] autorelease];
   self.navigationItem.leftBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                                          target:self 
                                                                                                          action:@selector(pressCancelButton:)] autorelease];
-  
 }
 
 - (void)viewDidUnload {
   [super viewDidUnload];
-  // Release any retained subviews of the main view.
-  // e.g. self.myOutlet = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -127,6 +131,21 @@
   NSString* path = [[NSBundle mainBundle] pathForResource:@"spots" ofType:@"plist"];
   NSDictionary* spots = [NSDictionary dictionaryWithContentsOfFile:path];
   return (NSString*)[[(NSDictionary*)[spots objectForKey:@"root"] allKeys] objectAtIndex:row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+  if(component == 0) {
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"spots" ofType:@"plist"];
+    NSDictionary* spots = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSLog(@"%@", [[spots allValues] objectAtIndex:row]);
+    spot_.scope = [(NSNumber*)[[spots allValues] objectAtIndex:row] intValue];
+  }
+}
+
+- (void)pressSaveButton:(id)sender {
+  spot_.dispName = @"ぎぎねっと邸";
+  spot_.autoInform = false;
+  [spot_ commit];
 }
 
 - (void)pressCancelButton:(id)sender {

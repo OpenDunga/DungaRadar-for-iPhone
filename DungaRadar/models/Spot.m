@@ -60,7 +60,9 @@ dispName=dispName_, location=location_;
 
 - (BOOL)commit {
   if([DungaRegister authWithStorage]) {
-    [DungaRegister post:(NSString*)VENUE_CREATION_PATH params:[self dump]];
+    NSLog(@"%@", [self dump]);
+    NSString* hoge = [DungaRegister post:(NSString*)VENUE_CREATION_PATH params:[self dump]];
+    NSLog(@"%@", hoge);
     return YES;
   }
   return NO;
@@ -68,11 +70,11 @@ dispName=dispName_, location=location_;
      
 - (NSDictionary*)dump {
   return [NSDictionary dictionaryWithObjectsAndKeys:
-          @"scope", [NSString stringWithFormat:@"%d", self.scope],
-          @"auto_inform", self.autoInform ? @"true" : @"false",
-          @"disp_name", self.dispName,
-          @"latitude", [NSString stringWithFormat:@"%lf", self.location.coordinate.latitude],
-          @"longitude", [NSString stringWithFormat:@"%lf", self.location.coordinate.latitude], 
+          [NSString stringWithFormat:@"%d", self.scope], @"scope",
+          self.autoInform ? @"true" : @"false", @"auto_inform",
+          self.dispName, @"disp_name",
+          [NSString stringWithFormat:@"%lf", self.location.coordinate.latitude], @"latitude",
+          [NSString stringWithFormat:@"%lf", self.location.coordinate.latitude], @"longitude", 
           nil];
 }
 

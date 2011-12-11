@@ -45,6 +45,8 @@
 		07D92E62149498C9000ACA48 /* spots.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E61149498C9000ACA48 /* spots.plist */; };
 		07D92E6514949950000ACA48 /* SpotEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D92E6414949950000ACA48 /* SpotEditViewController.m */; };
 		07D92E691494A869000ACA48 /* Spot.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D92E681494A869000ACA48 /* Spot.m */; };
+		07D92E731494B7D9000ACA48 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E721494B7D9000ACA48 /* Icon@2x.png */; };
+		07D92E751494B7E0000ACA48 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E741494B7E0000ACA48 /* Icon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +117,8 @@
 		07D92E6414949950000ACA48 /* SpotEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpotEditViewController.m; path = spots/SpotEditViewController.m; sourceTree = "<group>"; };
 		07D92E671494A869000ACA48 /* Spot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Spot.h; path = models/Spot.h; sourceTree = "<group>"; };
 		07D92E681494A869000ACA48 /* Spot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Spot.m; path = models/Spot.m; sourceTree = "<group>"; };
+		07D92E721494B7D9000ACA48 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		07D92E741494B7E0000ACA48 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -271,6 +275,8 @@
 		079C6AF41392040100528E69 = {
 			isa = PBXGroup;
 			children = (
+				07D92E741494B7E0000ACA48 /* Icon.png */,
+				07D92E721494B7D9000ACA48 /* Icon@2x.png */,
 				079C6B091392040200528E69 /* DungaRadar */,
 				079C6B021392040200528E69 /* Frameworks */,
 				079C6B001392040200528E69 /* Products */,
@@ -392,6 +398,8 @@
 				075634E8147CA4E80090BFE9 /* MapView.xib in Resources */,
 				07D92E6014948EEB000ACA48 /* SpotView.xib in Resources */,
 				07D92E62149498C9000ACA48 /* spots.plist in Resources */,
+				07D92E731494B7D9000ACA48 /* Icon@2x.png in Resources */,
+				07D92E751494B7E0000ACA48 /* Icon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
