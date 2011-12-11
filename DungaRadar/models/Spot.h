@@ -19,7 +19,7 @@
 
 - (id)initWithLocation:(CLLocation*)location;
 - (id)initWithJson:(NSString*)json;
-- (BOOL)commit;
+- (NSString*)commit;
 - (NSDictionary*)dump;
 
 @property(readonly) int primaryKey;
@@ -27,4 +27,6 @@
 @property(readwrite) BOOL autoInform;
 @property(readwrite, copy) NSString* dispName;
 @property(readwrite, retain) CLLocation* location;
+@property(readonly) int scopeIndex;
+@property(readonly, copy) NSString* scopeName;
 @end

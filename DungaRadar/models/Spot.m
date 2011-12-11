@@ -19,8 +19,10 @@ dispName=dispName_, location=location_;
 - (id)init {
   self = [super init];
   if(self) {
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"scopes" ofType:@"plist"];
+    NSDictionary* spots = [[NSDictionary dictionaryWithContentsOfFile:path] objectForKey:@"root"];
     primaryKey_ = -1;
-    scope_ = 100;
+    scope_ = [(NSNumber*)[[spots allValues] objectAtIndex:0] intValue];
     autoInform_ = NO;
     dispName_ = [[NSString alloc] init];
     location_ = [[CLLocation alloc] init];
@@ -58,17 +60,17 @@ dispName=dispName_, location=location_;
   return self;
 }
 
-- (BOOL)commit {
+- (NSString*)commit {
   if([DungaRegister authWithStorage]) {
-    NSLog(@"%@", [self dump]);
-    NSString* hoge = [DungaRegister post:(NSString*)VENUE_CREATION_PATH params:[self dump]];
-    NSLog(@"%@", hoge);
-    return YES;
+    return [DungaRegister post:(NSString*)VENUE_CREATION_PATH params:[self dump]];
   }
-  return NO;
+  return @"ログインに失敗しました"; // あとで直す
 }
      
 - (NSDictionary*)dump {
+  /**
+   * Dumps the spot into a dictionary formatted for OpenDunga Web API.
+   */
   return [NSDictionary dictionaryWithObjectsAndKeys:
           [NSString stringWithFormat:@"%d", self.scope], @"scope",
           self.autoInform ? @"true" : @"false", @"auto_inform",
@@ -76,6 +78,27 @@ dispName=dispName_, location=location_;
           [NSString stringWithFormat:@"%lf", self.location.coordinate.latitude], @"latitude",
           [NSString stringWithFormat:@"%lf", self.location.coordinate.latitude], @"longitude", 
           nil];
+}
+
+- (int)scopeIndex {
+  NSString* path = [[NSBundle mainBundle] pathForResource:@"spots" ofType:@"plist"];
+  NSDictionary* spots = [[NSDictionary dictionaryWithContentsOfFile:path] objectForKey:@"root"];
+  int count = [spots count];
+  for(int i = 0; i < count; ++i) {
+    if([(NSNumber*)[[spots allValues] objectAtIndex:i] intValue] == self.scope) {
+      return i;
+    }
+  }
+  return count;
+}
+
+- (NSString*)scopeName {
+  /**
+   * Returns a scopeName in scopes.plist via self.scope.
+   */
+  NSString* path = [[NSBundle mainBundle] pathForResource:@"spots" ofType:@"plist"];
+  NSDictionary* spots = [[NSDictionary dictionaryWithContentsOfFile:path] objectForKey:@"root"];
+  return (NSString*)[[spots allKeys] objectAtIndex:self.scopeIndex];
 }
 
 - (CLLocationCoordinate2D)coordinate {

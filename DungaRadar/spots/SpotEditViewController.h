@@ -9,9 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Spot.h"
 
-@interface SpotEditViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate>{
+@interface SpotEditViewController : UITableViewController <UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate>{
   Spot* spot_;
 }
 
+- (id)initWithSpot:(Spot*)spot;
 
+@property(readwrite, retain) Spot* spot;
 @end

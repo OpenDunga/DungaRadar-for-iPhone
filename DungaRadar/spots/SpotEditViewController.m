@@ -11,16 +11,27 @@
 @interface SpotEditViewController()
 - (void)pressSaveButton:(id)sender;
 - (void)pressCancelButton:(id)sender;
+- (void)changeDispNameField:(id)sender;
+- (void)changeInformSwitch:(id)sender;
 @end
 
 @implementation SpotEditViewController
+@synthesize spot=spot_;
 
 - (id)initWithStyle:(UITableViewStyle)style {
   self = [super initWithStyle:style];
   if (self) {
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    spot_ = [[Spot alloc] init];
+    self.spot = [[[Spot alloc] init] autorelease];
+  }
+  return self;
+}
+
+- (id)initWithSpot:(Spot *)spot {
+  self = [self initWithStyle:UITableViewStyleGrouped];
+  if(self) {
+    self.spot = [[Spot alloc] init];
   }
   return self;
 }
@@ -89,14 +100,21 @@
     NSString* cellName[] = {@"スポット名", @"範囲", @"自動通知"}; 
     if(row == 0){
       UITextField* field = [[[UITextField alloc] initWithFrame:CGRectMake(0, 0, 170, 25)] autorelease];
+      field.delegate = self;
+      field.text = self.spot.dispName;
       field.textColor = [UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1];
+      field.textAlignment = UITextAlignmentRight;
+      [field addTarget:self action:@selector(changeDispNameField:) forControlEvents:UIControlEventEditingChanged];
       cell.accessoryView = field;
     }else if(row == 1){
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-      cell.detailTextLabel.text = @"コンビニサイズ";
+      cell.detailTextLabel.text = self.spot.scopeName;
       cell.selectionStyle = UITableViewCellSelectionStyleBlue;
     }else if(row == 2){
       UISwitch* sw = [[[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+      [sw addTarget:self 
+             action:@selector(changeInformSwitch:) 
+   forControlEvents:UIControlEventValueChanged];
       cell.accessoryView = sw;
     }
     cell.textLabel.text = cellName[row];
@@ -110,6 +128,8 @@
     picker.showsSelectionIndicator = YES;
     picker.dataSource = self;
     picker.delegate = self;
+    int row = self.spot.scopeIndex % [picker numberOfRowsInComponent:0];
+    [picker selectRow:row inComponent:0 animated:NO];
     UIViewController* pickerController = [[[UIViewController alloc] init] autorelease];
     [pickerController.view addSubview:picker];
     pickerController.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -122,34 +142,58 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-  NSString* path = [[NSBundle mainBundle] pathForResource:@"spots" ofType:@"plist"];
+  NSString* path = [[NSBundle mainBundle] pathForResource:@"scopes" ofType:@"plist"];
   NSDictionary* spots = [NSDictionary dictionaryWithContentsOfFile:path];
   return [(NSDictionary*)[spots objectForKey:@"root"] count];
 }
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-  NSString* path = [[NSBundle mainBundle] pathForResource:@"spots" ofType:@"plist"];
+  NSString* path = [[NSBundle mainBundle] pathForResource:@"scopes" ofType:@"plist"];
   NSDictionary* spots = [NSDictionary dictionaryWithContentsOfFile:path];
   return (NSString*)[[(NSDictionary*)[spots objectForKey:@"root"] allKeys] objectAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
   if(component == 0) {
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"spots" ofType:@"plist"];
-    NSDictionary* spots = [NSDictionary dictionaryWithContentsOfFile:path];
-    NSLog(@"%@", [[spots allValues] objectAtIndex:row]);
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"scopes" ofType:@"plist"];
+    NSDictionary* spots = [[NSDictionary dictionaryWithContentsOfFile:path] objectForKey:@"root"];
     spot_.scope = [(NSNumber*)[[spots allValues] objectAtIndex:row] intValue];
+    UITableViewCell* cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:1 inSection:0]];
+    cell.detailTextLabel.text = self.spot.scopeName;
   }
 }
 
 - (void)pressSaveButton:(id)sender {
-  spot_.dispName = @"ぎぎねっと邸";
-  spot_.autoInform = false;
-  [spot_ commit];
+  NSString* result = [spot_ commit];
+  UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"スポットの追加" 
+                                                  message:result 
+                                                 delegate:nil
+                                        cancelButtonTitle:@"OK"
+                                        otherButtonTitles:nil, 
+                        nil] 
+  autorelease];
+  [alert show];
 }
 
 - (void)pressCancelButton:(id)sender {
   [self dismissModalViewControllerAnimated:YES];
+}
+
+- (void)changeInformSwitch:(id)sender {
+  UISwitch* sw = (UISwitch*)sender;
+  self.spot.autoInform = sw.on;
+}
+
+- (void)changeDispNameField:(id)sender {
+  UITextField* tf = (UITextField*)sender;
+  self.spot.dispName = tf.text;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+  if([textField canResignFirstResponder]) {
+    [textField resignFirstResponder];
+  }
+  return YES;
 }
 
 @end

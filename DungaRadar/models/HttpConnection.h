@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "KWSingleton.h"
 
-@interface HttpConnection : KWSingleton{
-}
+@interface HttpConnection : NSObject
 
 + (NSDictionary*)connectTo:(NSURL*)url
                     params:(NSDictionary*)parameters 

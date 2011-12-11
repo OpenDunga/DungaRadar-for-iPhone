@@ -39,10 +39,10 @@
 		079C6B111392040200528E69 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B101392040200528E69 /* main.m */; };
 		079C6B141392040200528E69 /* DungaRadarAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 079C6B131392040200528E69 /* DungaRadarAppDelegate.m */; };
 		079C6B171392040200528E69 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 079C6B151392040200528E69 /* MainWindow.xib */; };
+		07A4AFF41495582800B69C5E /* scopes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07A4AFF31495582800B69C5E /* scopes.plist */; };
 		07AE416D139211CA0087D526 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416C139211CA0087D526 /* MapKit.framework */; };
 		07AE416F1392132D0087D526 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416E1392132C0087D526 /* CoreLocation.framework */; };
 		07D92E6014948EEB000ACA48 /* SpotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E5F14948EEB000ACA48 /* SpotView.xib */; };
-		07D92E62149498C9000ACA48 /* spots.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E61149498C9000ACA48 /* spots.plist */; };
 		07D92E6514949950000ACA48 /* SpotEditViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D92E6414949950000ACA48 /* SpotEditViewController.m */; };
 		07D92E691494A869000ACA48 /* Spot.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D92E681494A869000ACA48 /* Spot.m */; };
 		07D92E731494B7D9000ACA48 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E721494B7D9000ACA48 /* Icon@2x.png */; };
@@ -109,10 +109,10 @@
 		079C6B121392040200528E69 /* DungaRadarAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DungaRadarAppDelegate.h; sourceTree = "<group>"; };
 		079C6B131392040200528E69 /* DungaRadarAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DungaRadarAppDelegate.m; sourceTree = "<group>"; };
 		079C6B161392040200528E69 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		07A4AFF31495582800B69C5E /* scopes.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = scopes.plist; path = resources/scopes.plist; sourceTree = "<group>"; };
 		07AE416C139211CA0087D526 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		07AE416E1392132C0087D526 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		07D92E5F14948EEB000ACA48 /* SpotView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpotView.xib; path = spots/SpotView.xib; sourceTree = "<group>"; };
-		07D92E61149498C9000ACA48 /* spots.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = spots.plist; path = resources/spots.plist; sourceTree = "<group>"; };
 		07D92E6314949950000ACA48 /* SpotEditViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpotEditViewController.h; path = spots/SpotEditViewController.h; sourceTree = "<group>"; };
 		07D92E6414949950000ACA48 /* SpotEditViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpotEditViewController.m; path = spots/SpotEditViewController.m; sourceTree = "<group>"; };
 		07D92E671494A869000ACA48 /* Spot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Spot.h; path = models/Spot.h; sourceTree = "<group>"; };
@@ -336,7 +336,7 @@
 		07D92E6614949962000ACA48 /* resources */ = {
 			isa = PBXGroup;
 			children = (
-				07D92E61149498C9000ACA48 /* spots.plist */,
+				07A4AFF31495582800B69C5E /* scopes.plist */,
 			);
 			name = resources;
 			sourceTree = "<group>";
@@ -397,9 +397,9 @@
 				075634CF147CA48E0090BFE9 /* MIMView.xib in Resources */,
 				075634E8147CA4E80090BFE9 /* MapView.xib in Resources */,
 				07D92E6014948EEB000ACA48 /* SpotView.xib in Resources */,
-				07D92E62149498C9000ACA48 /* spots.plist in Resources */,
 				07D92E731494B7D9000ACA48 /* Icon@2x.png in Resources */,
 				07D92E751494B7E0000ACA48 /* Icon.png in Resources */,
+				07A4AFF41495582800B69C5E /* scopes.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
