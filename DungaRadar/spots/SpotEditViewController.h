@@ -1,5 +1,5 @@
 //
-//  EditSpotViewController.h
+//  SpotEditViewController.h
 //  DungaRadar
 //
 //  Created by  on 11/11/23.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EditSpotViewController : UITableViewController
+@interface SpotEditViewController : UITableViewController
 
 @end

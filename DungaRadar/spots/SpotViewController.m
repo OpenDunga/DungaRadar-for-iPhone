@@ -7,7 +7,7 @@
 //
 
 
-#import "EditSpotViewController.h"
+#import "SpotEditViewController.h"
 #import "SpotViewController.h"
 
 @implementation SpotViewController
@@ -64,7 +64,7 @@
 }
 
 - (void)pressAddButton:(id)sender{
-  EditSpotViewController* addViewController = [[EditSpotViewController alloc] initWithStyle:UITableViewStyleGrouped];
+  SpotEditViewController* addViewController = [[SpotEditViewController alloc] initWithStyle:UITableViewStyleGrouped];
   UINavigationController* navigationController = [[[UINavigationController alloc] initWithRootViewController:addViewController] autorelease];
   [self presentModalViewController:navigationController animated:YES];
 }

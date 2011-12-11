@@ -1,18 +1,18 @@
 //
-//  EditSpotViewController.m
+//  SpotEditViewController.m
 //  DungaRadar
 //
 //  Created by  on 11/11/23.
 //  Copyright (c) 2011年 Kawaz. All rights reserved.
 //
 
-#import "EditSpotViewController.h"
+#import "SpotEditViewController.h"
 
-@interface EditSpotViewController()
+@interface SpotEditViewController()
 - (void)pressCancelButton:(id)sender;
 @end
 
-@implementation EditSpotViewController
+@implementation SpotEditViewController
 
 - (id)initWithStyle:(UITableViewStyle)style{
   self = [super initWithStyle:style];
@@ -79,13 +79,24 @@
   return 3;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   static NSString *CellIdentifier = @"Cell";
   
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  int row = indexPath.row;
   if (cell == nil) {
-    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
+    cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
+    NSString* cellName[] = {@"スポット名", @"範囲", @"自動通知"}; 
+    if(row == 0){
+      cell.textLabel.text = @"スポット名";
+    }else if(row == 1){
+      cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+      cell.detailTextLabel.text = @"";
+    }else if(row == 2){
+      UISwitch* sw = [[[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+      [cell addSubview:sw];
+    }
+    cell.textLabel.text = cellName[row];
   }
   
   // Configure the cell...
