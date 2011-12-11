@@ -42,12 +42,11 @@ const NSString* PATH_LOGIN		= @"/api/login";
                         @"user_name", encrypted, 
                         @"enc_password", passwordHash, 
                         @"password", nil];
-  NSURLResponse* res = (NSURLResponse*)[DungaRegister connectToDunga:(NSString*)PATH_LOGIN 
-                                                              params:post 
-                                                              method:@"POST"];
+  NSURLResponse* res = (NSURLResponse*)[[DungaRegister connectToDunga:(NSString*)PATH_LOGIN 
+                                                               params:post 
+                                                               method:@"POST"] objectForKey:@"response"];
   NSHTTPURLResponse* urlRes = (NSHTTPURLResponse*)res;
-  // return (urlRes.statusCode == 200);
-  return YES;
+  return (urlRes.statusCode == 200);
 }
 
 + (BOOL)authWithStorage {
