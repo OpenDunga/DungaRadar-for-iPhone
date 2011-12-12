@@ -108,8 +108,8 @@
   }
   UIAlertView* resultAlert = [[[UIAlertView alloc] initWithTitle:@"DungaRadar" 
                                                         message:alert delegate:nil 
-                                              cancelButtonTitle:@"キャンセル" 
-                                              otherButtonTitles:@"OK", nil] autorelease];
+                                              cancelButtonTitle:@"OK" 
+                                              otherButtonTitles:nil, nil] autorelease];
   [resultAlert show];
 }
 

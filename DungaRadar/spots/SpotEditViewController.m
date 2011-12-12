@@ -105,6 +105,7 @@
       field.text = self.spot.dispName;
       field.textColor = [UIColor colorWithRed:0.22 green:0.33 blue:0.53 alpha:1];
       field.textAlignment = UITextAlignmentRight;
+      field.returnKeyType = UIReturnKeyDone;
       [field addTarget:self action:@selector(changeDispNameField:) forControlEvents:UIControlEventEditingChanged];
       cell.accessoryView = field;
     }else if(row == 1){
