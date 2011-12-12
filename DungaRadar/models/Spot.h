@@ -12,18 +12,21 @@
 @interface Spot : NSObject <MKAnnotation>{
   int primaryKey_;
   int scope_;
+  int registeredMemberId_;
   BOOL autoInform_;
   NSString* dispName_;
   CLLocation* location_;
 }
 
 - (id)initWithLocation:(CLLocation*)location;
+- (id)initWithInfo:(NSDictionary*)dictionary;
 - (id)initWithJson:(NSString*)json;
 - (NSDictionary*)commit;
 - (NSDictionary*)dump;
 
 @property(readonly) int primaryKey;
 @property(readwrite) int scope;
+@property(readwrite) int registeredMemberId;
 @property(readwrite) BOOL autoInform;
 @property(readwrite, copy) NSString* dispName;
 @property(readwrite, retain) CLLocation* location;

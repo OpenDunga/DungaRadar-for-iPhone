@@ -10,8 +10,11 @@
 
 
 @interface SpotViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+  NSMutableArray* spots_;
+  IBOutlet UITableView* tableView_;
 }
 
--(IBAction)pressAddButton:(id)sender;
+-( IBAction)pressAddButton:(id)sender;
 
+@property(readwrite, retain) NSMutableArray* spots;
 @end

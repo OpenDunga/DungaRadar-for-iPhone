@@ -168,6 +168,7 @@
 - (void)pressSaveButton:(id)sender {
   Me* me = [Me sharedMe];
   self.spot.location = me.location;
+  NSLog(@"%@", self.spot.location);
   NSDictionary* result = [spot_ commit];
   NSString* message = (NSString*)[result objectForKey:@"message"];
   UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"スポットの追加" 

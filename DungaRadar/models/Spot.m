@@ -15,7 +15,7 @@ const NSString* PATH_SPOT_CREATION = @"/api/location/venue/new";
 
 @implementation Spot
 @synthesize primaryKey=primaryKey_, scope=scope_, autoInform=autoInform_, 
-dispName=dispName_, location=location_;
+registeredMemberId=registeredMemberId_, dispName=dispName_, location=location_;
 
 - (id)init {
   self = [super init];
@@ -45,19 +45,25 @@ dispName=dispName_, location=location_;
   return self;
 }
 
-- (id)initWithJson:(NSString *)json {
+- (id)initWithInfo:(NSDictionary *)dictionary {
   self = [self init];
   if(self) {
-    NSError* err;
-    NSDictionary* spot = [NSDictionary dictionaryWithJSONString:json error:&err];
-    primaryKey_ = [(NSNumber*)[spot objectForKey:@"ID"] intValue];
-    scope_ = [(NSNumber*)[spot objectForKey:@"scope"] intValue];
-    autoInform_ = [(NSString*)[spot objectForKey:@"auto_inform"] isEqual:@"true"];
-    dispName_ = (NSString*)[spot objectForKey:@"disp_name"];
-    double lat = [(NSNumber*)[spot objectForKey:@"latitude"] doubleValue];
-    double lng = [(NSNumber*)[spot objectForKey:@"longitude"] doubleValue];
-    location_ = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+    primaryKey_ = [(NSNumber*)[dictionary objectForKey:@"ID"] intValue];
+    self.scope = [(NSNumber*)[dictionary objectForKey:@"scope"] intValue];
+    self.registeredMemberId = [(NSNumber*)[dictionary objectForKey:@"registeredMemberID"] intValue];
+    self.autoInform = [(NSString*)[dictionary objectForKey:@"autoInform"] isEqual:@"true"];
+    self.dispName = (NSString*)[dictionary objectForKey:@"dispName"];
+    double lat = [(NSNumber*)[dictionary objectForKey:@"latitude"] doubleValue];
+    double lng = [(NSNumber*)[dictionary objectForKey:@"longitude"] doubleValue];
+    self.location = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
   }
+  return self;
+}
+
+- (id)initWithJson:(NSString *)json {
+  NSError* err;
+  NSDictionary* spot = [NSDictionary dictionaryWithJSONString:json error:&err];
+  self = [self initWithInfo:spot];
   return self;
 }
 
@@ -70,6 +76,7 @@ dispName=dispName_, location=location_;
    */
   NSMutableDictionary* result = [NSMutableDictionary dictionary];
   if([DungaRegister authWithStorage]) {
+    NSLog(@"%@", [self dump]);
     NSDictionary* response = [DungaRegister connectToDunga:(NSString*)PATH_SPOT_CREATION params:[self dump] method:@"POST"];
     NSHTTPURLResponse* res = (NSHTTPURLResponse*)[response objectForKey:@"response"];
     [result setObject:[NSNumber numberWithBool:res.statusCode == 200] forKey:@"succeed"];
@@ -93,7 +100,7 @@ dispName=dispName_, location=location_;
           self.autoInform ? @"true" : @"false", @"auto_inform",
           self.dispName, @"disp_name",
           [NSString stringWithFormat:@"%lf", self.location.coordinate.latitude], @"latitude",
-          [NSString stringWithFormat:@"%lf", self.location.coordinate.latitude], @"longitude", 
+          [NSString stringWithFormat:@"%lf", self.location.coordinate.longitude], @"longitude", 
           nil];
 }
 
