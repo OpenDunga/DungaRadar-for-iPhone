@@ -6,6 +6,7 @@
 //  Copyright (c) 2011年 Kawaz. All rights reserved.
 //
 
+#import "CJSONDeserializer.h"
 #import "NSDictionary_JSONExtensions.h"
 #import "Spot.h"
 #import "DungaRegister.h"
@@ -60,11 +61,27 @@ dispName=dispName_, location=location_;
   return self;
 }
 
-- (NSString*)commit {
+- (NSDictionary*)commit {
+  /**
+   * Commits spot data to server.
+   * Returns a dictionary contains two values.
+   *     succeed(NSNumber) success or not
+   *     message(NSString) message
+   */
+  NSMutableDictionary* result = [NSMutableDictionary dictionary];
   if([DungaRegister authWithStorage]) {
-    return [DungaRegister post:(NSString*)PATH_SPOT_CREATION params:[self dump]];
+    NSDictionary* response = [DungaRegister connectToDunga:(NSString*)PATH_SPOT_CREATION params:[self dump] method:@"POST"];
+    NSHTTPURLResponse* res = (NSHTTPURLResponse*)[response objectForKey:@"response"];
+    [result setObject:[NSNumber numberWithBool:res.statusCode == 200] forKey:@"succeed"];
+    NSData* json = [response objectForKey:@"data"];
+    NSError* err;
+    NSString* message = [[[CJSONDeserializer deserializer] deserializeAsArray:json error:&err] objectAtIndex:0];
+    [result setObject:message forKey:@"message"];
+    return result;
   }
-  return @"ログインに失敗しました"; // あとで直す
+  [result setObject:[NSNumber numberWithBool:NO] forKey:@"succeed"];
+  [result setObject:@"ログインに失敗しました" forKey:@"message"];
+  return result;
 }
      
 - (NSDictionary*)dump {

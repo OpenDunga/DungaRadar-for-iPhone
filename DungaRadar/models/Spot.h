@@ -19,7 +19,7 @@
 
 - (id)initWithLocation:(CLLocation*)location;
 - (id)initWithJson:(NSString*)json;
-- (NSString*)commit;
+- (NSDictionary*)commit;
 - (NSDictionary*)dump;
 
 @property(readonly) int primaryKey;

@@ -165,16 +165,18 @@
 }
 
 - (void)pressSaveButton:(id)sender {
-  NSString* result = [spot_ commit];
   Me* me = [Me sharedMe];
   self.spot.location = me.location;
+  NSDictionary* result = [spot_ commit];
+  NSString* message = (NSString*)[result objectForKey:@"message"];
   UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"スポットの追加" 
-                                                  message:result 
-                                                 delegate:nil
-                                        cancelButtonTitle:@"OK"
-                                        otherButtonTitles:nil, 
+                                                   message:message 
+                                                  delegate:self
+                                         cancelButtonTitle:@"OK"
+                                         otherButtonTitles:nil, 
                         nil] 
   autorelease];
+  alert.tag = [(NSNumber*)[result objectForKey:@"succeed"] intValue];
   [alert show];
 }
 
@@ -197,6 +199,12 @@
     [textField resignFirstResponder];
   }
   return YES;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+  if(alertView.tag == 1) {
+    [self dismissModalViewControllerAnimated:YES];
+  }
 }
 
 @end
