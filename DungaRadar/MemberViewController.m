@@ -57,7 +57,7 @@
 
 - (void)pressReloadButton:(id)sender {
   [[MemberManager instance] updateMembers];
-  UITableViewController* tvc = (UITableViewController*)self.navigationController.visibleViewController;
+  UITableViewController* tvc = (UITableViewController*)self.navigationController.topViewController;
   [tvc.tableView reloadData];
 }
 

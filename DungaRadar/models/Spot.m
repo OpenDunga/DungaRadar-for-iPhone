@@ -76,7 +76,6 @@ registeredMemberId=registeredMemberId_, dispName=dispName_, location=location_;
    */
   NSMutableDictionary* result = [NSMutableDictionary dictionary];
   if([DungaRegister authWithStorage]) {
-    NSLog(@"%@", [self dump]);
     NSDictionary* response = [DungaRegister connectToDunga:(NSString*)PATH_SPOT_CREATION params:[self dump] method:@"POST"];
     NSHTTPURLResponse* res = (NSHTTPURLResponse*)[response objectForKey:@"response"];
     [result setObject:[NSNumber numberWithBool:res.statusCode == 200] forKey:@"succeed"];

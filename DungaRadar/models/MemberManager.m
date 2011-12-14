@@ -44,6 +44,7 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
     NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
     [ud setObject:self.members forKey:@"members"];
   }
+  self.members = [self.members sortedArrayUsingSelector:@selector(sortByTimestamp:)];
 }
 
 - (NSMutableArray*)membersFromInfo:(NSArray *)userInfos {
@@ -66,7 +67,6 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
 }
 
 - (NSMutableArray*)membersFromAPI {
-  NSLog(@"update");
   if([DungaRegister authWithStorage]) {
     NSError* err;
     NSDictionary* res = [NSDictionary dictionaryWithJSONString:[DungaRegister get:(NSString*)PATH_ALL_MEMBER_LOCATION 

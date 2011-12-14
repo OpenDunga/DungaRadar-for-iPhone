@@ -19,6 +19,7 @@
 }
 
 - (id)initWithUserData:(NSDictionary*)userData;
+- (NSComparisonResult)sortByTimestamp:(DungaMember*)otherMember;
 
 @property(readonly) int primaryKey;
 @property(readwrite, copy) NSString* dispName;

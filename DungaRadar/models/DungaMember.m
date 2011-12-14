@@ -92,6 +92,16 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   return nil;
 }
 
+- (NSComparisonResult)sortByTimestamp:(DungaMember*)otherMember {
+  NSComparisonResult result = [self.timestamp compare:otherMember.timestamp];
+  if(result == NSOrderedAscending) {
+    return NSOrderedDescending;
+  }else {
+    return NSOrderedAscending;
+  }
+  return result;
+}
+
 - (UIImage*)iconImage {
   if(iconImage_ == nil) {
     self.iconImage = [self loadIconImage];
