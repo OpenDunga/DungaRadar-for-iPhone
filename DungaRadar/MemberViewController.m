@@ -8,7 +8,7 @@
 
 #import "MemberViewController.h"
 #import "MemberManager.h"
-#import "DungaMember.h"
+#import "Me.h"
 
 @interface MemberViewController()
 - (void)pressReloadButton:(id)sender;
@@ -50,6 +50,12 @@
   // e.g. self.myOutlet = nil;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+  UITableViewController* tvc = (UITableViewController*)self.visibleViewController;
+  [tvc.tableView reloadData];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
   // Return YES for supported orientations
   return (interfaceOrientation == UIInterfaceOrientationPortrait);
@@ -57,7 +63,7 @@
 
 - (void)pressReloadButton:(id)sender {
   [[MemberManager instance] updateMembers];
-  UITableViewController* tvc = (UITableViewController*)self.navigationController.topViewController;
+  UITableViewController* tvc = (UITableViewController*)self.visibleViewController;
   [tvc.tableView reloadData];
 }
 
@@ -77,7 +83,7 @@
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     DungaMember* member = (DungaMember*)[[[MemberManager instance] members] objectAtIndex:indexPath.row];
     cell.textLabel.text = member.dispName;
-    cell.detailTextLabel.text = [member.timestamp descriptionWithLocale:[NSLocale currentLocale]];
+    cell.detailTextLabel.text = [member descriptionDetailFrom:[Me sharedMe]];
     cell.imageView.image = member.iconImage;
   }
   return cell;

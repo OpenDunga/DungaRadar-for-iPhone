@@ -43,6 +43,7 @@
 		07A4AFF41495582800B69C5E /* scopes.plist in Resources */ = {isa = PBXBuildFile; fileRef = 07A4AFF31495582800B69C5E /* scopes.plist */; };
 		07A4AFF7149565FF00B69C5E /* Me.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A4AFF6149565FF00B69C5E /* Me.m */; };
 		07A4AFFE1498964B00B69C5E /* MemberManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A4AFFD1498964B00B69C5E /* MemberManager.m */; };
+		07A4B0051498C87000B69C5E /* RelativeDate.m in Sources */ = {isa = PBXBuildFile; fileRef = 07A4B0041498C87000B69C5E /* RelativeDate.m */; };
 		07AE416D139211CA0087D526 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416C139211CA0087D526 /* MapKit.framework */; };
 		07AE416F1392132D0087D526 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 07AE416E1392132C0087D526 /* CoreLocation.framework */; };
 		07D92E6014948EEB000ACA48 /* SpotView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E5F14948EEB000ACA48 /* SpotView.xib */; };
@@ -119,6 +120,8 @@
 		07A4AFF6149565FF00B69C5E /* Me.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Me.m; path = models/Me.m; sourceTree = "<group>"; };
 		07A4AFFC1498964B00B69C5E /* MemberManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemberManager.h; path = models/MemberManager.h; sourceTree = "<group>"; };
 		07A4AFFD1498964B00B69C5E /* MemberManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MemberManager.m; path = models/MemberManager.m; sourceTree = "<group>"; };
+		07A4B0031498C87000B69C5E /* RelativeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelativeDate.h; path = libs/RelativeDate.h; sourceTree = "<group>"; };
+		07A4B0041498C87000B69C5E /* RelativeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RelativeDate.m; path = libs/RelativeDate.m; sourceTree = "<group>"; };
 		07AE416C139211CA0087D526 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		07AE416E1392132C0087D526 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		07D92E5F14948EEB000ACA48 /* SpotView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SpotView.xib; path = spots/SpotView.xib; sourceTree = "<group>"; };
@@ -236,6 +239,8 @@
 		078F5961147CCFDE00C2A958 /* libs */ = {
 			isa = PBXGroup;
 			children = (
+				07A4B0031498C87000B69C5E /* RelativeDate.h */,
+				07A4B0041498C87000B69C5E /* RelativeDate.m */,
 				078F5A38147CD5F200C2A958 /* TouchJSON */,
 			);
 			name = libs;
@@ -462,6 +467,7 @@
 				07A4AFF7149565FF00B69C5E /* Me.m in Sources */,
 				073D6D9A149874DA00F9A486 /* MemberViewController.m in Sources */,
 				07A4AFFE1498964B00B69C5E /* MemberManager.m in Sources */,
+				07A4B0051498C87000B69C5E /* RelativeDate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

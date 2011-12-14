@@ -6,6 +6,7 @@
 //  Copyright 2011 Kawaz. All rights reserved.
 //
 
+#import "RelativeDate.h"
 #import "UIImageExtention.h"
 #import "HttpConnection.h"
 #import "DungaRegister.h"
@@ -33,7 +34,7 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   return self;
 }
 
-- (id)initWithUserData:(NSDictionary *)userData{
+- (id)initWithUserData:(NSDictionary *)userData {
   //
   // {"latitude":43.0838878,"longitude":141.3531251,"dispName":"ちくだ","memberID":47,"registeredTime":1310288033071}
   self = [super init];
@@ -49,12 +50,31 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   return self;
 }
 
-- (void)dealloc{
+- (void)dealloc {
   [dispName_ release];
   [timestamp_ release];
   [iconImage_ release];
   [location_ release];
   [super dealloc];
+}
+
+- (NSString*)descriptionDetailFrom:(DungaMember*)member {
+  NSString* date = [NSString stringWithFormat:@"%@ ago", [self.timestamp relativeDate]];
+  CLLocationDistance distance = [self.location distanceFromLocation:member.location];
+  if ((float)distance < 1000) {
+    return [NSString stringWithFormat:@"%@ %.1f m", date, distance];
+  }
+  return [NSString stringWithFormat:@"%@ %.3f km", date, distance / 1000];
+}
+
+- (NSComparisonResult)sortByTimestamp:(DungaMember*)otherMember {
+  NSComparisonResult result = [self.timestamp compare:otherMember.timestamp];
+  if(result == NSOrderedAscending) {
+    return NSOrderedDescending;
+  }else {
+    return NSOrderedAscending;
+  }
+  return result;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
@@ -90,16 +110,6 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
     return [origin resize:CGSizeMake(32, 32) aspect:YES];
   }
   return nil;
-}
-
-- (NSComparisonResult)sortByTimestamp:(DungaMember*)otherMember {
-  NSComparisonResult result = [self.timestamp compare:otherMember.timestamp];
-  if(result == NSOrderedAscending) {
-    return NSOrderedDescending;
-  }else {
-    return NSOrderedAscending;
-  }
-  return result;
 }
 
 - (UIImage*)iconImage {

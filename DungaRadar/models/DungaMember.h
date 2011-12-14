@@ -20,6 +20,7 @@
 
 - (id)initWithUserData:(NSDictionary*)userData;
 - (NSComparisonResult)sortByTimestamp:(DungaMember*)otherMember;
+- (NSString*)descriptionDetailFrom:(DungaMember*)member;
 
 @property(readonly) int primaryKey;
 @property(readwrite, copy) NSString* dispName;

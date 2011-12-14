@@ -62,6 +62,7 @@
            fromLocation:(CLLocation *)oldLocation{
   Me* me = [Me sharedMe];
   me.location = newLocation;
+  NSLog(@"%@", newLocation);
   [me commit];
   MKCoordinateRegion cr = mapView_.region;
   cr.center = me.location.coordinate;
