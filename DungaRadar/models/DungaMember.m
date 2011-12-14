@@ -6,6 +6,7 @@
 //  Copyright 2011 Kawaz. All rights reserved.
 //
 
+#import "NSDictionary_JSONExtensions.h"
 #import "RelativeDate.h"
 #import "UIImageExtention.h"
 #import "HttpConnection.h"
@@ -13,6 +14,7 @@
 #import "DungaMember.h"
 
 const NSString* PATH_MEMBER_PROFILE_ICON_LOCATION	= @"/api/profile/icon/";
+const NSString* PATH_MEMBER_LOCATION_HISTORY = @"/api/location/history/%d";
 
 @interface DungaMember()
 - (UIImage*)loadIconImage;
@@ -58,7 +60,7 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   [super dealloc];
 }
 
-- (NSString*)descriptionDetailFrom:(DungaMember*)member {
+- (NSString*)descriptionDetailFromMember:(DungaMember*)member {
   NSString* date = [NSString stringWithFormat:@"%@ ago", [self.timestamp relativeDate]];
   CLLocationDistance distance = [self.location distanceFromLocation:member.location];
   if ((float)distance < 1000) {
@@ -75,6 +77,24 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
     return NSOrderedAscending;
   }
   return result;
+}
+
+- (NSArray*)historySinceDate:(NSDate *)date {
+  if([DungaRegister authWithStorage]){
+    NSString* json = [DungaRegister get:[NSString stringWithFormat:(NSString*)PATH_MEMBER_LOCATION_HISTORY, primaryKey_] 
+                                 params:nil];
+    NSError* err;
+    NSArray* histories = (NSArray*)[[NSDictionary dictionaryWithJSONString:json error:&err] objectForKey:@"entries"];
+    double since = [date timeIntervalSince1970];
+    NSMutableArray* results = [NSMutableArray array];
+    for(NSDictionary* history in histories) {
+      double epoch = [(NSNumber*)[history objectForKey:@"registeredTime"] doubleValue] / 1000;
+      if(epoch < since) break;
+      [results addObject:history];
+    }
+    return results;
+  }
+  return [NSArray array];
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {

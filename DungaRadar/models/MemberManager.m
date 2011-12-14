@@ -37,7 +37,8 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
 
 - (void)updateMembers {
   NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-  if([self.members count] == 0 && [ud objectForKey:@"members"]) {
+  NSArray* cache = [ud objectForKey:@"members"];
+  if([self.members count] == 0 && cache && [cache count] != 0) {
     self.members = [self membersFromStorage];
   }else {
     self.members = [self membersFromAPI];

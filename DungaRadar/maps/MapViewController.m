@@ -63,11 +63,10 @@
 
 - (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
   DungaMember* member = (DungaMember*)annotation;
-  NSString* identifier = [NSString stringWithFormat:@"Pin_%@", member.dispName];
+  NSString* identifier = [NSString stringWithFormat:@"Pin_%d", member.primaryKey];
   MKAnnotationView *av = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
   if(!av){
-    av = [[[MKAnnotationView alloc]
-           initWithAnnotation:member reuseIdentifier:identifier] autorelease];
+    av = [[[MKAnnotationView alloc] initWithAnnotation:member reuseIdentifier:identifier] autorelease];
   }
   av.image = member.iconImage;
   return av;

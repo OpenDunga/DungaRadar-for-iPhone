@@ -9,52 +9,61 @@
 #import "MemberDetailViewController.h"
 
 @implementation MemberDetailViewController
+@synthesize mapView=mapView_, member=member_;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
+- (id)initWithMember:(DungaMember *)member {
+  self = [super init];
+  if(self) {
+    self.member = member;
+  }
+  return self;
 }
 
-- (void)didReceiveMemoryWarning
-{
-    // Releases the view if it doesn't have a superview.
-    [super didReceiveMemoryWarning];
-    
-    // Release any cached data, images, etc that aren't in use.
+- (void)viewDidLoad {
+  [super viewDidLoad];
+  self.title = self.member.dispName;
+  mapView_ = [[[MKMapView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
+  mapView_.delegate = self;
+  MKCoordinateRegion cr = mapView_.region;
+  cr.center = self.member.location.coordinate;
+  cr.span.latitudeDelta = 0.01;
+  cr.span.longitudeDelta = 0.01;
+  [mapView_ setRegion:cr animated:NO];
+  [mapView_ addAnnotation:self.member];
+  NSArray* histories = [self.member historySinceDate:[NSDate dateWithTimeIntervalSinceNow:-1 * 60 * 60 * 24]];
+  CLLocationCoordinate2D coordinates[[histories count]];
+  int i = 0;
+  for(NSDictionary* history in histories) {
+    double lat = [[history objectForKey:@"latitude"] doubleValue];
+    double lng = [[history objectForKey:@"longitude"] doubleValue];
+    coordinates[i] = CLLocationCoordinate2DMake(lat, lng);
+    ++i;
+  }
+  MKPolyline* line = [MKPolyline polylineWithCoordinates:coordinates count:[histories count]];
+  [mapView_ addOverlay:line];
+  [self.view addSubview:mapView_];
 }
 
-#pragma mark - View lifecycle
-
-/*
-// Implement loadView to create a view hierarchy programmatically, without using a nib.
-- (void)loadView
-{
-}
-*/
-
-/*
-// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-}
-*/
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+- (void)viewDidUnload {
+  [super viewDidUnload];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+- (MKOverlayView*)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
+  MKPolylineView* plv = [[[MKPolylineView alloc] initWithOverlay:overlay] autorelease];  
+  plv.strokeColor = [UIColor blueColor];
+  plv.lineWidth = 5.0;
+  return plv;
+}
+
+- (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
+  DungaMember* member = (DungaMember*)annotation;
+  NSString* identifier = [NSString stringWithFormat:@"Pin_%d", member.primaryKey];
+  MKAnnotationView *av = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+  if(!av){
+    av = [[[MKAnnotationView alloc] initWithAnnotation:member reuseIdentifier:identifier] autorelease];
+  }
+  av.image = member.iconImage;
+  return av;
 }
 
 @end

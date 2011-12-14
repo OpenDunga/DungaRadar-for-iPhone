@@ -18,11 +18,11 @@
 @synthesize tabBarController=_tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+  [[MemberManager instance] updateMembers];
   locationManager_ = [[CLLocationManager alloc] init];
   locationManager_.delegate = self;
   [locationManager_ startUpdatingLocation];
   [locationManager_ startMonitoringSignificantLocationChanges];
-  [[MemberManager instance] updateMembers];
   self.window.rootViewController = self.tabBarController;
   [self.window makeKeyAndVisible];
   return YES;

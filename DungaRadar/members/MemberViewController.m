@@ -7,6 +7,7 @@
 //
 
 #import "MemberViewController.h"
+#import "MemberDetailViewController.h"
 #import "MemberManager.h"
 #import "Me.h"
 
@@ -83,10 +84,18 @@
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
     cell.imageView.image = member.iconImage;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   cell.textLabel.text = member.dispName;
-  cell.detailTextLabel.text = [member descriptionDetailFrom:[Me sharedMe]];
+  cell.detailTextLabel.text = [member descriptionDetailFromMember:[Me sharedMe]];
   return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+  int row = indexPath.row;
+  DungaMember* member = [[[MemberManager instance] members] objectAtIndex:row];
+  MemberDetailViewController* vc = [[MemberDetailViewController alloc] initWithMember:member];
+  [self pushViewController:vc animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
