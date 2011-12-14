@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <MapKit/MapKit.h>
 
-@interface DungaMember : NSObject <MKAnnotation>{
+@interface DungaMember : NSObject <MKAnnotation, NSCoding>{
  @private
   int primaryKey_;
   NSString* dispName_;
@@ -21,9 +21,9 @@
 - (id)initWithUserData:(NSDictionary*)userData;
 
 @property(readonly) int primaryKey;
-@property(readonly, copy) NSString* dispName;
-@property(readonly, retain) UIImage* iconImage;
+@property(readwrite, copy) NSString* dispName;
+@property(readwrite, retain) UIImage* iconImage;
 @property(readwrite, retain) CLLocation* location;
-@property(readonly, retain) NSDate* timestamp;
+@property(readwrite, retain) NSDate* timestamp;
 
 @end

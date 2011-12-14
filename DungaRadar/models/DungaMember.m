@@ -13,6 +13,10 @@
 
 const NSString* PATH_MEMBER_PROFILE_ICON_LOCATION	= @"/api/profile/icon/";
 
+@interface DungaMember()
+- (void)updateIconImage;
+@end
+
 @implementation DungaMember
 @synthesize primaryKey=primaryKey_, dispName=dispName_, 
 timestamp=timestamp_, iconImage=iconImage_, location=location_;
@@ -35,11 +39,11 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   self = [super init];
   if(self){
     primaryKey_ = [(NSNumber*)[userData objectForKey:@"memberID"] intValue];
-    dispName_ = [(NSString*)[userData objectForKey:@"memberDispName"] retain];
-    iconImage_ = nil;
-    location_ = [[CLLocation alloc] initWithLatitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"latitude"] doubleValue] 
+    self.dispName = [(NSString*)[userData objectForKey:@"memberDispName"] retain];
+    self.iconImage = nil;
+    self.location = [[CLLocation alloc] initWithLatitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"latitude"] doubleValue] 
                                            longitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"longitude"] doubleValue]];
-    timestamp_ = [[NSDate alloc] initWithTimeIntervalSince1970:(NSTimeInterval)[(NSNumber*)[userData objectForKey:@"registeredTime"] intValue]];
+    self.timestamp = [[NSDate alloc] initWithTimeIntervalSince1970:(NSTimeInterval)[(NSNumber*)[userData objectForKey:@"registeredTime"] intValue]];
   }
   return self;
 }
@@ -52,24 +56,44 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   [super dealloc];
 }
 
-- (UIImage*)iconImage{
-  if(iconImage_){
-    return iconImage_;
-  }else{
-    if([DungaRegister authWithStorage]){
-      NSData* icon = (NSData*)[[DungaRegister connectToDunga:[NSString stringWithFormat:@"%@%d", 
-                                                              (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
-                                                              primaryKey_] 
-                                                      params:nil 
-                                                      method:@"GET"] 
-                               objectForKey:@"data"];
-      UIImage* origin = [[UIImage alloc] initWithData:icon];
-      iconImage_ = [origin resize:CGSizeMake(32, 32) aspect:YES];
-      return iconImage_;
-    }
-    return nil;
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+  [aCoder encodeObject:[NSNumber numberWithInt:primaryKey_] forKey:@"primaryKey"];
+  [aCoder encodeObject:dispName_ forKey:@"dispName"];
+  [aCoder encodeObject:timestamp_ forKey:@"timestamp"];
+  [aCoder encodeObject:iconImage_ forKey:@"iconImage"];
+  [aCoder encodeObject:location_ forKey:@"location"];
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+  self = [super init];
+  if(self) {
+    primaryKey_ = [(NSNumber*)[aDecoder decodeObjectForKey:@"primaryKey"] intValue];
+    self.dispName = [aDecoder decodeObjectForKey:@"dispName"];
+    self.timestamp = [aDecoder decodeObjectForKey:@"timestamp"];
+    self.iconImage = [aDecoder decodeObjectForKey:@"iconImage"];
+    self.location = [aDecoder decodeObjectForKey:@"location"];
   }
-  return nil;
+  return self;
+}
+
+- (void)updateIconImage {
+  if([DungaRegister authWithStorage]){
+    NSData* icon = (NSData*)[[DungaRegister connectToDunga:[NSString stringWithFormat:@"%@%d", 
+                                                            (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
+                                                            primaryKey_] 
+                                                    params:nil 
+                                                    method:@"GET"] 
+                             objectForKey:@"data"];
+    UIImage* origin = [[UIImage alloc] initWithData:icon];
+    self.iconImage = [origin resize:CGSizeMake(32, 32) aspect:YES];
+  }
+}
+
+- (UIImage*)iconImage {
+  if(iconImage_ == nil) {
+    [self updateIconImage];
+  }
+  return iconImage_;
 }
 
 - (CLLocationCoordinate2D)coordinate{

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		073D6D9A149874DA00F9A486 /* MemberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 073D6D98149874DA00F9A486 /* MemberViewController.m */; };
 		075634CA147CA4790090BFE9 /* ConfigurationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634C7147CA4790090BFE9 /* ConfigurationView.xib */; };
 		075634CB147CA4790090BFE9 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634C9147CA4790090BFE9 /* ConfigurationViewController.m */; };
 		075634CF147CA48E0090BFE9 /* MIMView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634CC147CA48E0090BFE9 /* MIMView.xib */; };
@@ -51,6 +52,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		073D6D97149874DA00F9A486 /* MemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemberViewController.h; sourceTree = "<group>"; };
+		073D6D98149874DA00F9A486 /* MemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemberViewController.m; sourceTree = "<group>"; };
 		075634C7147CA4790090BFE9 /* ConfigurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigurationView.xib; path = configurations/ConfigurationView.xib; sourceTree = "<group>"; };
 		075634C8147CA4790090BFE9 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigurationViewController.h; path = configurations/ConfigurationViewController.h; sourceTree = "<group>"; };
 		075634C9147CA4790090BFE9 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationViewController.m; path = configurations/ConfigurationViewController.m; sourceTree = "<group>"; };
@@ -140,6 +143,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		073D6D901498748400F9A486 /* members */ = {
+			isa = PBXGroup;
+			children = (
+				073D6D97149874DA00F9A486 /* MemberViewController.h */,
+				073D6D98149874DA00F9A486 /* MemberViewController.m */,
+			);
+			name = members;
+			sourceTree = "<group>";
+		};
 		0757020F13C951C3009119A3 /* configurations */ = {
 			isa = PBXGroup;
 			children = (
@@ -311,6 +323,7 @@
 		079C6B091392040200528E69 /* DungaRadar */ = {
 			isa = PBXGroup;
 			children = (
+				073D6D901498748400F9A486 /* members */,
 				07D92E6614949962000ACA48 /* resources */,
 				078F5961147CCFDE00C2A958 /* libs */,
 				0757021413C95297009119A3 /* maps */,
@@ -442,6 +455,7 @@
 				07D92E6514949950000ACA48 /* SpotEditViewController.m in Sources */,
 				07D92E691494A869000ACA48 /* Spot.m in Sources */,
 				07A4AFF7149565FF00B69C5E /* Me.m in Sources */,
+				073D6D9A149874DA00F9A486 /* MemberViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

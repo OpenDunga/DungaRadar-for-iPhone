@@ -10,6 +10,7 @@
 #import "DictionaryExtention.h"
 #import "EncryptExtention.h"
 #import "DungaRegister.h"
+#import "Me.h"
 
 @implementation DungaRegister
 
@@ -46,7 +47,15 @@ const NSString* PATH_LOGIN		= @"/api/login";
                                                                params:post 
                                                                method:@"POST"] objectForKey:@"response"];
   NSHTTPURLResponse* urlRes = (NSHTTPURLResponse*)res;
-  return (urlRes.statusCode == 200);
+  if(urlRes.statusCode == 200) {
+    // set userName as my dispName.
+    Me* me = [Me sharedMe];
+    if(me.dispName != userName) {
+      me.dispName = userName;
+    }
+    return YES;
+  }
+  return NO;
 }
 
 + (BOOL)authWithStorage {

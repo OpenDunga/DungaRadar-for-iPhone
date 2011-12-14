@@ -45,17 +45,17 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
   initialized_ = NO;
   locationManager_ = [[CLLocationManager alloc] init];
   locationManager_.delegate = self;
-  [locationManager_ startUpdatingLocation];
-  [locationManager_ startMonitoringSignificantLocationChanges];
+  //[locationManager_ startUpdatingLocation];
+  //[locationManager_ startMonitoringSignificantLocationChanges];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  [mapView_ removeAnnotations:[mapView_ annotations]];
+  /*[mapView_ removeAnnotations:[mapView_ annotations]];
   NSArray* members = [self getAllMembers];
   for(DungaMember* member in members){
     [self addMember:member];
-  }
+  }*/
 }
 
 - (void)viewDidUnload{
