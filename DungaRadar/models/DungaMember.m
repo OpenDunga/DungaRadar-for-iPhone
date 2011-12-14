@@ -14,7 +14,7 @@
 const NSString* PATH_MEMBER_PROFILE_ICON_LOCATION	= @"/api/profile/icon/";
 
 @interface DungaMember()
-- (void)updateIconImage;
+- (UIImage*)loadIconImage;
 @end
 
 @implementation DungaMember
@@ -60,7 +60,8 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   [aCoder encodeObject:[NSNumber numberWithInt:primaryKey_] forKey:@"primaryKey"];
   [aCoder encodeObject:dispName_ forKey:@"dispName"];
   [aCoder encodeObject:timestamp_ forKey:@"timestamp"];
-  [aCoder encodeObject:iconImage_ forKey:@"iconImage"];
+  NSData* imageData = UIImagePNGRepresentation(iconImage_);
+  [aCoder encodeObject:imageData forKey:@"iconImage"];
   [aCoder encodeObject:location_ forKey:@"location"];
 }
 
@@ -70,13 +71,13 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
     primaryKey_ = [(NSNumber*)[aDecoder decodeObjectForKey:@"primaryKey"] intValue];
     self.dispName = [aDecoder decodeObjectForKey:@"dispName"];
     self.timestamp = [aDecoder decodeObjectForKey:@"timestamp"];
-    self.iconImage = [aDecoder decodeObjectForKey:@"iconImage"];
+    self.iconImage = [UIImage imageWithData:[aDecoder decodeObjectForKey:@"iconImage"]];
     self.location = [aDecoder decodeObjectForKey:@"location"];
   }
   return self;
 }
 
-- (void)updateIconImage {
+- (UIImage*)loadIconImage {
   if([DungaRegister authWithStorage]){
     NSData* icon = (NSData*)[[DungaRegister connectToDunga:[NSString stringWithFormat:@"%@%d", 
                                                             (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
@@ -84,14 +85,19 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
                                                     params:nil 
                                                     method:@"GET"] 
                              objectForKey:@"data"];
-    UIImage* origin = [[UIImage alloc] initWithData:icon];
-    self.iconImage = [origin resize:CGSizeMake(32, 32) aspect:YES];
+    UIImage* origin = [[[UIImage alloc] initWithData:icon] autorelease];
+    return [origin resize:CGSizeMake(32, 32) aspect:YES];
   }
+  return nil;
+}
+
+- (BOOL)isMe {
+  return NO;
 }
 
 - (UIImage*)iconImage {
   if(iconImage_ == nil) {
-    [self updateIconImage];
+    self.iconImage = [self loadIconImage];
   }
   return iconImage_;
 }

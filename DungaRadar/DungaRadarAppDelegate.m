@@ -7,6 +7,7 @@
 //
 
 #import "DungaRadarAppDelegate.h"
+#import "MemberManager.h"
 
 @implementation DungaRadarAppDelegate
 
@@ -15,13 +16,11 @@
 
 @synthesize tabBarController=_tabBarController;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-  // Override point for customization after application launch.
-  // Add the tab bar controller's current view as a subview of the window
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
   self.window.rootViewController = self.tabBarController;
+  [[MemberManager instance] updateMembers];
   [self.window makeKeyAndVisible];
-    return YES;
+  return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
