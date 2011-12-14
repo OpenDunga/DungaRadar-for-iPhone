@@ -43,7 +43,8 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
     self.iconImage = nil;
     self.location = [[CLLocation alloc] initWithLatitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"latitude"] doubleValue] 
                                            longitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"longitude"] doubleValue]];
-    self.timestamp = [[NSDate alloc] initWithTimeIntervalSince1970:(NSTimeInterval)[(NSNumber*)[userData objectForKey:@"registeredTime"] intValue]];
+    double epoch = [(NSNumber*)[userData objectForKey:@"registeredTime"] doubleValue] / 1000;
+    self.timestamp = [[NSDate alloc] initWithTimeIntervalSince1970:epoch];
   }
   return self;
 }
@@ -89,10 +90,6 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
     return [origin resize:CGSizeMake(32, 32) aspect:YES];
   }
   return nil;
-}
-
-- (BOOL)isMe {
-  return NO;
 }
 
 - (UIImage*)iconImage {

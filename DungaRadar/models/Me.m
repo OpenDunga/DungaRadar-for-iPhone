@@ -75,8 +75,4 @@ static BOOL _willDelete = NO;
   return NO;
 }
 
-- (BOOL)isMe {
-  return YES;
-}
-
 @end

@@ -66,6 +66,7 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
 }
 
 - (NSMutableArray*)membersFromAPI {
+  NSLog(@"update");
   if([DungaRegister authWithStorage]) {
     NSError* err;
     NSDictionary* res = [NSDictionary dictionaryWithJSONString:[DungaRegister get:(NSString*)PATH_ALL_MEMBER_LOCATION 

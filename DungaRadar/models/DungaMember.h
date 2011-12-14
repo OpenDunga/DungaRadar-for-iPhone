@@ -19,7 +19,6 @@
 }
 
 - (id)initWithUserData:(NSDictionary*)userData;
-- (BOOL)isMe;
 
 @property(readonly) int primaryKey;
 @property(readwrite, copy) NSString* dispName;

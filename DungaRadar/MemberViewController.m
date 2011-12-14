@@ -7,13 +7,18 @@
 //
 
 #import "MemberViewController.h"
+#import "MemberManager.h"
+#import "DungaMember.h"
+
+@interface MemberViewController()
+- (void)pressReloadButton:(id)sender;
+@end
 
 @implementation MemberViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
   if (self) {
-    // Custom initialization
   }
   return self;
 }
@@ -32,6 +37,10 @@
   UITableViewController* rootView = [[[UITableViewController alloc] initWithStyle:UITableViewStylePlain] autorelease];
   rootView.tableView.delegate = self;
   rootView.tableView.dataSource = self;
+  rootView.title = @"メンバー";
+  rootView.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh 
+                                                                                             target:self 
+                                                                                             action:@selector(pressReloadButton:)] autorelease];
   [self pushViewController:rootView animated:NO];
 }
 
@@ -46,22 +55,36 @@
   return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)pressReloadButton:(id)sender {
+  [[MemberManager instance] updateMembers];
+  UITableViewController* tvc = (UITableViewController*)self.navigationController.visibleViewController;
+  [tvc.tableView reloadData];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
   return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return 0;
+  return [[[MemberManager instance] members] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  static NSString *CellIdentifier = @"Cell";
+  NSString *CellIdentifier = [NSString stringWithFormat:@"Cell_%d", indexPath.row];
   
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
   if (cell == nil) {
+    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    DungaMember* member = (DungaMember*)[[[MemberManager instance] members] objectAtIndex:indexPath.row];
+    cell.textLabel.text = member.dispName;
+    cell.detailTextLabel.text = [member.timestamp descriptionWithLocale:[NSLocale currentLocale]];
+    cell.imageView.image = member.iconImage;
   }
   return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  return 56;
+}
 
 @end

@@ -47,15 +47,7 @@ const NSString* PATH_LOGIN		= @"/api/login";
                                                                params:post 
                                                                method:@"POST"] objectForKey:@"response"];
   NSHTTPURLResponse* urlRes = (NSHTTPURLResponse*)res;
-  if(urlRes.statusCode == 200) {
-    // set userName as my dispName.
-    Me* me = [Me sharedMe];
-    if(me.dispName != userName) {
-      me.dispName = userName;
-    }
-    return YES;
-  }
-  return NO;
+  return (urlRes.statusCode == 200);
 }
 
 + (BOOL)authWithStorage {
