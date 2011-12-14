@@ -79,13 +79,13 @@
   NSString *CellIdentifier = [NSString stringWithFormat:@"Cell_%d", indexPath.row];
   
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  DungaMember* member = (DungaMember*)[[[MemberManager instance] members] objectAtIndex:indexPath.row];
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    DungaMember* member = (DungaMember*)[[[MemberManager instance] members] objectAtIndex:indexPath.row];
-    cell.textLabel.text = member.dispName;
-    cell.detailTextLabel.text = [member descriptionDetailFrom:[Me sharedMe]];
     cell.imageView.image = member.iconImage;
   }
+  cell.textLabel.text = member.dispName;
+  cell.detailTextLabel.text = [member descriptionDetailFrom:[Me sharedMe]];
   return cell;
 }
 

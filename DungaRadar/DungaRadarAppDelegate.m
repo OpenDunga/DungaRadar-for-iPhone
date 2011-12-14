@@ -8,6 +8,7 @@
 
 #import "DungaRadarAppDelegate.h"
 #import "MemberManager.h"
+#import "Me.h"
 
 @implementation DungaRadarAppDelegate
 
@@ -17,8 +18,12 @@
 @synthesize tabBarController=_tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
-  self.window.rootViewController = self.tabBarController;
+  locationManager_ = [[CLLocationManager alloc] init];
+  locationManager_.delegate = self;
+  [locationManager_ startUpdatingLocation];
+  [locationManager_ startMonitoringSignificantLocationChanges];
   [[MemberManager instance] updateMembers];
+  self.window.rootViewController = self.tabBarController;
   [self.window makeKeyAndVisible];
   return YES;
 }
@@ -39,11 +44,8 @@
    */
 }
 
-- (void)applicationWillEnterForeground:(UIApplication *)application
-{
-  /*
-   Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-   */
+- (void)applicationWillEnterForeground:(UIApplication *)application {
+  [[MemberManager instance] updateMembers];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -69,18 +71,11 @@
     [super dealloc];
 }
 
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
-{
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation 
+           fromLocation:(CLLocation *)oldLocation{
+  Me* me = [Me sharedMe];
+  me.location = newLocation;
+  [me commit];
 }
-*/
-
-/*
-// Optional UITabBarControllerDelegate method.
-- (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray *)viewControllers changed:(BOOL)changed
-{
-}
-*/
 
 @end

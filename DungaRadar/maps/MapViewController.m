@@ -21,7 +21,6 @@
 }
 
 - (void)dealloc{
-  [locationManager_ release];
   [super dealloc];
 }
 
@@ -33,11 +32,6 @@
 
 - (void)viewDidLoad{
   [super viewDidLoad];
-  initialized_ = NO;
-  locationManager_ = [[CLLocationManager alloc] init];
-  locationManager_.delegate = self;
-  [locationManager_ startUpdatingLocation];
-  [locationManager_ startMonitoringSignificantLocationChanges];
   MemberManager* manager = [MemberManager instance];
   for(DungaMember* member in manager.members) {
     [mapView_ addAnnotation:member];
@@ -45,6 +39,15 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+  Me* me = [Me sharedMe];
+  MKCoordinateRegion cr = mapView_.region;
+  cr.center = me.location.coordinate;
+  cr.span.latitudeDelta = 0.03;
+  cr.span.longitudeDelta = 0.03;
+  [mapView_ setRegion:cr animated:NO];
+  // Update my annotation
+  [mapView_ removeAnnotation:me];
+  [mapView_ addAnnotation:me];
   [super viewWillAppear:animated];
 }
 
@@ -56,22 +59,6 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation{
   // Return YES for supported orientations
   return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation 
-           fromLocation:(CLLocation *)oldLocation{
-  Me* me = [Me sharedMe];
-  me.location = newLocation;
-  NSLog(@"%@", newLocation);
-  [me commit];
-  MKCoordinateRegion cr = mapView_.region;
-  cr.center = me.location.coordinate;
-  cr.span.latitudeDelta = 0.03;
-  cr.span.longitudeDelta = 0.03;
-  [mapView_ setRegion:cr animated:NO];
-  // Update my annotation
-  [mapView_ removeAnnotation:me];
-  [mapView_ addAnnotation:me];
 }
 
 - (MKAnnotationView*)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation{
