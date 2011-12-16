@@ -75,7 +75,14 @@
            fromLocation:(CLLocation *)oldLocation{
   Me* me = [Me sharedMe];
   me.location = newLocation;
-  [me commit];
+  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+  double last = [ud doubleForKey:@"lastUpdate"];
+  double now = [[NSDate date] timeIntervalSince1970];
+  if(!last || last + 60 < now) {
+    [me commit];
+    [ud setDouble:now forKey:@"lastUpdate"];
+    NSLog(@"update");
+  }
 }
 
 @end

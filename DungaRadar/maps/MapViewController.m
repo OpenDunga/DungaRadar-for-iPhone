@@ -48,6 +48,7 @@
   // Update my annotation
   [mapView_ removeAnnotation:me];
   [mapView_ addAnnotation:me];
+  [[MemberManager instance] updateMembers];
   [super viewWillAppear:animated];
 }
 

@@ -51,7 +51,7 @@
 - (MKOverlayView*)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {
   MKPolylineView* plv = [[[MKPolylineView alloc] initWithOverlay:overlay] autorelease];  
   plv.strokeColor = [UIColor blueColor];
-  plv.lineWidth = 5.0;
+  plv.lineWidth = 3.0;
   return plv;
 }
 
