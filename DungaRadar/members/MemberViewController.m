@@ -53,7 +53,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
-  UITableViewController* tvc = (UITableViewController*)self.visibleViewController;
+  UITableViewController* tvc = (UITableViewController*)[self.viewControllers objectAtIndex:0];
   [tvc.tableView reloadData];
 }
 
@@ -83,11 +83,11 @@
   DungaMember* member = (DungaMember*)[[[MemberManager instance] members] objectAtIndex:indexPath.row];
   if (cell == nil) {
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    cell.imageView.image = member.iconImage;
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
   }
   cell.textLabel.text = member.dispName;
   cell.detailTextLabel.text = [member descriptionDetailFromMember:[Me sharedMe]];
+  cell.imageView.image = member.iconImage;
   return cell;
 }
 
