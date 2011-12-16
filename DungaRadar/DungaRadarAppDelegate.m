@@ -6,6 +6,7 @@
 //  Copyright 2011 Kawaz. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import "DungaRadarAppDelegate.h"
 #import "MemberManager.h"
 #import "Me.h"
@@ -23,49 +24,20 @@
   locationManager_.delegate = self;
   [locationManager_ startUpdatingLocation];
   [locationManager_ startMonitoringSignificantLocationChanges];
+  // set my location for last place.
+  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+  double longitude = [ud doubleForKey:@"lastLongitude"];
+  double latitude = [ud doubleForKey:@"lastLatitude"];
+  if(longitude && latitude) {
+    Me* me = [Me sharedMe];
+    me.location = [[[CLLocation alloc] initWithLatitude:latitude longitude:longitude] autorelease];
+  }
   self.window.rootViewController = self.tabBarController;
   [self.window makeKeyAndVisible];
   return YES;
 }
 
-- (void)applicationWillResignActive:(UIApplication *)application
-{
-  /*
-   Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-   Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-   */
-}
-
-- (void)applicationDidEnterBackground:(UIApplication *)application
-{
-  /*
-   Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
-   If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-   */
-}
-
-- (void)applicationWillEnterForeground:(UIApplication *)application {
-  [[MemberManager instance] updateMembers];
-}
-
-- (void)applicationDidBecomeActive:(UIApplication *)application
-{
-  /*
-   Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-   */
-}
-
-- (void)applicationWillTerminate:(UIApplication *)application
-{
-  /*
-   Called when the application is about to terminate.
-   Save data if appropriate.
-   See also applicationDidEnterBackground:.
-   */
-}
-
-- (void)dealloc
-{
+- (void)dealloc {
   [_window release];
   [_tabBarController release];
     [super dealloc];
@@ -76,12 +48,13 @@
   Me* me = [Me sharedMe];
   me.location = newLocation;
   NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+  [ud setDouble:newLocation.coordinate.longitude forKey:@"lastLongitude"];
+  [ud setDouble:newLocation.coordinate.latitude forKey:@"lastLatitude"];
   double last = [ud doubleForKey:@"lastUpdate"];
   double now = [[NSDate date] timeIntervalSince1970];
   if(!last || last + 60 < now) {
     [me commit];
     [ud setDouble:now forKey:@"lastUpdate"];
-    NSLog(@"update");
   }
 }
 

@@ -45,6 +45,8 @@
 }
 
 - (void)viewDidUnload {
+  [mapView_ release];
+  [member_ release];
   [super viewDidUnload];
 }
 
