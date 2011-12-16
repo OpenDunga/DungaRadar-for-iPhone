@@ -33,9 +33,7 @@ const NSString*	USER_AGENT		= @"DungaRadar/1.0";
 const NSString* PATH_LOGIN		= @"/api/login";
 
 + (BOOL)auth:(NSString *)userName passwordHash:(NSString *)passwordHash {
-  NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[HttpConnection buildURL:(NSString*)SERVER_SCHEME 
-                                                                                     host:(NSString*)SERVER_HOST 
-                                                                                     path:(NSString*)PATH_LOGIN]];
+  NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[self buildFullPath:(NSString*)PATH_LOGIN]];
   [req addValue:(NSString*)USER_AGENT forHTTPHeaderField:@"http.useragent"];
   NSString* agent = [req valueForHTTPHeaderField:@"http.useragent"];
   NSString* encrypted = [passwordHash toEncrypted:agent];
@@ -62,9 +60,7 @@ const NSString* PATH_LOGIN		= @"/api/login";
   /**
    Returns dictionary that has key data and response. 
    */
-  NSMutableURLRequest* httpPostRequest = [NSMutableURLRequest requestWithURL:[HttpConnection buildURL:(NSString*)SERVER_SCHEME 
-                                                                                                 host:(NSString*)SERVER_HOST 
-                                                                                                 path:path]];
+  NSMutableURLRequest* httpPostRequest = [NSMutableURLRequest requestWithURL:[self buildFullPath:path]];
   [httpPostRequest setHTTPMethod:method];
   if(parameters){
     NSData* requestData = [[parameters dump] dataUsingEncoding:NSUTF8StringEncoding];
@@ -93,6 +89,12 @@ const NSString* PATH_LOGIN		= @"/api/login";
                                                  params:getParameters 
                                                  method:@"GET"] objectForKey:@"data"];
   return [[NSString alloc] initWithData:res encoding:NSUTF8StringEncoding];;
+}
+
++ (NSURL*)buildFullPath:(NSString *)path {
+  return [HttpConnection buildURL:(NSString*)SERVER_SCHEME 
+                      host:(NSString*)SERVER_HOST 
+                      path:path];
 }
 
 @end

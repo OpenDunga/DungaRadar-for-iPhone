@@ -30,6 +30,17 @@
   cr.span.longitudeDelta = 0.01;
   [mapView_ setRegion:cr animated:NO];
   [mapView_ addAnnotation:self.member];
+  [self.view addSubview:mapView_];
+}
+
+- (void)viewDidUnload {
+  [mapView_ release];
+  [member_ release];
+  [super viewDidUnload];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
   NSArray* histories = [self.member historySinceDate:[NSDate dateWithTimeIntervalSinceNow:-1 * 60 * 60 * 24]];
   CLLocationCoordinate2D coordinates[[histories count]];
   int i = 0;
@@ -41,13 +52,6 @@
   }
   MKPolyline* line = [MKPolyline polylineWithCoordinates:coordinates count:[histories count]];
   [mapView_ addOverlay:line];
-  [self.view addSubview:mapView_];
-}
-
-- (void)viewDidUnload {
-  [mapView_ release];
-  [member_ release];
-  [super viewDidUnload];
 }
 
 - (MKOverlayView*)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {

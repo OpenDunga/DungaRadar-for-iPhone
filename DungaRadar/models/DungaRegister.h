@@ -20,4 +20,5 @@
            params:(NSDictionary*)postParameters;
 + (NSString*)get:(NSString*)path
           params:(NSDictionary*)getParameters;
++ (NSURL*)buildFullPath:(NSString*)path;
 @end
