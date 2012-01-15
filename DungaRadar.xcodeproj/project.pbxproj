@@ -21,6 +21,8 @@
 		075634EC147CAC780090BFE9 /* KWSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634EB147CAC780090BFE9 /* KWSingleton.m */; };
 		0770DD5514C2787900008CA3 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0770DD5314C2787900008CA3 /* ConfigurationViewController.m */; };
 		0770DD5914C278A700008CA3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0770DD5814C278A700008CA3 /* LoginViewController.m */; };
+		0770DD5D14C2AD5E00008CA3 /* HttpAsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0770DD5C14C2AD5D00008CA3 /* HttpAsyncConnection.m */; };
+		0770DD6014C2B3F000008CA3 /* DungaAsyncConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 0770DD5F14C2B3EF00008CA3 /* DungaAsyncConnection.m */; };
 		078F5A51147CD5F200C2A958 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A3A147CD5F200C2A958 /* CDataScanner.m */; };
 		078F5A52147CD5F200C2A958 /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A3D147CD5F200C2A958 /* CFilteringJSONSerializer.m */; };
 		078F5A53147CD5F200C2A958 /* CJSONDeserializer_BlocksExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A3F147CD5F200C2A958 /* CJSONDeserializer_BlocksExtensions.m */; };
@@ -82,6 +84,10 @@
 		0770DD5714C278A700008CA3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = configurations/LoginViewController.h; sourceTree = "<group>"; };
 		0770DD5814C278A700008CA3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = configurations/LoginViewController.m; sourceTree = "<group>"; };
 		0770DD5A14C29B9F00008CA3 /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
+		0770DD5B14C2AD5D00008CA3 /* HttpAsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpAsyncConnection.h; path = models/HttpAsyncConnection.h; sourceTree = "<group>"; };
+		0770DD5C14C2AD5D00008CA3 /* HttpAsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpAsyncConnection.m; path = models/HttpAsyncConnection.m; sourceTree = "<group>"; };
+		0770DD5E14C2B3EE00008CA3 /* DungaAsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DungaAsyncConnection.h; path = models/DungaAsyncConnection.h; sourceTree = "<group>"; };
+		0770DD5F14C2B3EF00008CA3 /* DungaAsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DungaAsyncConnection.m; path = models/DungaAsyncConnection.m; sourceTree = "<group>"; };
 		078F5A39147CD5F200C2A958 /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
 		078F5A3A147CD5F200C2A958 /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
 		078F5A3C147CD5F200C2A958 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
@@ -216,6 +222,10 @@
 				07A4AFF6149565FF00B69C5E /* Me.m */,
 				07A4AFFC1498964B00B69C5E /* MemberManager.h */,
 				07A4AFFD1498964B00B69C5E /* MemberManager.m */,
+				0770DD5B14C2AD5D00008CA3 /* HttpAsyncConnection.h */,
+				0770DD5C14C2AD5D00008CA3 /* HttpAsyncConnection.m */,
+				0770DD5E14C2B3EE00008CA3 /* DungaAsyncConnection.h */,
+				0770DD5F14C2B3EF00008CA3 /* DungaAsyncConnection.m */,
 			);
 			name = models;
 			sourceTree = "<group>";
@@ -482,6 +492,8 @@
 				07A4B0131498E49100B69C5E /* MemberViewController.m in Sources */,
 				0770DD5514C2787900008CA3 /* ConfigurationViewController.m in Sources */,
 				0770DD5914C278A700008CA3 /* LoginViewController.m in Sources */,
+				0770DD5D14C2AD5E00008CA3 /* HttpAsyncConnection.m in Sources */,
+				0770DD6014C2B3F000008CA3 /* DungaAsyncConnection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -46,7 +46,7 @@ NSMutableData* loadedData = nil;
                                              method:@"POST" 
                                           userAgent:ua 
                                          httpHeader:header] objectForKey:@"data"];
-  return [[NSString alloc] initWithData:res encoding:NSUTF8StringEncoding];;
+  return [[[NSString alloc] initWithData:res encoding:NSUTF8StringEncoding] autorelease];
 }
 
 + (NSString*)get:(NSURL *)url
@@ -58,7 +58,7 @@ NSMutableData* loadedData = nil;
                                              method:@"GET" 
                                           userAgent:ua 
                                          httpHeader:header] objectForKey:@"data"];
-  return [[NSString alloc] initWithData:res encoding:NSUTF8StringEncoding];;
+  return [[[NSString alloc] initWithData:res encoding:NSUTF8StringEncoding] autorelease];
 }
 
 + (NSURL*)buildURL:(NSString *)schema host:(NSString *)host path:(NSString *)path {
