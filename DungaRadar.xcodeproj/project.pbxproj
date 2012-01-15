@@ -81,6 +81,7 @@
 		0770DD5314C2787900008CA3 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationViewController.m; path = configurations/ConfigurationViewController.m; sourceTree = "<group>"; };
 		0770DD5714C278A700008CA3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = configurations/LoginViewController.h; sourceTree = "<group>"; };
 		0770DD5814C278A700008CA3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = configurations/LoginViewController.m; sourceTree = "<group>"; };
+		0770DD5A14C29B9F00008CA3 /* define.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
 		078F5A39147CD5F200C2A958 /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
 		078F5A3A147CD5F200C2A958 /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
 		078F5A3C147CD5F200C2A958 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
@@ -356,6 +357,7 @@
 				079C6B131392040200528E69 /* DungaRadarAppDelegate.m */,
 				079C6B151392040200528E69 /* MainWindow.xib */,
 				079C6B0A1392040200528E69 /* Supporting Files */,
+				0770DD5A14C29B9F00008CA3 /* define.h */,
 			);
 			path = DungaRadar;
 			sourceTree = "<group>";

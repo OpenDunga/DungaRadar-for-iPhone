@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ConfigurationViewController : UINavigationController <UITableViewDataSource, UITableViewDelegate> {
+@interface ConfigurationViewController : UINavigationController <UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 }
 
 @end
