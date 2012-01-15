@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		075634CA147CA4790090BFE9 /* ConfigurationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634C7147CA4790090BFE9 /* ConfigurationView.xib */; };
-		075634CB147CA4790090BFE9 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634C9147CA4790090BFE9 /* ConfigurationViewController.m */; };
 		075634CF147CA48E0090BFE9 /* MIMView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634CC147CA48E0090BFE9 /* MIMView.xib */; };
 		075634D0147CA48E0090BFE9 /* MIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634CE147CA48E0090BFE9 /* MIMViewController.m */; };
 		075634D5147CA49B0090BFE9 /* SpotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634D3147CA49B0090BFE9 /* SpotViewController.m */; };
@@ -20,6 +19,8 @@
 		075634E8147CA4E80090BFE9 /* MapView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 075634E5147CA4E80090BFE9 /* MapView.xib */; };
 		075634E9147CA4E80090BFE9 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634E7147CA4E80090BFE9 /* MapViewController.m */; };
 		075634EC147CAC780090BFE9 /* KWSingleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634EB147CAC780090BFE9 /* KWSingleton.m */; };
+		0770DD5514C2787900008CA3 /* ConfigurationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0770DD5314C2787900008CA3 /* ConfigurationViewController.m */; };
+		0770DD5914C278A700008CA3 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0770DD5814C278A700008CA3 /* LoginViewController.m */; };
 		078F5A51147CD5F200C2A958 /* CDataScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A3A147CD5F200C2A958 /* CDataScanner.m */; };
 		078F5A52147CD5F200C2A958 /* CFilteringJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A3D147CD5F200C2A958 /* CFilteringJSONSerializer.m */; };
 		078F5A53147CD5F200C2A958 /* CJSONDeserializer_BlocksExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A3F147CD5F200C2A958 /* CJSONDeserializer_BlocksExtensions.m */; };
@@ -56,8 +57,6 @@
 
 /* Begin PBXFileReference section */
 		075634C7147CA4790090BFE9 /* ConfigurationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ConfigurationView.xib; path = configurations/ConfigurationView.xib; sourceTree = "<group>"; };
-		075634C8147CA4790090BFE9 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigurationViewController.h; path = configurations/ConfigurationViewController.h; sourceTree = "<group>"; };
-		075634C9147CA4790090BFE9 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationViewController.m; path = configurations/ConfigurationViewController.m; sourceTree = "<group>"; };
 		075634CC147CA48E0090BFE9 /* MIMView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MIMView.xib; path = MIM/MIMView.xib; sourceTree = "<group>"; };
 		075634CD147CA48E0090BFE9 /* MIMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MIMViewController.h; path = MIM/MIMViewController.h; sourceTree = "<group>"; };
 		075634CE147CA48E0090BFE9 /* MIMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MIMViewController.m; path = MIM/MIMViewController.m; sourceTree = "<group>"; };
@@ -78,6 +77,10 @@
 		075634E7147CA4E80090BFE9 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MapViewController.m; path = maps/MapViewController.m; sourceTree = "<group>"; };
 		075634EA147CAC780090BFE9 /* KWSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KWSingleton.h; path = utils/KWSingleton.h; sourceTree = "<group>"; };
 		075634EB147CAC780090BFE9 /* KWSingleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = KWSingleton.m; path = utils/KWSingleton.m; sourceTree = "<group>"; };
+		0770DD5214C2787900008CA3 /* ConfigurationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ConfigurationViewController.h; path = configurations/ConfigurationViewController.h; sourceTree = "<group>"; };
+		0770DD5314C2787900008CA3 /* ConfigurationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ConfigurationViewController.m; path = configurations/ConfigurationViewController.m; sourceTree = "<group>"; };
+		0770DD5714C278A700008CA3 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = configurations/LoginViewController.h; sourceTree = "<group>"; };
+		0770DD5814C278A700008CA3 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = configurations/LoginViewController.m; sourceTree = "<group>"; };
 		078F5A39147CD5F200C2A958 /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
 		078F5A3A147CD5F200C2A958 /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
 		078F5A3C147CD5F200C2A958 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
@@ -121,7 +124,7 @@
 		07A4AFFD1498964B00B69C5E /* MemberManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MemberManager.m; path = models/MemberManager.m; sourceTree = "<group>"; };
 		07A4B0031498C87000B69C5E /* RelativeDate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RelativeDate.h; path = libs/RelativeDate.h; sourceTree = "<group>"; };
 		07A4B0041498C87000B69C5E /* RelativeDate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RelativeDate.m; path = libs/RelativeDate.m; sourceTree = "<group>"; };
-		07A4B00E1498E44C00B69C5E /* MemberDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; name = MemberDetailViewController.h; path = members/MemberDetailViewController.h; sourceTree = "<group>"; };
+		07A4B00E1498E44C00B69C5E /* MemberDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemberDetailViewController.h; path = members/MemberDetailViewController.h; sourceTree = "<group>"; };
 		07A4B00F1498E44C00B69C5E /* MemberDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MemberDetailViewController.m; path = members/MemberDetailViewController.m; sourceTree = "<group>"; };
 		07A4B0111498E49100B69C5E /* MemberViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MemberViewController.h; path = members/MemberViewController.h; sourceTree = "<group>"; };
 		07A4B0121498E49100B69C5E /* MemberViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MemberViewController.m; path = members/MemberViewController.m; sourceTree = "<group>"; };
@@ -167,8 +170,10 @@
 			isa = PBXGroup;
 			children = (
 				075634C7147CA4790090BFE9 /* ConfigurationView.xib */,
-				075634C8147CA4790090BFE9 /* ConfigurationViewController.h */,
-				075634C9147CA4790090BFE9 /* ConfigurationViewController.m */,
+				0770DD5214C2787900008CA3 /* ConfigurationViewController.h */,
+				0770DD5314C2787900008CA3 /* ConfigurationViewController.m */,
+				0770DD5714C278A700008CA3 /* LoginViewController.h */,
+				0770DD5814C278A700008CA3 /* LoginViewController.m */,
 			);
 			name = configurations;
 			sourceTree = "<group>";
@@ -445,7 +450,6 @@
 			files = (
 				079C6B111392040200528E69 /* main.m in Sources */,
 				079C6B141392040200528E69 /* DungaRadarAppDelegate.m in Sources */,
-				075634CB147CA4790090BFE9 /* ConfigurationViewController.m in Sources */,
 				075634D0147CA48E0090BFE9 /* MIMViewController.m in Sources */,
 				075634D5147CA49B0090BFE9 /* SpotViewController.m in Sources */,
 				075634DA147CA4D40090BFE9 /* DungaMember.m in Sources */,
@@ -474,6 +478,8 @@
 				07A4B0051498C87000B69C5E /* RelativeDate.m in Sources */,
 				07A4B0101498E44C00B69C5E /* MemberDetailViewController.m in Sources */,
 				07A4B0131498E49100B69C5E /* MemberViewController.m in Sources */,
+				0770DD5514C2787900008CA3 /* ConfigurationViewController.m in Sources */,
+				0770DD5914C278A700008CA3 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,7 +21,7 @@ const NSString* PATH_VENUE_LIST = @"/api/location/venue/list/%lf/%lf/%d";
 @end
 
 @implementation SpotViewController
-@synthesize spots=spots_;
+@synthesize spots = spots_;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil{
   self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
