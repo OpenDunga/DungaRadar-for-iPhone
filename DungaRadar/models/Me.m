@@ -12,7 +12,7 @@
 const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
 
 @interface Me()
-- (void)onSucceedCommit:(NSURLConnection*)connection;
+- (void)onSucceedCommit:(NSURLConnection*)connection aRegister:(DungaAsyncConnection*)aRegister;
 @end
 
 @implementation Me
@@ -73,19 +73,14 @@ static BOOL _willDelete = NO;
                           @"latitude",
                           nil];
   DungaAsyncConnection* dac = [DungaAsyncConnection connection];
-  dac.finishSelector = @selector(onSucceedCommit:);
-  dac.responseSelector = @selector(onResponse:);
+  dac.finishSelector = @selector(onSucceedCommit:aRegister:);
   dac.delegate = self;
   return [dac connectToDungaWithAuth:(NSString*)PATH_REGISTER_MEMBER_LOCATION 
                               params:params 
                               method:@"POST"];
 }
 
-- (void)onResponse:(NSURLResponse*)res {
-  NSLog(@"%d", ((NSHTTPURLResponse*)res).statusCode);
-}
-
-- (void)onSucceedCommit:(NSURLConnection *)connection {
+- (void)onSucceedCommit:(NSURLConnection *)connection aRegister:(DungaAsyncConnection *)aRegister {
   NSLog(@"おくりました");
 }
 

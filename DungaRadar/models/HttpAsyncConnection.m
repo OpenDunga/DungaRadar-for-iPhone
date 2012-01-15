@@ -55,32 +55,28 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-  NSHTTPURLResponse* urlRes = (NSHTTPURLResponse*)response;
   if (self.responseSelector) {
-    [self.delegate performSelector:self.responseSelector withObject:response];
-  }
-  if (urlRes.statusCode != 200) {
-    [connection cancel];
+    [self.delegate performSelector:self.responseSelector withObject:connection withObject:response];
   }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
   [data_ appendData:data];
   if (self.dataSelector) {
-    [self.delegate performSelector:self.dataSelector withObject:data];
+    [self.delegate performSelector:self.dataSelector withObject:connection withObject:data];
   }	
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
   if (self.failSelector) {
-    [self.delegate performSelector:self.failSelector withObject:error];
+    [self.delegate performSelector:self.failSelector withObject:connection withObject:error];
   }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (self.finishSelector) {
     NSLog(@"aaa: %@", [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease]);
-    [self.delegate performSelector:self.finishSelector withObject:connection];
+    [self.delegate performSelector:self.finishSelector withObject:connection withObject:self];
   }	
 }
 

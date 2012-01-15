@@ -12,8 +12,8 @@
 
 @interface LoginViewController()
 - (void)pressLoginButton:(id)sender;
-- (void)onReviceResponse:(NSURLResponse*)response;
-- (void)onSucceedLogin:(NSURLConnection*)connection;
+- (void)onReviceResponse:(NSURLConnection*)connection response:(NSURLResponse*)response;
+- (void)onSucceedLogin:(NSURLConnection*)connection aRegister:(DungaAsyncConnection*)aRegister;
 @end
 
 @implementation LoginViewController
@@ -100,8 +100,8 @@
 
 - (void)pressLoginButton:(id)sender{
   DungaAsyncConnection* hac = [[[DungaAsyncConnection alloc] init] autorelease];
-  hac.responseSelector = @selector(onReviceResponse:);
-  hac.finishSelector = @selector(onSucceedLogin:);
+  hac.responseSelector = @selector(onReviceResponse:response:);
+  hac.finishSelector = @selector(onSucceedLogin:aRegister:);
   hac.delegate = self;
   [hac connectToDungaWithAuth:nil 
                        params:nil 
@@ -110,8 +110,8 @@
                  passwordHash:[passwordField_.text toMD5]];
 }
 
-- (void)onReviceResponse:(NSURLResponse *)res {
-  NSHTTPURLResponse* urlRes = (NSHTTPURLResponse*)res;
+- (void)onReviceResponse:(NSURLConnection*)connection response:(NSURLResponse *)response {
+  NSHTTPURLResponse* urlRes = (NSHTTPURLResponse*)response;
   if (urlRes.statusCode != 200) {
     NSString* alert;
     alert = @"なんか上手くいかなかったっぽいです･･････";
@@ -120,10 +120,11 @@
                                                  cancelButtonTitle:@"OK" 
                                                  otherButtonTitles:nil, nil] autorelease];
     [resultAlert show];
+    [connection cancel];
   }
 }
 
-- (void)onSucceedLogin:(NSURLConnection *)connection {  
+- (void)onSucceedLogin:(NSURLConnection *)connection aRegister:(DungaAsyncConnection *)aRegister {
   NSString* alert;
   NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
   [ud setObject:usernameField_.text forKey:@"username"];
