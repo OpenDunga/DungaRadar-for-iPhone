@@ -9,7 +9,7 @@
 #import "NSDictionary_JSONExtensions.h"
 #import "SpotEditViewController.h"
 #import "SpotViewController.h"
-#import "DungaRegister.h"
+#import "DungaAsyncConnection.h"
 #import "Spot.h"
 #import "Me.h"
 
@@ -18,6 +18,7 @@ const NSString* PATH_VENUE_LIST = @"/api/location/venue/list/%lf/%lf/%d";
 
 @interface SpotViewController()
 - (void)reloadSpotList;
+- (void)onSucceedLoadingSpots:(NSURLConnection*)connection aConnection:(DungaAsyncConnection*)aConnection;
 @end
 
 @implementation SpotViewController
@@ -62,16 +63,25 @@ const NSString* PATH_VENUE_LIST = @"/api/location/venue/list/%lf/%lf/%d";
 }
 
 - (void)reloadSpotList {
-  if([DungaRegister authWithStorage]) {
-    self.spots = [NSMutableArray array];
-    NSError* err;
-    Me* me = [Me sharedMe];
-    NSString* path = [NSString stringWithFormat:(NSString*)PATH_VENUE_LIST, 
-                      me.location.coordinate.latitude, 
-                      me.location.coordinate.longitude, 
-                      SCOPE_RADIUS];
-    NSArray* spots = [[NSDictionary dictionaryWithJSONString:[DungaRegister get:path params:nil] error:&err] objectForKey:@"entries"];
-    for(NSDictionary* spotData in spots) {
+  Me* me = [Me sharedMe];
+  NSString* path = [NSString stringWithFormat:(NSString*)PATH_VENUE_LIST, 
+                    me.location.coordinate.latitude, 
+                    me.location.coordinate.longitude, 
+                    SCOPE_RADIUS];
+  DungaAsyncConnection* dac = [DungaAsyncConnection connection];
+  dac.delegate = self;
+  dac.finishSelector = @selector(onSucceedLoadingSpots:aConnection:);
+  [dac connectToDungaWithAuth:path params:nil method:@"GET"];
+}
+
+- (void)onSucceedLoadingSpots:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
+  NSString* json = aConnection.responseBody;
+  NSError* err;
+  NSArray* entries = (NSArray*)[[NSDictionary dictionaryWithJSONString:json error:&err] objectForKey:@"entries"];
+  
+  if (entries) {
+    self.spots = [NSMutableArray arrayWithArray:entries];
+    for(NSDictionary* spotData in self.spots) {
       Spot* spot = [[Spot alloc] initWithInfo:spotData];
       [spots_ addObject:spot];
     }

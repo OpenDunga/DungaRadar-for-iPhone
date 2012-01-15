@@ -8,7 +8,7 @@
 
 #import "NSDictionary_JSONExtensions.h"
 #import "MemberManager.h"
-#import "DungaRegister.h"
+#import "DungaAsyncConnection.h"
 #import "Me.h"
 
 const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
@@ -16,7 +16,7 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
 @interface MemberManager()
 - (NSMutableArray*)membersFromInfo:(NSArray*)userInfos;
 - (NSMutableArray*)membersFromStorage;
-- (NSMutableArray*)membersFromAPI;
+- (void)onSucceedLoadingMembers:(NSURLConnection*)connection aConnection:(DungaAsyncConnection*)aConnection;
 @end
 
 @implementation MemberManager
@@ -41,10 +41,14 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
   if([self.members count] == 0 && cache && [cache count] != 0) {
     self.members = [self membersFromStorage];
   }else {
-    self.members = [self membersFromAPI];
-    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject:self.members forKey:@"members"];
+    DungaAsyncConnection* dac = [DungaAsyncConnection connection];
+    dac.delegate = self;
+    dac.finishSelector = @selector(onSucceedLoadingMembers:aConnection:);
+    [dac connectToDungaWithAuth:(NSString*)PATH_ALL_MEMBER_LOCATION 
+                         params:nil 
+                         method:@"GET"];
   }
+     
   self.members = [self.members sortedArrayUsingSelector:@selector(sortByTimestamp:)];
 }
 
@@ -67,17 +71,19 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
   return [self membersFromInfo:[ud arrayForKey:@"members"]];
 }
 
-- (NSMutableArray*)membersFromAPI {
-  if([DungaRegister authWithStorage]) {
-    NSError* err;
-    NSDictionary* res = [NSDictionary dictionaryWithJSONString:[DungaRegister get:(NSString*)PATH_ALL_MEMBER_LOCATION 
-                                                                           params:nil]
-                                                         error:&err];
-    NSArray* memberInfos = (NSArray*)[res objectForKey:@"entries"];
-    [[NSUserDefaults standardUserDefaults] setObject:memberInfos forKey:@"members"];
-    return [self membersFromInfo:memberInfos];
-  }
-  return [NSArray array];
+- (void)onSucceedLoadingMembers:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
+  NSError* err;
+  NSLog(@"%@", connection);
+  
+  NSLog(@"%@", aConnection);
+  NSDictionary* res = [NSDictionary dictionaryWithJSONString:aConnection.responseBody
+                                                       error:&err];
+  NSArray* memberInfos = (NSArray*)[res objectForKey:@"entries"];
+  [[NSUserDefaults standardUserDefaults] setObject:memberInfos forKey:@"members"];
+  self.members = [self membersFromInfo:memberInfos];
+  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+  [ud setObject:self.members forKey:@"members"];
+  self.members = [self.members sortedArrayUsingSelector:@selector(sortByTimestamp:)];
 }
 
 @end

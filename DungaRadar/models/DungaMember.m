@@ -9,8 +9,7 @@
 #import "NSDictionary_JSONExtensions.h"
 #import "RelativeDate.h"
 #import "UIImageExtention.h"
-#import "HttpConnection.h"
-#import "DungaRegister.h"
+#import "DungaAsyncConnection.h"
 #import "DungaMember.h"
 
 const NSString* PATH_MEMBER_PROFILE_ICON_LOCATION	= @"/api/profile/icon/";
@@ -18,6 +17,7 @@ const NSString* PATH_MEMBER_LOCATION_HISTORY = @"/api/location/history/%d";
 
 @interface DungaMember()
 - (UIImage*)loadIconImage;
+- (void)onSucceedLoadHistory:(NSURLConnection*)connection aConnection:(DungaAsyncConnection*)aConnection;
 @end
 
 @implementation DungaMember
@@ -80,7 +80,7 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
 }
 
 - (NSArray*)historySinceDate:(NSDate *)date {
-  if([DungaRegister authWithStorage]){
+  /*if([DungaRegister authWithStorage]){
     NSString* json = [DungaRegister get:[NSString stringWithFormat:(NSString*)PATH_MEMBER_LOCATION_HISTORY, primaryKey_] 
                                  params:nil];
     NSError* err;
@@ -93,7 +93,7 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
       [results addObject:history];
     }
     return results;
-  }
+  }*/
   return [NSArray array];
 }
 
@@ -119,7 +119,7 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
 }
 
 - (UIImage*)loadIconImage {
-  if([DungaRegister authWithStorage]){
+  /*if([DungaRegister authWithStorage]){
     NSData* icon = (NSData*)[[DungaRegister connectToDunga:[NSString stringWithFormat:@"%@%d", 
                                                             (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
                                                             primaryKey_] 
@@ -128,7 +128,7 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
                              objectForKey:@"data"];
     UIImage* origin = [[[UIImage alloc] initWithData:icon] autorelease];
     return [origin resize:CGSizeMake(32, 32) aspect:YES];
-  }
+  }*/
   return nil;
 }
 
@@ -137,6 +137,10 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
     self.iconImage = [self loadIconImage];
   }
   return iconImage_;
+}
+
+- (void)onSucceedLoadHistory:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
+  
 }
 
 - (CLLocationCoordinate2D)coordinate{

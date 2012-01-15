@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "DungaAsyncConnection.h"
 #import <MapKit/MapKit.h>
 
 @interface Spot : NSObject <MKAnnotation>{
@@ -21,7 +22,6 @@
 - (id)initWithLocation:(CLLocation*)location;
 - (id)initWithInfo:(NSDictionary*)dictionary;
 - (id)initWithJson:(NSString*)json;
-- (NSDictionary*)commit;
 - (NSDictionary*)dump;
 
 @property(readonly) int primaryKey;

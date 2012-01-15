@@ -21,22 +21,22 @@
 @synthesize method = method_;
 
 /** サーバースキーマ。 */
-const NSString*	SERVER_SCHEME2	= @"http";
+const NSString*	SERVER_SCHEME	= @"http";
 
 /** サーバーホスト。 */
-const NSString*	SERVER_HOST2		= @"www.opendunga.net";
+const NSString*	SERVER_HOST		= @"www.opendunga.net";
 
 /** HttpHeaderField **/
 /**
  http.useragentを利用すると、cocoaの罠にはまるので便宜的にnamaco.
  **/
-const NSString* HEADER_FIELD2 = @"namaco";
+const NSString* HEADER_FIELD  = @"namaco";
 
 /** ユーザーエージェント。 */
-const NSString*	USER_AGENT2		= @"DungaRadar/1.0";
+const NSString*	USER_AGENT	  = @"DungaRadar/1.0";
 
 /** ログイン用URIのパス。 */
-const NSString* PATH_LOGIN2		= @"/api/login";
+const NSString* PATH_LOGIN	  = @"/api/login";
 
 - (id)init {
   self = [super init];
@@ -74,8 +74,8 @@ const NSString* PATH_LOGIN2		= @"/api/login";
   self.url = [DungaAsyncConnection buildFullPath:path];
   self.parameters = parameters;
   self.method = method;
-  NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[DungaAsyncConnection buildFullPath:(NSString*)PATH_LOGIN2]];
-  [req addValue:(NSString*)USER_AGENT2 forHTTPHeaderField:@"http.useragent"];
+  NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[DungaAsyncConnection buildFullPath:(NSString*)PATH_LOGIN]];
+  [req addValue:(NSString*)USER_AGENT forHTTPHeaderField:@"http.useragent"];
   NSString* agent = [req valueForHTTPHeaderField:@"http.useragent"];
   NSString* encrypted = [passwordHash toEncrypted:agent];
   NSDictionary* post = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -83,17 +83,17 @@ const NSString* PATH_LOGIN2		= @"/api/login";
                         encrypted, @"enc_password", 
                         passwordHash, @"password", nil];
   state_ = DungaAsyncStateLogin;
-  return [self connectTo:[DungaAsyncConnection buildFullPath:(NSString*)PATH_LOGIN2]
+  return [self connectTo:[DungaAsyncConnection buildFullPath:(NSString*)PATH_LOGIN]
                   params:post
                   method:@"POST" 
-               userAgent:(NSString*)USER_AGENT2
-              httpHeader:(NSString*)HEADER_FIELD2];
+               userAgent:(NSString*)USER_AGENT
+              httpHeader:(NSString*)HEADER_FIELD];
 }
 
 + (NSURL*)buildFullPath:(NSString *)path {
   if(!path) return nil;
-  return [HttpAsyncConnection buildURL:(NSString*)SERVER_SCHEME2 
-                                  host:(NSString*)SERVER_HOST2
+  return [HttpAsyncConnection buildURL:(NSString*)SERVER_SCHEME
+                                  host:(NSString*)SERVER_HOST
                                   path:path];
 }
 
@@ -105,15 +105,15 @@ const NSString* PATH_LOGIN2		= @"/api/login";
       [self connectTo:self.url 
                params:self.parameters 
                method:self.method 
-            userAgent:(NSString*)USER_AGENT2 
-           httpHeader:(NSString*)HEADER_FIELD2];
+            userAgent:(NSString*)USER_AGENT
+           httpHeader:(NSString*)HEADER_FIELD];
     } else {
-      [self.delegate performSelector:self.finishSelector withObject:connection];
+      [self.delegate performSelector:self.finishSelector withObject:connection withObject:self];
     }
   } else {
     if (self.finishSelector) {
       NSLog(@"aaa: %@", [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease]);
-      [self.delegate performSelector:self.finishSelector withObject:connection];
+      [self.delegate performSelector:self.finishSelector withObject:connection withObject:self];
     }	
   }
 }

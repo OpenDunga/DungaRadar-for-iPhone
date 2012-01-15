@@ -9,9 +9,7 @@
 #import "CJSONDeserializer.h"
 #import "NSDictionary_JSONExtensions.h"
 #import "Spot.h"
-#import "DungaRegister.h"
-
-const NSString* PATH_SPOT_CREATION = @"/api/location/venue/new";
+#import "DungaAsyncConnection.h"
 
 @implementation Spot
 @synthesize primaryKey=primaryKey_, scope=scope_, autoInform=autoInform_, 
@@ -65,29 +63,6 @@ registeredMemberId=registeredMemberId_, dispName=dispName_, location=location_;
   NSDictionary* spot = [NSDictionary dictionaryWithJSONString:json error:&err];
   self = [self initWithInfo:spot];
   return self;
-}
-
-- (NSDictionary*)commit {
-  /**
-   * Commits spot data to server.
-   * Returns a dictionary contains two values.
-   *     succeed(NSNumber) success or not
-   *     message(NSString) message
-   */
-  NSMutableDictionary* result = [NSMutableDictionary dictionary];
-  if([DungaRegister authWithStorage]) {
-    NSDictionary* response = [DungaRegister connectToDunga:(NSString*)PATH_SPOT_CREATION params:[self dump] method:@"POST"];
-    NSHTTPURLResponse* res = (NSHTTPURLResponse*)[response objectForKey:@"response"];
-    [result setObject:[NSNumber numberWithBool:res.statusCode == 200] forKey:@"succeed"];
-    NSData* json = [response objectForKey:@"data"];
-    NSError* err;
-    NSString* message = [[[CJSONDeserializer deserializer] deserializeAsArray:json error:&err] objectAtIndex:0];
-    [result setObject:message forKey:@"message"];
-    return result;
-  }
-  [result setObject:[NSNumber numberWithBool:NO] forKey:@"succeed"];
-  [result setObject:@"ログインに失敗しました" forKey:@"message"];
-  return result;
 }
      
 - (NSDictionary*)dump {

@@ -12,7 +12,6 @@
 		075634D0147CA48E0090BFE9 /* MIMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634CE147CA48E0090BFE9 /* MIMViewController.m */; };
 		075634D5147CA49B0090BFE9 /* SpotViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634D3147CA49B0090BFE9 /* SpotViewController.m */; };
 		075634DA147CA4D40090BFE9 /* DungaMember.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634D7147CA4D40090BFE9 /* DungaMember.m */; };
-		075634DB147CA4D40090BFE9 /* HttpConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634D9147CA4D40090BFE9 /* HttpConnection.m */; };
 		075634E2147CA4DE0090BFE9 /* ArrayExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634DD147CA4DE0090BFE9 /* ArrayExtention.m */; };
 		075634E3147CA4DE0090BFE9 /* DictionaryExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634DF147CA4DE0090BFE9 /* DictionaryExtention.m */; };
 		075634E4147CA4DE0090BFE9 /* EncryptExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 075634E1147CA4DE0090BFE9 /* EncryptExtention.m */; };
@@ -33,7 +32,6 @@
 		078F5A58147CD5F200C2A958 /* CJSONDeserializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A4B147CD5F200C2A958 /* CJSONDeserializer.m */; };
 		078F5A59147CD5F200C2A958 /* CJSONScanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A4D147CD5F200C2A958 /* CJSONScanner.m */; };
 		078F5A5A147CD5F200C2A958 /* CJSONSerializer.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A4F147CD5F200C2A958 /* CJSONSerializer.m */; };
-		078F5A5D147CD8BA00C2A958 /* DungaRegister.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A5C147CD8BA00C2A958 /* DungaRegister.m */; };
 		078F5A66147CE72700C2A958 /* UIImageExtention.m in Sources */ = {isa = PBXBuildFile; fileRef = 078F5A65147CE72700C2A958 /* UIImageExtention.m */; };
 		079C6B041392040200528E69 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B031392040200528E69 /* UIKit.framework */; };
 		079C6B061392040200528E69 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 079C6B051392040200528E69 /* Foundation.framework */; };
@@ -66,8 +64,6 @@
 		075634D3147CA49B0090BFE9 /* SpotViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SpotViewController.m; path = spots/SpotViewController.m; sourceTree = "<group>"; };
 		075634D6147CA4D40090BFE9 /* DungaMember.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DungaMember.h; path = models/DungaMember.h; sourceTree = "<group>"; };
 		075634D7147CA4D40090BFE9 /* DungaMember.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DungaMember.m; path = models/DungaMember.m; sourceTree = "<group>"; };
-		075634D8147CA4D40090BFE9 /* HttpConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpConnection.h; path = models/HttpConnection.h; sourceTree = "<group>"; };
-		075634D9147CA4D40090BFE9 /* HttpConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpConnection.m; path = models/HttpConnection.m; sourceTree = "<group>"; };
 		075634DC147CA4DE0090BFE9 /* ArrayExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArrayExtention.h; path = utils/ArrayExtention.h; sourceTree = "<group>"; };
 		075634DD147CA4DE0090BFE9 /* ArrayExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArrayExtention.m; path = utils/ArrayExtention.m; sourceTree = "<group>"; };
 		075634DE147CA4DE0090BFE9 /* DictionaryExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DictionaryExtention.h; path = utils/DictionaryExtention.h; sourceTree = "<group>"; };
@@ -109,8 +105,6 @@
 		078F5A4E147CD5F200C2A958 /* CJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CJSONSerializer.h; sourceTree = "<group>"; };
 		078F5A4F147CD5F200C2A958 /* CJSONSerializer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CJSONSerializer.m; sourceTree = "<group>"; };
 		078F5A50147CD5F200C2A958 /* JSONRepresentation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONRepresentation.h; sourceTree = "<group>"; };
-		078F5A5B147CD8BA00C2A958 /* DungaRegister.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DungaRegister.h; path = models/DungaRegister.h; sourceTree = "<group>"; };
-		078F5A5C147CD8BA00C2A958 /* DungaRegister.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DungaRegister.m; path = models/DungaRegister.m; sourceTree = "<group>"; };
 		078F5A64147CE72600C2A958 /* UIImageExtention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = UIImageExtention.h; path = utils/UIImageExtention.h; sourceTree = "<group>"; };
 		078F5A65147CE72700C2A958 /* UIImageExtention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = UIImageExtention.m; path = utils/UIImageExtention.m; sourceTree = "<group>"; };
 		079C6AFF1392040200528E69 /* DungaRadar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DungaRadar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,10 +206,6 @@
 			children = (
 				075634D6147CA4D40090BFE9 /* DungaMember.h */,
 				075634D7147CA4D40090BFE9 /* DungaMember.m */,
-				075634D8147CA4D40090BFE9 /* HttpConnection.h */,
-				075634D9147CA4D40090BFE9 /* HttpConnection.m */,
-				078F5A5B147CD8BA00C2A958 /* DungaRegister.h */,
-				078F5A5C147CD8BA00C2A958 /* DungaRegister.m */,
 				07D92E671494A869000ACA48 /* Spot.h */,
 				07D92E681494A869000ACA48 /* Spot.m */,
 				07A4AFF5149565FE00B69C5E /* Me.h */,
@@ -465,7 +455,6 @@
 				075634D0147CA48E0090BFE9 /* MIMViewController.m in Sources */,
 				075634D5147CA49B0090BFE9 /* SpotViewController.m in Sources */,
 				075634DA147CA4D40090BFE9 /* DungaMember.m in Sources */,
-				075634DB147CA4D40090BFE9 /* HttpConnection.m in Sources */,
 				075634E2147CA4DE0090BFE9 /* ArrayExtention.m in Sources */,
 				075634E3147CA4DE0090BFE9 /* DictionaryExtention.m in Sources */,
 				075634E4147CA4DE0090BFE9 /* EncryptExtention.m in Sources */,
@@ -481,7 +470,6 @@
 				078F5A58147CD5F200C2A958 /* CJSONDeserializer.m in Sources */,
 				078F5A59147CD5F200C2A958 /* CJSONScanner.m in Sources */,
 				078F5A5A147CD5F200C2A958 /* CJSONSerializer.m in Sources */,
-				078F5A5D147CD8BA00C2A958 /* DungaRegister.m in Sources */,
 				078F5A66147CE72700C2A958 /* UIImageExtention.m in Sources */,
 				07D92E6514949950000ACA48 /* SpotEditViewController.m in Sources */,
 				07D92E691494A869000ACA48 /* Spot.m in Sources */,

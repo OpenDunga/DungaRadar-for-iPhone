@@ -16,9 +16,16 @@
 @synthesize failSelector = failSelector_;
 @synthesize delegate = delegate_;
 @synthesize data = data_;
+@dynamic responseBody;
+@synthesize urlRes = urlRes_;
 
 + (id)connection {
   return [[[[self class] alloc] init] autorelease];
+}
+
++ (NSURL*)buildURL:(NSString *)schema host:(NSString *)host path:(NSString *)path {
+  NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", (NSString*)schema, (NSString*)host, (NSString*)path]];
+  return url;
 }
 
 - (id)init {
@@ -35,6 +42,7 @@
 
 - (void)dealloc {
   [data_ release];
+  [urlRes_ release];
   [super dealloc];
 }
 
@@ -55,6 +63,7 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+  urlRes_ = [(NSHTTPURLResponse*)response retain];
   if (self.responseSelector) {
     [self.delegate performSelector:self.responseSelector withObject:connection withObject:response];
   }
@@ -80,9 +89,9 @@
   }	
 }
 
-+ (NSURL*)buildURL:(NSString *)schema host:(NSString *)host path:(NSString *)path {
-  NSURL* url = [NSURL URLWithString:[NSString stringWithFormat:@"%@://%@%@", (NSString*)schema, (NSString*)host, (NSString*)path]];
-  return url;
+- (NSString*)responseBody {
+  NSLog(@"%@", self.data);
+  return [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease];
 }
 
 @end

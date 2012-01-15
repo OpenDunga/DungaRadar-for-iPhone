@@ -13,7 +13,7 @@
 @interface LoginViewController()
 - (void)pressLoginButton:(id)sender;
 - (void)onReviceResponse:(NSURLConnection*)connection response:(NSURLResponse*)response;
-- (void)onSucceedLogin:(NSURLConnection*)connection aRegister:(DungaAsyncConnection*)aRegister;
+- (void)onSucceedLogin:(NSURLConnection*)connection aConnection:(DungaAsyncConnection*)aConnection;
 @end
 
 @implementation LoginViewController
@@ -101,7 +101,7 @@
 - (void)pressLoginButton:(id)sender{
   DungaAsyncConnection* hac = [[[DungaAsyncConnection alloc] init] autorelease];
   hac.responseSelector = @selector(onReviceResponse:response:);
-  hac.finishSelector = @selector(onSucceedLogin:aRegister:);
+  hac.finishSelector = @selector(onSucceedLogin:aConnection:);
   hac.delegate = self;
   [hac connectToDungaWithAuth:nil 
                        params:nil 
@@ -124,7 +124,7 @@
   }
 }
 
-- (void)onSucceedLogin:(NSURLConnection *)connection aRegister:(DungaAsyncConnection *)aRegister {
+- (void)onSucceedLogin:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
   NSString* alert;
   NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
   [ud setObject:usernameField_.text forKey:@"username"];

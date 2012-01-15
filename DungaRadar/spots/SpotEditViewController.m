@@ -6,18 +6,25 @@
 //  Copyright (c) 2011年 Kawaz. All rights reserved.
 //
 
+#import "CJSONDeserializer.h"
+
 #import "SpotEditViewController.h"
 #import "Me.h"
+#import "DungaAsyncConnection.h"
 
 @interface SpotEditViewController()
 - (void)pressSaveButton:(id)sender;
 - (void)pressCancelButton:(id)sender;
 - (void)changeDispNameField:(id)sender;
 - (void)changeInformSwitch:(id)sender;
+- (void)onRecivedResponse:(NSURLResponse*)res aConnection:(DungaAsyncConnection*)aConnection;
+- (void)onSucceedCreation:(NSURLConnection*)connection aConnection:(DungaAsyncConnection*)aConnection;
 @end
 
 @implementation SpotEditViewController
-@synthesize spot=spot_;
+@synthesize spot = spot_;
+
+const NSString* PATH_SPOT_CREATION = @"/api/location/venue/new";
 
 - (id)initWithStyle:(UITableViewStyle)style {
   self = [super initWithStyle:style];
@@ -168,17 +175,8 @@
 - (void)pressSaveButton:(id)sender {
   Me* me = [Me sharedMe];
   self.spot.location = me.location;
-  NSDictionary* result = [spot_ commit];
-  NSString* message = (NSString*)[result objectForKey:@"message"];
-  UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"スポットの追加" 
-                                                   message:message 
-                                                  delegate:self
-                                         cancelButtonTitle:@"OK"
-                                         otherButtonTitles:nil, 
-                        nil] 
-  autorelease];
-  alert.tag = [(NSNumber*)[result objectForKey:@"succeed"] intValue];
-  [alert show];
+  DungaAsyncConnection* connection = [DungaAsyncConnection connection];
+  connection.delegate = self;
 }
 
 - (void)pressCancelButton:(id)sender {
@@ -200,6 +198,27 @@
     [textField resignFirstResponder];
   }
   return YES;
+}
+
+- (void)onRecivedResponse:(NSURLResponse *)res aConnection:(DungaAsyncConnection *)aConnection {
+  NSHTTPURLResponse* urlRes = (NSHTTPURLResponse*)res;
+  if (urlRes.statusCode != 200) {
+  }
+}
+
+- (void)onSucceedCreation:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
+  NSError* err;
+  NSString* message = [[[CJSONDeserializer deserializer] deserializeAsArray:aConnection.data error:&err] objectAtIndex:0];
+  UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"スポットの追加" 
+                                                   message:message 
+                                                  delegate:self
+                                         cancelButtonTitle:@"OK"
+                                         otherButtonTitles:nil, 
+                         nil] 
+                        autorelease];
+  alert.tag = aConnection.urlRes.statusCode == 200;
+  [alert show];
+  
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {

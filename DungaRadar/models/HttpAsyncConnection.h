@@ -15,6 +15,7 @@
   SEL failSelector_;
   id delegate_;
   NSMutableData* data_;
+  NSHTTPURLResponse* urlRes_;
 }
 
 @property(readwrite) SEL responseSelector;
@@ -23,6 +24,8 @@
 @property(readwrite) SEL failSelector;
 @property(readwrite, assign) id delegate;
 @property(readonly, retain) NSMutableData* data;
+@property(readonly) NSString* responseBody;
+@property(readonly) NSHTTPURLResponse* urlRes;
 
 + (id)connection;
 
