@@ -83,7 +83,6 @@ const NSString* PATH_VENUE_LIST = @"/api/location/venue/list/%lf/%lf/%d";
   if (entries) {
     NSArray* spots = [NSArray arrayWithArray:entries];
     for(NSDictionary* spotData in spots) {
-      NSLog(@"%@", spotData);
       Spot* spot = [[[Spot alloc] initWithInfo:spotData] autorelease];
       [spots_ addObject:spot];
     }

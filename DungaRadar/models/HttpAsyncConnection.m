@@ -84,7 +84,6 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (self.finishSelector) {
-    NSLog(@"aaa: %@", [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease]);
     [self.delegate performSelector:self.finishSelector withObject:connection withObject:self];
   }	
 }

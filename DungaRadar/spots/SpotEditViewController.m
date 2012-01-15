@@ -210,7 +210,6 @@ const NSString* PATH_SPOT_CREATION = @"/api/location/venue/new";
 
 - (void)onSucceedCreation:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
   NSError* err;
-  NSLog(@"%@", aConnection.responseBody);
   NSString* message = [[[CJSONDeserializer deserializer] deserializeAsArray:aConnection.data error:&err] objectAtIndex:0];
   UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"スポットの追加" 
                                                    message:message

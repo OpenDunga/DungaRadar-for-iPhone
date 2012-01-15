@@ -7,7 +7,6 @@
 //
 
 #import "MapViewController.h"
-#import "HttpConnection.h"
 #import "Me.h"
 #import "MemberManager.h"
 

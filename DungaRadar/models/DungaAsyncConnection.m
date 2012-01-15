@@ -100,7 +100,6 @@ const NSString* PATH_LOGIN	  = @"/api/login";
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (state_ == DungaAsyncStateLogin) {
     state_ = DungaAsyncStateData;
-    NSLog(@"%@", self.url);
     if (self.url) {
       [self connectTo:self.url 
                params:self.parameters 
@@ -114,7 +113,7 @@ const NSString* PATH_LOGIN	  = @"/api/login";
     }
   } else {
     if (self.finishSelector) {
-      NSLog(@"aaa: %@", [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease]);
+      NSLog(@"%@", [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease]);
       [self.delegate performSelector:self.finishSelector withObject:connection withObject:self];
     }	
   }

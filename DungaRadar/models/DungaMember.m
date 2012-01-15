@@ -16,8 +16,7 @@ const NSString* PATH_MEMBER_PROFILE_ICON_LOCATION	= @"/api/profile/icon/";
 const NSString* PATH_MEMBER_LOCATION_HISTORY = @"/api/location/history/%d";
 
 @interface DungaMember()
-- (UIImage*)loadIconImage;
-- (void)onSucceedLoadHistory:(NSURLConnection*)connection aConnection:(DungaAsyncConnection*)aConnection;
+- (void)onSucceedLoadingImage:(NSURLConnection*)connection aConnection:(DungaAsyncConnection*)aConnection;
 @end
 
 @implementation DungaMember
@@ -118,29 +117,22 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   return self;
 }
 
-- (UIImage*)loadIconImage {
-  /*if([DungaRegister authWithStorage]){
-    NSData* icon = (NSData*)[[DungaRegister connectToDunga:[NSString stringWithFormat:@"%@%d", 
-                                                            (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
-                                                            primaryKey_] 
-                                                    params:nil 
-                                                    method:@"GET"] 
-                             objectForKey:@"data"];
-    UIImage* origin = [[[UIImage alloc] initWithData:icon] autorelease];
-    return [origin resize:CGSizeMake(32, 32) aspect:YES];
-  }*/
-  return nil;
-}
-
 - (UIImage*)iconImage {
   if(iconImage_ == nil) {
-    self.iconImage = [self loadIconImage];
+    DungaAsyncConnection* dac = [DungaAsyncConnection connection];
+    dac.delegate = self;
+    dac.finishSelector = @selector(onSucceedLoadingImage:aConnection:);
+    [dac connectToDungaWithAuth:[NSString stringWithFormat:@"%@%d", 
+                                 (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
+                                 primaryKey_]  
+                         params:nil 
+                         method:@"GET"];
   }
   return iconImage_;
 }
 
-- (void)onSucceedLoadHistory:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
-  
+- (void)onSucceedLoadingImage:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
+  self.iconImage = [[[UIImage alloc] initWithData:aConnection.data] autorelease];
 }
 
 - (CLLocationCoordinate2D)coordinate{
