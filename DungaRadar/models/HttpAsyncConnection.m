@@ -55,8 +55,12 @@
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+  NSHTTPURLResponse* urlRes = (NSHTTPURLResponse*)response;
   if (self.responseSelector) {
     [self.delegate performSelector:self.responseSelector withObject:response];
+  }
+  if (urlRes.statusCode != 200) {
+    [connection cancel];
   }
 }
 

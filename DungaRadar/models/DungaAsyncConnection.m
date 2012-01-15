@@ -21,22 +21,22 @@
 @synthesize method = method_;
 
 /** サーバースキーマ。 */
-const NSString*	SERVER_SCHEME	= @"http";
+const NSString*	SERVER_SCHEME2	= @"http";
 
 /** サーバーホスト。 */
-const NSString*	SERVER_HOST		= @"www.opendunga.net";
+const NSString*	SERVER_HOST2		= @"www.opendunga.net";
 
 /** HttpHeaderField **/
 /**
  http.useragentを利用すると、cocoaの罠にはまるので便宜的にnamaco.
  **/
-const NSString* HEADER_FIELD = @"namaco";
+const NSString* HEADER_FIELD2 = @"namaco";
 
 /** ユーザーエージェント。 */
-const NSString*	USER_AGENT		= @"DungaRadar/1.0";
+const NSString*	USER_AGENT2		= @"DungaRadar/1.0";
 
 /** ログイン用URIのパス。 */
-const NSString* PATH_LOGIN		= @"/api/login";
+const NSString* PATH_LOGIN2		= @"/api/login";
 
 - (id)init {
   self = [super init];
@@ -59,11 +59,23 @@ const NSString* PATH_LOGIN		= @"/api/login";
   NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
   NSString* userName = [ud objectForKey:@"username"];
   NSString* passwordHash = [[ud objectForKey:@"password"] toMD5];
+  return [self connectToDungaWithAuth:path 
+                               params:parameters 
+                               method:method 
+                             userName:userName 
+                         passwordHash:passwordHash];
+}
+
+- (BOOL)connectToDungaWithAuth:(NSString *)path 
+                        params:(NSDictionary *)parameters 
+                        method:(NSString *)method 
+                      userName:(NSString *)userName 
+                  passwordHash:(NSString *)passwordHash {
   self.url = [DungaAsyncConnection buildFullPath:path];
   self.parameters = parameters_;
   self.method = method;
-  NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[DungaAsyncConnection buildFullPath:(NSString*)PATH_LOGIN]];
-  [req addValue:(NSString*)USER_AGENT forHTTPHeaderField:@"http.useragent"];
+  NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[DungaAsyncConnection buildFullPath:(NSString*)PATH_LOGIN2]];
+  [req addValue:(NSString*)USER_AGENT2 forHTTPHeaderField:@"http.useragent"];
   NSString* agent = [req valueForHTTPHeaderField:@"http.useragent"];
   NSString* encrypted = [passwordHash toEncrypted:agent];
   NSDictionary* post = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -71,27 +83,33 @@ const NSString* PATH_LOGIN		= @"/api/login";
                         encrypted, @"enc_password", 
                         passwordHash, @"password", nil];
   state_ = DungaAsyncStateLogin;
-  return [self connectTo:[DungaAsyncConnection buildFullPath:(NSString*)PATH_LOGIN]
+  return [self connectTo:[DungaAsyncConnection buildFullPath:(NSString*)PATH_LOGIN2]
                   params:post
                   method:@"POST" 
-               userAgent:(NSString*)USER_AGENT
-              httpHeader:(NSString*)HEADER_FIELD];
+               userAgent:(NSString*)USER_AGENT2
+              httpHeader:(NSString*)HEADER_FIELD2];
 }
 
 + (NSURL*)buildFullPath:(NSString *)path {
-  return [HttpAsyncConnection buildURL:(NSString*)SERVER_SCHEME 
-                                  host:(NSString*)SERVER_HOST 
+  if(!path) return nil;
+  return [HttpAsyncConnection buildURL:(NSString*)SERVER_SCHEME2 
+                                  host:(NSString*)SERVER_HOST2
                                   path:path];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (state_ == DungaAsyncStateLogin) {
     state_ = DungaAsyncStateData;
-    [self connectTo:self.url 
-             params:self.parameters 
-             method:self.method 
-          userAgent:(NSString*)USER_AGENT 
-         httpHeader:(NSString*)HEADER_FIELD];
+    NSLog(@"%@", self.url);
+    if (self.url) {
+      [self connectTo:self.url 
+               params:self.parameters 
+               method:self.method 
+            userAgent:(NSString*)USER_AGENT2 
+           httpHeader:(NSString*)HEADER_FIELD2];
+    } else {
+      [self.delegate performSelector:self.finishSelector withObject:connection];
+    }
   } else {
     if (self.finishSelector) {
       [self.delegate performSelector:self.finishSelector withObject:connection];

@@ -7,11 +7,13 @@
 //
 
 #import "LoginViewController.h"
-#import "DungaRegister.h"
+#import "DungaAsyncConnection.h"
 #import "EncryptExtention.h"
 
 @interface LoginViewController()
 - (void)pressLoginButton:(id)sender;
+- (void)onReviceResponse:(NSURLResponse*)response;
+- (void)onSucceedLogin:(NSURLConnection*)connection;
 @end
 
 @implementation LoginViewController
@@ -97,21 +99,41 @@
 }
 
 - (void)pressLoginButton:(id)sender{
-  BOOL result = [DungaRegister auth:usernameField_.text passwordHash:[passwordField_.text toMD5]];
-  NSString* alert;
-  if(result){
-    NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-    [ud setObject:usernameField_.text forKey:@"username"];
-    [ud setObject:passwordField_.text forKey:@"password"];
-    alert = @"ログインに成功しました";
-    [self.navigationController popViewControllerAnimated:YES];
-  }else{
+  DungaAsyncConnection* hac = [[[DungaAsyncConnection alloc] init] autorelease];
+  hac.responseSelector = @selector(onReviceResponse:);
+  hac.finishSelector = @selector(onSucceedLogin:);
+  hac.delegate = self;
+  [hac connectToDungaWithAuth:nil 
+                       params:nil 
+                       method:@"GET" 
+                     userName:usernameField_.text 
+                 passwordHash:[passwordField_.text toMD5]];
+}
+
+- (void)onReviceResponse:(NSURLResponse *)res {
+  NSHTTPURLResponse* urlRes = (NSHTTPURLResponse*)res;
+  if (urlRes.statusCode != 200) {
+    NSString* alert;
     alert = @"なんか上手くいかなかったっぽいです･･････";
+    UIAlertView* resultAlert = [[[UIAlertView alloc] initWithTitle:@"DungaRadar" 
+                                                           message:alert delegate:nil 
+                                                 cancelButtonTitle:@"OK" 
+                                                 otherButtonTitles:nil, nil] autorelease];
+    [resultAlert show];
   }
+}
+
+- (void)onSucceedLogin:(NSURLConnection *)connection {  
+  NSString* alert;
+  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+  [ud setObject:usernameField_.text forKey:@"username"];
+  [ud setObject:passwordField_.text forKey:@"password"];
+  alert = @"ログインに成功しました";
+  [self.navigationController popViewControllerAnimated:YES];
   UIAlertView* resultAlert = [[[UIAlertView alloc] initWithTitle:@"DungaRadar" 
-                                                        message:alert delegate:nil 
-                                              cancelButtonTitle:@"OK" 
-                                              otherButtonTitles:nil, nil] autorelease];
+                                                         message:alert delegate:nil 
+                                               cancelButtonTitle:@"OK" 
+                                               otherButtonTitles:nil, nil] autorelease];
   [resultAlert show];
 }
 

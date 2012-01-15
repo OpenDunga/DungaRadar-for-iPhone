@@ -25,6 +25,12 @@ typedef enum {
                         params:(NSDictionary *)parameters 
                         method:(NSString *)method;
 
+- (BOOL)connectToDungaWithAuth:(NSString *)path
+                        params:(NSDictionary *)parameters 
+                        method:(NSString *)method 
+                      userName:(NSString*)userName 
+                  passwordHash:(NSString*)passwordHash;
+
 + (NSURL*)buildFullPath:(NSString*)path;
 
 @end
