@@ -77,6 +77,7 @@
       } else if (row == 1) {
         cell.textLabel.text = @"節電モード";
         UISwitch* sw = [[[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+        sw.on = [[NSUserDefaults standardUserDefaults] boolForKey:KEY_FOR_SAVEMODE];
         cell.accessoryView = sw;
         [sw addTarget:self 
                action:@selector(switchSaveMode:) 

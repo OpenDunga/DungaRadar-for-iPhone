@@ -12,9 +12,11 @@
 #import "Me.h"
 #import "define.h"
 
+@interface DungaRadarAppDelegate()
+- (int)calcActivateFrequency;
+@end
+
 @implementation DungaRadarAppDelegate
-
-
 @synthesize window=_window;
 
 @synthesize tabBarController=_tabBarController;
@@ -57,11 +59,29 @@
   [ud setDouble:newLocation.coordinate.latitude forKey:@"lastLatitude"];
   double last = [ud doubleForKey:@"lastUpdate"];
   double now = [[NSDate date] timeIntervalSince1970];
-  int frequency = [[NSUserDefaults standardUserDefaults] integerForKey:@"activateFrequency"];
+  int frequency = [self calcActivateFrequency];
   if(!last || last + frequency < now) {
     [me commit];
     [ud setDouble:now forKey:@"lastUpdate"];
   }
+}
+
+- (int)calcActivateFrequency {
+  int frequency = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_FREQUENCY];
+  BOOL saveMode = [[NSUserDefaults standardUserDefaults] boolForKey:KEY_FOR_SAVEMODE];
+  if(!saveMode) return frequency;
+  UIDevice* device = [UIDevice currentDevice];
+  device.batteryMonitoringEnabled = YES;
+  if (device.batteryState == UIDeviceBatteryStateCharging || 
+      device.batteryState == UIDeviceBatteryStateFull || 
+      device.batteryLevel == -1) {
+    return frequency;
+  } else if (0.2 < device.batteryLevel && device.batteryLevel < 0.5) {
+    return frequency * 2;
+  } else if (device.batteryLevel <= 0.2) {
+    return INT_MAX;
+  }
+  return frequency;
 }
 
 @end
