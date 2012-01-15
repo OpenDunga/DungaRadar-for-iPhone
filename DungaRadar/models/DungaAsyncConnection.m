@@ -46,6 +46,13 @@ const NSString* PATH_LOGIN		= @"/api/login";
   return self;
 }
 
+- (void)dealloc {
+  [self.url release];
+  [self.parameters release];
+  [self.method release];
+  [super dealloc];
+}
+
 - (BOOL)connectToDungaWithAuth:(NSString *)path 
                         params:(NSDictionary *)parameters 
                         method:(NSString *)method {
@@ -86,8 +93,8 @@ const NSString* PATH_LOGIN		= @"/api/login";
           userAgent:(NSString*)USER_AGENT 
          httpHeader:(NSString*)HEADER_FIELD];
   } else {
-    if (self.finish) {
-      [self.delegate performSelector:self.finish withObject:connection];
+    if (self.finishSelector) {
+      [self.delegate performSelector:self.finishSelector withObject:connection];
     }	
   }
 }

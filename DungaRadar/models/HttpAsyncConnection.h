@@ -9,18 +9,20 @@
 #import <Foundation/Foundation.h>
 
 @interface HttpAsyncConnection : NSObject {
-  SEL response_;
-  SEL data_;
-  SEL finish_;
-  SEL fail_;
+  SEL responseSelector_;
+  SEL dataSelector_;
+  SEL finishSelector_;
+  SEL failSelector_;
   id delegate_;
+  NSMutableData* data_;
 }
 
-@property(readwrite) SEL response;
-@property(readwrite) SEL data;
-@property(readwrite) SEL finish;
-@property(readwrite) SEL fail;
+@property(readwrite) SEL responseSelector;
+@property(readwrite) SEL dataSelector;
+@property(readwrite) SEL finishSelector;
+@property(readwrite) SEL failSelector;
 @property(readwrite, assign) id delegate;
+@property(readonly, retain) NSMutableData* data;
 
 + (id)connection;
 

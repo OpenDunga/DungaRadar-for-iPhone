@@ -10,11 +10,12 @@
 #import "DictionaryExtention.h"
 
 @implementation HttpAsyncConnection
-@synthesize response = response_;
-@synthesize data = data_;
-@synthesize finish = finish_;
-@synthesize fail = fail_;
+@synthesize responseSelector = responseSelector_;
+@synthesize dataSelector = dataSelector_;
+@synthesize finishSelector = finishSelector_;
+@synthesize failSelector = failSelector_;
 @synthesize delegate = delegate_;
+@synthesize data = data_;
 
 + (id)connection {
   return [[[HttpAsyncConnection alloc] init] autorelease];
@@ -23,12 +24,18 @@
 - (id)init {
   self = [super init];
   if (self) {
-    response_ = nil;
-    data_ = nil;
-    finish_ = nil;
-    fail_ = nil;    
+    responseSelector_ = nil;
+    dataSelector_ = nil;
+    finishSelector_ = nil;
+    failSelector_ = nil;
+    data_ = [[NSMutableData alloc] initWithData:0];
   }
   return self;
+}
+
+- (void)dealloc {
+  [data_ release];
+  [super dealloc];
 }
 
 - (BOOL)connectTo:(NSURL *)url 
@@ -47,27 +54,28 @@
   return connection != nil;
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response{
-  if (self.response) {
-    [self.delegate performSelector:self.response withObject:response];
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+  if (self.responseSelector) {
+    [self.delegate performSelector:self.responseSelector withObject:response];
   }
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
-  if (self.data) {
-    [self.delegate performSelector:self.data withObject:data];
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
+  [data_ appendData:data];
+  if (self.dataSelector) {
+    [self.delegate performSelector:self.dataSelector withObject:data];
   }	
 }
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-  if (self.fail) {
-    [self.delegate performSelector:self.fail withObject:error];
+  if (self.failSelector) {
+    [self.delegate performSelector:self.failSelector withObject:error];
   }
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-  if (self.finish) {
-    [self.delegate performSelector:self.finish withObject:connection];
+  if (self.finishSelector) {
+    [self.delegate performSelector:self.finishSelector withObject:connection];
   }	
 }
 
