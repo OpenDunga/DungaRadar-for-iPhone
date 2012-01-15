@@ -50,6 +50,7 @@ const NSString* PATH_VENUE_LIST = @"/api/location/venue/list/%lf/%lf/%d";
   [super viewDidLoad];
   tableView_.delegate = self;
   tableView_.dataSource = self;
+  self.spots = [NSArray array];
   [self reloadSpotList];
 }
 
@@ -78,11 +79,12 @@ const NSString* PATH_VENUE_LIST = @"/api/location/venue/list/%lf/%lf/%d";
   NSString* json = aConnection.responseBody;
   NSError* err;
   NSArray* entries = (NSArray*)[[NSDictionary dictionaryWithJSONString:json error:&err] objectForKey:@"entries"];
-  
+  self.spots = [NSMutableArray array];
   if (entries) {
-    self.spots = [NSMutableArray arrayWithArray:entries];
-    for(NSDictionary* spotData in self.spots) {
-      Spot* spot = [[Spot alloc] initWithInfo:spotData];
+    NSArray* spots = [NSArray arrayWithArray:entries];
+    for(NSDictionary* spotData in spots) {
+      NSLog(@"%@", spotData);
+      Spot* spot = [[[Spot alloc] initWithInfo:spotData] autorelease];
       [spots_ addObject:spot];
     }
   }

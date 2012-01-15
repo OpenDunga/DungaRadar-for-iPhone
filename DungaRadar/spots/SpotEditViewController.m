@@ -177,6 +177,8 @@ const NSString* PATH_SPOT_CREATION = @"/api/location/venue/new";
   self.spot.location = me.location;
   DungaAsyncConnection* connection = [DungaAsyncConnection connection];
   connection.delegate = self;
+  connection.finishSelector = @selector(onSucceedCreation:aConnection:);
+  [connection connectToDungaWithAuth:(NSString*)PATH_SPOT_CREATION params:[spot_ dump] method:@"POST"];
 }
 
 - (void)pressCancelButton:(id)sender {
@@ -208,9 +210,10 @@ const NSString* PATH_SPOT_CREATION = @"/api/location/venue/new";
 
 - (void)onSucceedCreation:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
   NSError* err;
+  NSLog(@"%@", aConnection.responseBody);
   NSString* message = [[[CJSONDeserializer deserializer] deserializeAsArray:aConnection.data error:&err] objectAtIndex:0];
   UIAlertView* alert = [[[UIAlertView alloc] initWithTitle:@"スポットの追加" 
-                                                   message:message 
+                                                   message:message
                                                   delegate:self
                                          cancelButtonTitle:@"OK"
                                          otherButtonTitles:nil, 

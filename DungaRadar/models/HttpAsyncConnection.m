@@ -90,7 +90,6 @@
 }
 
 - (NSString*)responseBody {
-  NSLog(@"%@", self.data);
   return [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease];
 }
 

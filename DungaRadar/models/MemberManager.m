@@ -40,6 +40,7 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
   NSArray* cache = [ud objectForKey:@"members"];
   if([self.members count] == 0 && cache && [cache count] != 0) {
     self.members = [self membersFromStorage];
+    self.members = [self.members sortedArrayUsingSelector:@selector(sortByTimestamp:)];
   }else {
     DungaAsyncConnection* dac = [DungaAsyncConnection connection];
     dac.delegate = self;
@@ -48,8 +49,6 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
                          params:nil 
                          method:@"GET"];
   }
-     
-  self.members = [self.members sortedArrayUsingSelector:@selector(sortByTimestamp:)];
 }
 
 - (NSMutableArray*)membersFromInfo:(NSArray *)userInfos {
@@ -73,9 +72,6 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
 
 - (void)onSucceedLoadingMembers:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
   NSError* err;
-  NSLog(@"%@", connection);
-  
-  NSLog(@"%@", aConnection);
   NSDictionary* res = [NSDictionary dictionaryWithJSONString:aConnection.responseBody
                                                        error:&err];
   NSArray* memberInfos = (NSArray*)[res objectForKey:@"entries"];

@@ -107,6 +107,8 @@ const NSString* PATH_LOGIN	  = @"/api/login";
                method:self.method 
             userAgent:(NSString*)USER_AGENT
            httpHeader:(NSString*)HEADER_FIELD];
+      [data_ release];
+      data_ = [[NSMutableData alloc] initWithData:0];
     } else {
       [self.delegate performSelector:self.finishSelector withObject:connection withObject:self];
     }
