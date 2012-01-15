@@ -12,6 +12,7 @@
 
 @interface ConfigurationViewController()
 - (void)switchSaveMode:(id)sender;
+- (NSString*)labelFromFrequency:(int)second;
 @end
 
 @implementation ConfigurationViewController
@@ -29,8 +30,15 @@
   tvc.tableView.dataSource = self;
   tvc.tableView.delegate = self;
   tvc.title = @"設定";
+  frequencies_ = [[NSArray alloc] initWithObjects:@"1分", @"5分", @"10分", 
+                          @"15分", @"30分", @"1時間", 
+                          @"3時間", @"6時間", @"12時間", @"24時間", nil];
   [self pushViewController:tvc animated:NO];
-  
+}
+
+- (void)dealloc {
+  [frequencies_ release];
+  [super dealloc];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
@@ -68,12 +76,6 @@
       if (row == 0) {
         cell.textLabel.text = @"送信頻度";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        int frequency = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_FREQUENCY];
-        if (frequency < 60 * 60) { 
-          cell.detailTextLabel.text = [NSString stringWithFormat:@"%d分", frequency/60];
-        } else {
-          cell.detailTextLabel.text = [NSString stringWithFormat:@"%d時間", frequency/3600];
-        }
       } else if (row == 1) {
         cell.textLabel.text = @"節電モード";
         UISwitch* sw = [[[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
@@ -87,6 +89,10 @@
     } else if (section == 2) {
     }
     
+  }
+  if (section == 1 && row == 0) {
+    int frequency = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_FREQUENCY];
+    cell.detailTextLabel.text = [self labelFromFrequency:frequency];
   }
   return cell;
 }
@@ -105,6 +111,9 @@
       picker.delegate = self;
       picker.dataSource = self;
       picker.showsSelectionIndicator = YES;
+      int frequency = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_FREQUENCY];
+      [picker selectRow:[frequencies_ indexOfObject:[self labelFromFrequency:frequency]]
+            inComponent:0 animated:NO];
       [vc.view addSubview:picker];
       [self pushViewController:vc animated:YES];
     }
@@ -121,14 +130,11 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-  return 10;
+  return [frequencies_ count];
 }
 
 - (NSString*)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-  NSString* string[] = {@"1分", @"5分", @"10分", 
-    @"15分", @"30分", @"1時間", 
-    @"3時間", @"6時間", @"12時間", @"24時間"};
-  return string[row];
+  return [frequencies_ objectAtIndex:row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
@@ -142,13 +148,11 @@
       NSString* hour = [label stringByReplacingOccurrencesOfString:@"分" withString:@""];
       minute = [hour intValue] * 60;
     }
+    UITableViewController* tvc = (UITableViewController*)[self.viewControllers objectAtIndex:0];
+    UITableViewCell* cell = [self tableView:tvc.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
+    cell.detailTextLabel.text = label;
     NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
     [ud setInteger:minute * 60 forKey:KEY_FOR_FREQUENCY];
-    UITableViewController* tvc = (UITableViewController*)[self.viewControllers objectAtIndex:0];
-    NSLog(@"%@", tvc);
-    UITableViewCell* cell = [self tableView:tvc.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
-    NSLog(@"%@", cell);
-    cell.detailTextLabel.text = label;
     [tvc.tableView reloadData];
   }
 }
@@ -161,6 +165,13 @@
   } else {
     [ud setBool:NO forKey:KEY_FOR_SAVEMODE];
   }
+}
+
+- (NSString*)labelFromFrequency:(int)second {
+  if (second < 60 * 60) { 
+    return [NSString stringWithFormat:@"%d分", second / 60];
+  }
+  return [NSString stringWithFormat:@"%d時間", second / 3600];
 }
 
 @end
