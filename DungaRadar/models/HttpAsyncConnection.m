@@ -18,7 +18,7 @@
 @synthesize data = data_;
 
 + (id)connection {
-  return [[[HttpAsyncConnection alloc] init] autorelease];
+  return [[[[self class] alloc] init] autorelease];
 }
 
 - (id)init {
@@ -79,6 +79,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (self.finishSelector) {
+    NSLog(@"aaa: %@", [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease]);
     [self.delegate performSelector:self.finishSelector withObject:connection];
   }	
 }

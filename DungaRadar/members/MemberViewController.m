@@ -65,6 +65,7 @@
 - (void)pressReloadButton:(id)sender {
   [[MemberManager instance] updateMembers];
   UITableViewController* tvc = (UITableViewController*)self.visibleViewController;
+  [[Me sharedMe] commit];
   [tvc.tableView reloadData];
 }
 

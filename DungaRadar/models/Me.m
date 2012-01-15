@@ -7,9 +7,13 @@
 //
 
 #import "Me.h"
-#import "DungaRegister.h"
+#import "DungaAsyncConnection.h"
 
 const NSString* PATH_REGISTER_MEMBER_LOCATION = @"/api/location/register";
+
+@interface Me()
+- (void)onSucceedCommit:(NSURLConnection*)connection;
+@end
 
 @implementation Me
 
@@ -60,19 +64,29 @@ static BOOL _willDelete = NO;
 - (id)autorelease { return self; }
 
 - (BOOL)commit {
-  if([DungaRegister authWithStorage]){
-    float lng = self.location.coordinate.longitude;
-    float lat = self.location.coordinate.latitude;
-    NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
-                            [NSString stringWithFormat:@"%f", lng], 
-                            @"longitude", 
-                            [NSString stringWithFormat:@"%f", lat],
-                            @"latitude",
-                            nil];
-    [DungaRegister post:(NSString*)PATH_REGISTER_MEMBER_LOCATION params:params];
-    return YES;
-  }
-  return NO;
+  float lng = self.location.coordinate.longitude;
+  float lat = self.location.coordinate.latitude;
+  NSDictionary* params = [NSDictionary dictionaryWithObjectsAndKeys:
+                          [NSString stringWithFormat:@"%f", lng], 
+                          @"longitude", 
+                          [NSString stringWithFormat:@"%f", lat],
+                          @"latitude",
+                          nil];
+  DungaAsyncConnection* dac = [DungaAsyncConnection connection];
+  dac.finishSelector = @selector(onSucceedCommit:);
+  dac.responseSelector = @selector(onResponse:);
+  dac.delegate = self;
+  return [dac connectToDungaWithAuth:(NSString*)PATH_REGISTER_MEMBER_LOCATION 
+                              params:params 
+                              method:@"POST"];
+}
+
+- (void)onResponse:(NSURLResponse*)res {
+  NSLog(@"%d", ((NSHTTPURLResponse*)res).statusCode);
+}
+
+- (void)onSucceedCommit:(NSURLConnection *)connection {
+  NSLog(@"おくりました");
 }
 
 @end

@@ -72,7 +72,7 @@ const NSString* PATH_LOGIN2		= @"/api/login";
                       userName:(NSString *)userName 
                   passwordHash:(NSString *)passwordHash {
   self.url = [DungaAsyncConnection buildFullPath:path];
-  self.parameters = parameters_;
+  self.parameters = parameters;
   self.method = method;
   NSMutableURLRequest* req = [NSMutableURLRequest requestWithURL:[DungaAsyncConnection buildFullPath:(NSString*)PATH_LOGIN2]];
   [req addValue:(NSString*)USER_AGENT2 forHTTPHeaderField:@"http.useragent"];
@@ -112,6 +112,7 @@ const NSString* PATH_LOGIN2		= @"/api/login";
     }
   } else {
     if (self.finishSelector) {
+      NSLog(@"aaa: %@", [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease]);
       [self.delegate performSelector:self.finishSelector withObject:connection];
     }	
   }
