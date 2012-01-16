@@ -53,6 +53,10 @@
 		07D92E691494A869000ACA48 /* Spot.m in Sources */ = {isa = PBXBuildFile; fileRef = 07D92E681494A869000ACA48 /* Spot.m */; };
 		07D92E731494B7D9000ACA48 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E721494B7D9000ACA48 /* Icon@2x.png */; };
 		07D92E751494B7E0000ACA48 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 07D92E741494B7E0000ACA48 /* Icon.png */; };
+		07F20B6814C3EAF6003D6237 /* configuration.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F20B6414C3EAF6003D6237 /* configuration.png */; };
+		07F20B6914C3EAF6003D6237 /* member.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F20B6514C3EAF6003D6237 /* member.png */; };
+		07F20B6A14C3EAF6003D6237 /* radar.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F20B6614C3EAF6003D6237 /* radar.png */; };
+		07F20B6B14C3EAF6003D6237 /* spot.png in Resources */ = {isa = PBXBuildFile; fileRef = 07F20B6714C3EAF6003D6237 /* spot.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +143,10 @@
 		07D92E681494A869000ACA48 /* Spot.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Spot.m; path = models/Spot.m; sourceTree = "<group>"; };
 		07D92E721494B7D9000ACA48 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		07D92E741494B7E0000ACA48 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		07F20B6414C3EAF6003D6237 /* configuration.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = configuration.png; path = resources/configuration.png; sourceTree = "<group>"; };
+		07F20B6514C3EAF6003D6237 /* member.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = member.png; path = resources/member.png; sourceTree = "<group>"; };
+		07F20B6614C3EAF6003D6237 /* radar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = radar.png; path = resources/radar.png; sourceTree = "<group>"; };
+		07F20B6714C3EAF6003D6237 /* spot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = spot.png; path = resources/spot.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -378,6 +386,10 @@
 		07D92E6614949962000ACA48 /* resources */ = {
 			isa = PBXGroup;
 			children = (
+				07F20B6414C3EAF6003D6237 /* configuration.png */,
+				07F20B6514C3EAF6003D6237 /* member.png */,
+				07F20B6614C3EAF6003D6237 /* radar.png */,
+				07F20B6714C3EAF6003D6237 /* spot.png */,
 				07A4AFF31495582800B69C5E /* scopes.plist */,
 			);
 			name = resources;
@@ -442,6 +454,10 @@
 				07D92E731494B7D9000ACA48 /* Icon@2x.png in Resources */,
 				07D92E751494B7E0000ACA48 /* Icon.png in Resources */,
 				07A4AFF41495582800B69C5E /* scopes.plist in Resources */,
+				07F20B6814C3EAF6003D6237 /* configuration.png in Resources */,
+				07F20B6914C3EAF6003D6237 /* member.png in Resources */,
+				07F20B6A14C3EAF6003D6237 /* radar.png in Resources */,
+				07F20B6B14C3EAF6003D6237 /* spot.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
