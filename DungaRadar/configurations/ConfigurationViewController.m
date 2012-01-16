@@ -71,13 +71,11 @@
   int row = indexPath.row;
   NSString *CellIdentifier = [NSString stringWithFormat:@"Cell_%d_%d", section, row];
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+  Me* me = [Me sharedMe];
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
     if (section == 0) {
-      Me* me = [Me sharedMe];
       cell.textLabel.text = @"ログイン設定";
-      cell.detailTextLabel.text = me.dispName;
-      cell.imageView.image = me.iconImage;
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (section == 1) {
       if (row == 0) {
@@ -121,9 +119,11 @@
         cell.textLabel.text = @"アイコンを再取得";
       }
     }
-    
   }
-  if (section == 1 && row == 2) {
+  if (section == 0 && row == 0) {
+    cell.detailTextLabel.text = me.dispName;
+    cell.imageView.image = me.iconImage;
+  } else if (section == 1 && row == 2) {
     int frequency = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_FREQUENCY];
     cell.detailTextLabel.text = [self labelFromFrequency:frequency];
   }

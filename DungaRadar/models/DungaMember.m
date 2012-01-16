@@ -10,6 +10,7 @@
 #import "UIImageExtention.h"
 #import "DungaAsyncConnection.h"
 #import "DungaMember.h"
+#import "MemberManager.h"
 
 const NSString* PATH_MEMBER_PROFILE_ICON_LOCATION	= @"/api/profile/icon/";
 

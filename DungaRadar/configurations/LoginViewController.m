@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "DungaAsyncConnection.h"
 #import "EncryptExtention.h"
+#import "MemberManager.h"
 
 @interface LoginViewController()
 - (void)pressLoginButton:(id)sender;
@@ -136,6 +137,7 @@
                                                cancelButtonTitle:@"OK" 
                                                otherButtonTitles:nil, nil] autorelease];
   [resultAlert show];
+  [[MemberManager instance] updateMembers];
 }
 
 @end
