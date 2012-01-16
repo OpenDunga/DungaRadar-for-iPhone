@@ -78,8 +78,14 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
   NSDictionary* res = [NSDictionary dictionaryWithJSONString:aConnection.responseBody
                                                        error:&err];
   NSArray* memberInfos = (NSArray*)[res objectForKey:@"entries"];
-  self.members = [self membersFromInfo:memberInfos];
-  self.members = [self.members sortedArrayUsingSelector:@selector(sortByTimestamp:)];
+  NSArray* newMembers = [self membersFromInfo:memberInfos];
+  for(DungaMember* newMember in newMembers) {
+    if([self.members containsObject:newMember]) {
+      DungaMember* oldMember = [self.members objectAtIndex:[self.members indexOfObject:newMember]];
+      newMember.iconImage = oldMember.iconImage;
+    }
+  }
+  self.members = [newMembers sortedArrayUsingSelector:@selector(sortByTimestamp:)];
   NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
   NSMutableArray* saveMembers = [NSMutableArray array];
   for (DungaMember* member in self.members) {

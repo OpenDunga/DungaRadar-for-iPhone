@@ -14,7 +14,6 @@
 const NSString* PATH_MEMBER_PROFILE_ICON_LOCATION	= @"/api/profile/icon/";
 
 @interface DungaMember()
-- (UIImage*)loadImageFromStorage;
 - (void)onSucceedLoadingImage:(NSURLConnection*)connection aConnection:(DungaAsyncConnection*)aConnection;
 @end
 
@@ -111,6 +110,7 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_, history = histor
 }
 
 - (void)startLoadingIcon {
+  if(!self.primaryKey) return;
   DungaAsyncConnection* dac = [DungaAsyncConnection connection];
   dac.delegate = self;
   dac.finishSelector = @selector(onSucceedLoadingImage:aConnection:);
@@ -123,36 +123,14 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_, history = histor
 
 - (UIImage*)iconImage {
   if(iconImage_ == nil) {
-    UIImage* storage = [self loadImageFromStorage];
-    if (storage) {
-      iconImage_ = [storage retain];
-    } else if (self.primaryKey) {
-      [self startLoadingIcon];
-    }
+    [self startLoadingIcon];
   }
   return iconImage_;
 }
 
-- (UIImage*)loadImageFromStorage {
-  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-  NSMutableDictionary* imageIcons = [ud objectForKey:@"imageIcons"];
-  NSData* imageData = [imageIcons objectForKey:[NSString stringWithFormat:@"%d", self.primaryKey]];
-  if (imageData) {
-    return [[[UIImage alloc] initWithData:imageData] autorelease];
-  }
-  return nil;
-}
-
 - (void)onSucceedLoadingImage:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
-  self.iconImage = [[[UIImage alloc] initWithData:aConnection.data] autorelease];
-  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-  NSMutableDictionary* imageIcons = [NSMutableDictionary dictionaryWithDictionary:[ud objectForKey:@"imageIcons"]];
-  if (!imageIcons) {
-    imageIcons = [NSMutableDictionary dictionary];
-  }
-  NSData* imageData = UIImagePNGRepresentation(self.iconImage);
-  [imageIcons setObject:imageData forKey:[NSString stringWithFormat:@"%d", self.primaryKey]];
-  [ud setObject:imageIcons forKey:@"imageIcons"];
+  UIImage* newIcon = [[[UIImage alloc] initWithData:aConnection.data] autorelease];
+  self.iconImage = newIcon;
 }
 
 - (CLLocationCoordinate2D)coordinate{

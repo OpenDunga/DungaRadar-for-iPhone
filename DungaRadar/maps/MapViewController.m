@@ -32,8 +32,11 @@
 - (void)viewDidLoad{
   [super viewDidLoad];
   MemberManager* manager = [MemberManager instance];
+  Me* me = [Me sharedMe];
   for(DungaMember* member in manager.members) {
-    [mapView_ addAnnotation:member];
+    if (me.primaryKey != member.primaryKey) {
+      [mapView_ addAnnotation:member];
+    }
   }
 }
 
