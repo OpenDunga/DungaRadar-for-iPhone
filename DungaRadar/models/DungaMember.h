@@ -16,6 +16,7 @@
   NSDate* timestamp_;
   UIImage* iconImage_;
   CLLocation* location_;
+  NSArray* history_;
 }
 
 - (id)initWithUserData:(NSDictionary*)userData;
@@ -28,5 +29,6 @@
 @property(readwrite, retain) UIImage* iconImage;
 @property(readwrite, retain) CLLocation* location;
 @property(readwrite, retain) NSDate* timestamp;
+@property(readwrite, retain) NSArray* history;
 
 @end

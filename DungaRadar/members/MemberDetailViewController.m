@@ -6,10 +6,19 @@
 //  Copyright (c) 2011年 Kawaz. All rights reserved.
 //
 
+#import "NSDictionary_JSONExtensions.h"
+
 #import "MemberDetailViewController.h"
+#import "DungaAsyncConnection.h"
+
+@interface MemberDetailViewController()
+- (void)onSucceedLoadingMemberHistroy:(NSURLConnection*)connection aConnection:(DungaAsyncConnection*)aConnection;
+@end
 
 @implementation MemberDetailViewController
 @synthesize mapView=mapView_, member=member_;
+
+const NSString* PATH_MEMBER_LOCATION_HISTORY = @"/api/location/history/%d";
 
 - (id)initWithMember:(DungaMember *)member {
   self = [super init];
@@ -41,17 +50,35 @@
 
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
-  NSArray* histories = [self.member historySinceDate:[NSDate dateWithTimeIntervalSinceNow:-1 * 60 * 60 * 24]];
-  CLLocationCoordinate2D coordinates[[histories count]];
-  int i = 0;
-  for(NSDictionary* history in histories) {
-    double lat = [[history objectForKey:@"latitude"] doubleValue];
-    double lng = [[history objectForKey:@"longitude"] doubleValue];
-    coordinates[i] = CLLocationCoordinate2DMake(lat, lng);
-    ++i;
+  [self startLoadingHistory];
+}
+
+- (void)startLoadingHistory {
+  DungaAsyncConnection* dac = [DungaAsyncConnection connection];
+  dac.delegate = self;
+  dac.finishSelector = @selector(onSucceedLoadingMemberHistroy:aConnection:);
+  [dac connectToDungaWithAuth:[NSString stringWithFormat:(NSString*)PATH_MEMBER_LOCATION_HISTORY, self.member.primaryKey] 
+                       params:nil 
+                       method:@"GET"];
+}
+
+- (void)onSucceedLoadingMemberHistroy:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
+  NSError* err;
+  NSArray* histories = (NSArray*)[[NSDictionary dictionaryWithJSONString:aConnection.responseBody error:&err] objectForKey:@"entries"];
+  if (histories) {
+    self.member.history = histories;
+    histories = [self.member historySinceDate:[NSDate dateWithTimeIntervalSinceNow:60* 60 * 24 * -3]];
+    CLLocationCoordinate2D coordinates[[histories count]];
+    int i = 0;
+    for(NSDictionary* history in histories) {
+      double lat = [[history objectForKey:@"latitude"] doubleValue];
+      double lng = [[history objectForKey:@"longitude"] doubleValue];
+      coordinates[i] = CLLocationCoordinate2DMake(lat, lng);
+      ++i;
+    }
+    MKPolyline* line = [MKPolyline polylineWithCoordinates:coordinates count:[histories count]];
+    [mapView_ addOverlay:line];
   }
-  MKPolyline* line = [MKPolyline polylineWithCoordinates:coordinates count:[histories count]];
-  [mapView_ addOverlay:line];
 }
 
 - (MKOverlayView*)mapView:(MKMapView *)mapView viewForOverlay:(id<MKOverlay>)overlay {

@@ -16,6 +16,7 @@
 }
 
 - (id)initWithMember:(DungaMember*)member;
+- (void)startLoadingHistory;
 
 @property(readwrite, retain) MKMapView* mapView;
 @property(readwrite, retain) DungaMember* member;

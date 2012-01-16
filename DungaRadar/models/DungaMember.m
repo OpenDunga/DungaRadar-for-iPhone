@@ -6,14 +6,12 @@
 //  Copyright 2011 Kawaz. All rights reserved.
 //
 
-#import "NSDictionary_JSONExtensions.h"
 #import "RelativeDate.h"
 #import "UIImageExtention.h"
 #import "DungaAsyncConnection.h"
 #import "DungaMember.h"
 
 const NSString* PATH_MEMBER_PROFILE_ICON_LOCATION	= @"/api/profile/icon/";
-const NSString* PATH_MEMBER_LOCATION_HISTORY = @"/api/location/history/%d";
 
 @interface DungaMember()
 - (UIImage*)loadImageFromStorage;
@@ -22,7 +20,7 @@ const NSString* PATH_MEMBER_LOCATION_HISTORY = @"/api/location/history/%d";
 
 @implementation DungaMember
 @synthesize primaryKey=primaryKey_, dispName=dispName_, 
-timestamp=timestamp_, iconImage=iconImage_, location=location_;
+timestamp=timestamp_, iconImage=iconImage_, location=location_, history = history_;
 
 - (id)init {
   self = [super init];
@@ -51,51 +49,6 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   return self;
 }
 
-- (void)dealloc {
-  [dispName_ release];
-  [timestamp_ release];
-  [iconImage_ release];
-  [location_ release];
-  [super dealloc];
-}
-
-- (NSString*)descriptionDetailFromMember:(DungaMember*)member {
-  NSString* date = [NSString stringWithFormat:@"%@ ago", [self.timestamp relativeDate]];
-  CLLocationDistance distance = [self.location distanceFromLocation:member.location];
-  if ((float)distance < 1000) {
-    return [NSString stringWithFormat:@"%@ %.1f m", date, distance];
-  }
-  return [NSString stringWithFormat:@"%@ %.3f km", date, distance / 1000];
-}
-
-- (NSComparisonResult)sortByTimestamp:(DungaMember*)otherMember {
-  NSComparisonResult result = [self.timestamp compare:otherMember.timestamp];
-  if(result == NSOrderedAscending) {
-    return NSOrderedDescending;
-  }else {
-    return NSOrderedAscending;
-  }
-  return result;
-}
-
-- (NSArray*)historySinceDate:(NSDate *)date {
-  /*if([DungaRegister authWithStorage]){
-    NSString* json = [DungaRegister get:[NSString stringWithFormat:(NSString*)PATH_MEMBER_LOCATION_HISTORY, primaryKey_] 
-                                 params:nil];
-    NSError* err;
-    NSArray* histories = (NSArray*)[[NSDictionary dictionaryWithJSONString:json error:&err] objectForKey:@"entries"];
-    double since = [date timeIntervalSince1970];
-    NSMutableArray* results = [NSMutableArray array];
-    for(NSDictionary* history in histories) {
-      double epoch = [(NSNumber*)[history objectForKey:@"registeredTime"] doubleValue] / 1000;
-      if(epoch < since) break;
-      [results addObject:history];
-    }
-    return results;
-  }*/
-  return [NSArray array];
-}
-
 - (void)encodeWithCoder:(NSCoder *)aCoder {
   [aCoder encodeObject:[NSNumber numberWithInt:primaryKey_] forKey:@"primaryKey"];
   [aCoder encodeObject:dispName_ forKey:@"dispName"];
@@ -115,6 +68,46 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
     self.location = [aDecoder decodeObjectForKey:@"location"];
   }
   return self;
+}
+
+- (void)dealloc {
+  [dispName_ release];
+  [timestamp_ release];
+  [iconImage_ release];
+  [location_ release];
+  [history_ release];
+  [super dealloc];
+}
+
+- (NSComparisonResult)sortByTimestamp:(DungaMember*)otherMember {
+  NSComparisonResult result = [self.timestamp compare:otherMember.timestamp];
+  if(result == NSOrderedAscending) {
+    return NSOrderedDescending;
+  }else {
+    return NSOrderedAscending;
+  }
+  return result;
+}
+
+- (NSString*)descriptionDetailFromMember:(DungaMember*)member {
+  NSString* date = [NSString stringWithFormat:@"%@ ago", [self.timestamp relativeDate]];
+  CLLocationDistance distance = [self.location distanceFromLocation:member.location];
+  if ((float)distance < 1000) {
+    return [NSString stringWithFormat:@"%@ %.1f m", date, distance];
+  }
+  return [NSString stringWithFormat:@"%@ %.3f km", date, distance / 1000];
+}
+
+- (NSArray*)historySinceDate:(NSDate *)date {
+  if (!history_) return [NSArray array];
+  double since = [date timeIntervalSince1970];
+  NSMutableArray* results = [NSMutableArray array];
+  for(NSDictionary* history in history_) {
+    double epoch = [(NSNumber*)[history objectForKey:@"registeredTime"] doubleValue] / 1000;
+    if(epoch < since) break;
+    [results addObject:history];
+  }
+  return results;
 }
 
 - (UIImage*)iconImage {
