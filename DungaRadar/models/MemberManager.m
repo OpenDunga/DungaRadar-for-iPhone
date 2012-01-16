@@ -52,15 +52,10 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
 }
 
 - (NSMutableArray*)membersFromInfo:(NSArray *)userInfos {
-  Me* me = [Me sharedMe];
   NSMutableArray* members = [NSMutableArray array];
   for(NSDictionary* userInfo in userInfos){
-    if ([me.dispName isEqual:[userInfo objectForKey:@"dispName"]]){
-      [members addObject:me];
-    } else {
-      DungaMember* member = [[[DungaMember alloc] initWithUserData:userInfo] autorelease];
-      [members addObject:member];
-    }
+    DungaMember* member = [[[DungaMember alloc] initWithUserData:userInfo] autorelease];
+    [members addObject:member];
   }
   return members;
 }

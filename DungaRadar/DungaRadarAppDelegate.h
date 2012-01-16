@@ -9,9 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MKMapView.h>
 
-@interface DungaRadarAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, CLLocationManagerDelegate> {
-  CLLocationManager* locationManager_;
-}
+@interface DungaRadarAppDelegate : NSObject <UIApplicationDelegate, UITabBarControllerDelegate>
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 

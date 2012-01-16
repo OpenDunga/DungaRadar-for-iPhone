@@ -5,9 +5,9 @@
 //  Created by  on 1/15/12.
 //  Copyright (c) 2012 Kawaz. All rights reserved.
 //
-
 #import "DungaAsyncConnection.h"
 #import "EncryptExtention.h"
+#import "Me.h"
 
 @interface DungaAsyncConnection()
 @property(readwrite, retain) NSURL* url;
@@ -107,6 +107,8 @@ const NSString* PATH_LOGIN	  = @"/api/login";
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (state_ == DungaAsyncStateLogin) {
     state_ = DungaAsyncStateData;
+    Me* me = [Me sharedMe];
+    [me updateFromJSON:self.responseBody];
     if (self.url) {
       [self connectTo:self.url 
                params:self.parameters 

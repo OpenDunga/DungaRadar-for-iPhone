@@ -12,13 +12,13 @@
 		</object>
 		<object class="NSArray" key="IBDocument.IntegratedClassDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<string>IBProxyObject</string>
-			<string>IBUITabBarItem</string>
 			<string>IBUIViewController</string>
+			<string>IBUITabBar</string>
+			<string>IBProxyObject</string>
+			<string>IBUIWindow</string>
 			<string>IBUICustomObject</string>
 			<string>IBUITabBarController</string>
-			<string>IBUIWindow</string>
-			<string>IBUITabBar</string>
+			<string>IBUITabBarItem</string>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -133,7 +133,6 @@
 					<int key="NSvFlags">266</int>
 					<string key="NSFrame">{{0, 431}, {320, 49}}</string>
 					<reference key="NSSuperview"/>
-					<reference key="NSNextKeyView"/>
 					<object class="NSColor" key="IBUIBackgroundColor">
 						<int key="NSColorSpace">3</int>
 						<bytes key="NSWhite">MCAwAA</bytes>

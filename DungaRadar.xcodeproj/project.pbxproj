@@ -346,6 +346,7 @@
 		079C6B091392040200528E69 /* DungaRadar */ = {
 			isa = PBXGroup;
 			children = (
+				0770DD5A14C29B9F00008CA3 /* define.h */,
 				073D6D901498748400F9A486 /* members */,
 				07D92E6614949962000ACA48 /* resources */,
 				078F5961147CCFDE00C2A958 /* libs */,
@@ -359,7 +360,6 @@
 				079C6B131392040200528E69 /* DungaRadarAppDelegate.m */,
 				079C6B151392040200528E69 /* MainWindow.xib */,
 				079C6B0A1392040200528E69 /* Supporting Files */,
-				0770DD5A14C29B9F00008CA3 /* define.h */,
 			);
 			path = DungaRadar;
 			sourceTree = "<group>";

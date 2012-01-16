@@ -6,11 +6,14 @@
 //  Copyright (c) 2012 Kawaz. All rights reserved.
 //
 
+#import "define.h"
 #import "ConfigurationViewController.h"
 #import "LoginViewController.h"
-#import "define.h"
+#import "Me.h"
 
 @interface ConfigurationViewController()
+- (void)switchEnableRegistration:(id)sender;
+- (void)switchEnableBackground:(id)sender;
 - (void)switchSaveMode:(id)sender;
 - (NSString*)labelFromFrequency:(int)second;
 @end
@@ -54,11 +57,11 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-  return 3;
+  return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  int rows[3] = {1, 2, 1};
+  int rows[4] = {1, 4, 1, 1};
   return rows[section];
 }
 
@@ -70,13 +73,34 @@
   if (cell == nil) {
     cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier] autorelease];
     if (section == 0) {
+      Me* me = [Me sharedMe];
       cell.textLabel.text = @"ログイン設定";
+      cell.detailTextLabel.text = me.dispName;
+      cell.imageView.image = me.iconImage;
       cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     } else if (section == 1) {
       if (row == 0) {
+        cell.textLabel.text = @"現在位置を送信する";
+        UISwitch* sw = [[[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+        sw.on = [[NSUserDefaults standardUserDefaults] boolForKey:KEY_FOR_ENABLE_ACTIVATION];
+        cell.accessoryView = sw;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [sw addTarget:self 
+               action:@selector(switchEnableRegistration:) 
+     forControlEvents:UIControlEventValueChanged];
+      } else if (row == 1) {
+        cell.textLabel.text = @"バックグラウンド送信";
+        UISwitch* sw = [[[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
+        sw.on = [[NSUserDefaults standardUserDefaults] boolForKey:KEY_FOR_ENABLE_BACKGROUND];
+        cell.accessoryView = sw;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [sw addTarget:self 
+               action:@selector(switchEnableBackground:) 
+     forControlEvents:UIControlEventValueChanged];
+      } else if (row == 2) {
         cell.textLabel.text = @"送信頻度";
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-      } else if (row == 1) {
+      } else if (row == 3) {
         cell.textLabel.text = @"節電モード";
         UISwitch* sw = [[[UISwitch alloc] initWithFrame:CGRectMake(0, 0, 0, 0)] autorelease];
         sw.on = [[NSUserDefaults standardUserDefaults] boolForKey:KEY_FOR_SAVEMODE];
@@ -87,10 +111,18 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
       }
     } else if (section == 2) {
+      if (row == 0) {
+        cell.textLabel.text = @"表示日数";
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+      }
+    } else if (section == 3) {
+      if (row == 0) {
+        cell.textLabel.text = @"アイコンを再取得";
+      }
     }
     
   }
-  if (section == 1 && row == 0) {
+  if (section == 1 && row == 2) {
     int frequency = [[NSUserDefaults standardUserDefaults] integerForKey:KEY_FOR_FREQUENCY];
     cell.detailTextLabel.text = [self labelFromFrequency:frequency];
   }
@@ -104,7 +136,7 @@
     LoginViewController* vc = [[[LoginViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
     [self pushViewController:vc animated:YES];
   } else if (section == 1) {
-    if (row == 0) {
+    if (row == 2) {
       UIViewController* vc = [[[UIViewController alloc] init] autorelease];
       UIPickerView* picker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, 0, 0, 0)];
       vc.view.backgroundColor = [UIColor groupTableViewBackgroundColor];
@@ -121,8 +153,15 @@
 }
   
 - (NSString*)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-  NSString* header[] = {@"", @"送信設定", @"アイコン設定"};
+  NSString* header[] = {@"", @"送信設定", @"履歴設定", @""};
   return header[section];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+  if (indexPath.section == 0 && indexPath.row == 0){
+    return 56;
+  }
+  return 44;
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -157,14 +196,22 @@
   }
 }
 
+- (void)switchEnableRegistration:(id)sender {
+  UISwitch* sw = (UISwitch*)sender;
+  [[NSUserDefaults standardUserDefaults] setBool:sw.on forKey:KEY_FOR_ENABLE_ACTIVATION];
+  [[Me sharedMe] updateLocationStatus];
+}
+
+- (void)switchEnableBackground:(id)sender {
+  UISwitch* sw = (UISwitch*)sender;
+  [[NSUserDefaults standardUserDefaults] setBool:sw.on forKey:KEY_FOR_ENABLE_BACKGROUND];
+  [[Me sharedMe] updateLocationStatus];
+}
+
 - (void)switchSaveMode:(id)sender {
   UISwitch* sw = (UISwitch*)sender;
   NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-  if (sw.on) {
-    [ud setBool:YES forKey:KEY_FOR_SAVEMODE];
-  } else {
-    [ud setBool:NO forKey:KEY_FOR_SAVEMODE];
-  }
+  [ud setBool:sw.on forKey:KEY_FOR_SAVEMODE];
 }
 
 - (NSString*)labelFromFrequency:(int)second {

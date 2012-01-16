@@ -10,7 +10,6 @@
 #import <MapKit/MapKit.h>
 
 @interface DungaMember : NSObject <MKAnnotation, NSCoding>{
- @private
   int primaryKey_;
   NSString* dispName_;
   NSDate* timestamp_;

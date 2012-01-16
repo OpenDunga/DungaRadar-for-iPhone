@@ -8,9 +8,13 @@
 
 #import "DungaMember.h"
 
-@interface Me : DungaMember
+@interface Me : DungaMember <CLLocationManagerDelegate> {
+  CLLocationManager* locationManager_;
+}
 
 + (id)sharedMe;
 - (BOOL)commit;
+- (void)updateFromJSON:(NSString*)json;
+- (void)updateLocationStatus;
 
 @end

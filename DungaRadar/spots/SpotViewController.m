@@ -46,7 +46,7 @@ const NSString* PATH_VENUE_LIST = @"/api/location/venue/list/%lf/%lf/%d";
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad{
+- (void)viewDidLoad {
   [super viewDidLoad];
   tableView_.delegate = self;
   tableView_.dataSource = self;
@@ -54,7 +54,8 @@ const NSString* PATH_VENUE_LIST = @"/api/location/venue/list/%lf/%lf/%d";
   [self reloadSpotList];
 }
 
-- (void)viewDidUnload{
+- (void)viewDidUnload {
+  [tableView_ release];
   [super viewDidUnload];
 }
 
