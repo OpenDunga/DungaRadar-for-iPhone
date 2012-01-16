@@ -16,6 +16,7 @@ const NSString* PATH_MEMBER_PROFILE_ICON_LOCATION	= @"/api/profile/icon/";
 const NSString* PATH_MEMBER_LOCATION_HISTORY = @"/api/location/history/%d";
 
 @interface DungaMember()
+- (UIImage*)loadImageFromStorage;
 - (void)onSucceedLoadingImage:(NSURLConnection*)connection aConnection:(DungaAsyncConnection*)aConnection;
 @end
 
@@ -42,7 +43,6 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   if(self){
     primaryKey_ = [(NSNumber*)[userData objectForKey:@"memberID"] intValue];
     self.dispName = [(NSString*)[userData objectForKey:@"memberDispName"] retain];
-    self.iconImage = nil;
     self.location = [[CLLocation alloc] initWithLatitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"latitude"] doubleValue] 
                                            longitude:(CLLocationDegrees)[(NSNumber*)[userData objectForKey:@"longitude"] doubleValue]];
     double epoch = [(NSNumber*)[userData objectForKey:@"registeredTime"] doubleValue] / 1000;
@@ -100,7 +100,7 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
   [aCoder encodeObject:[NSNumber numberWithInt:primaryKey_] forKey:@"primaryKey"];
   [aCoder encodeObject:dispName_ forKey:@"dispName"];
   [aCoder encodeObject:timestamp_ forKey:@"timestamp"];
-  NSData* imageData = UIImagePNGRepresentation(iconImage_);
+  NSData* imageData = UIImagePNGRepresentation(self.iconImage);
   [aCoder encodeObject:imageData forKey:@"iconImage"];
   [aCoder encodeObject:location_ forKey:@"location"];
 }
@@ -119,20 +119,43 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
 
 - (UIImage*)iconImage {
   if(iconImage_ == nil) {
-    DungaAsyncConnection* dac = [DungaAsyncConnection connection];
-    dac.delegate = self;
-    dac.finishSelector = @selector(onSucceedLoadingImage:aConnection:);
-    [dac connectToDungaWithAuth:[NSString stringWithFormat:@"%@%d", 
-                                 (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
-                                 primaryKey_]  
-                         params:nil 
-                         method:@"GET"];
+    UIImage* storage = [self loadImageFromStorage];
+    if (storage) {
+      iconImage_ = [storage retain];
+    } else if (self.primaryKey) {
+      DungaAsyncConnection* dac = [DungaAsyncConnection connection];
+      dac.delegate = self;
+      dac.finishSelector = @selector(onSucceedLoadingImage:aConnection:);
+      [dac connectToDungaWithAuth:[NSString stringWithFormat:@"%@%d", 
+                                   (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
+                                   self.primaryKey]  
+                           params:nil 
+                           method:@"GET"];
+    }
   }
   return iconImage_;
 }
 
+- (UIImage*)loadImageFromStorage {
+  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+  NSMutableDictionary* imageIcons = [ud objectForKey:@"imageIcons"];
+  NSData* imageData = [imageIcons objectForKey:[NSString stringWithFormat:@"%d", self.primaryKey]];
+  if (imageData) {
+    return [[[UIImage alloc] initWithData:imageData] autorelease];
+  }
+  return nil;
+}
+
 - (void)onSucceedLoadingImage:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
   self.iconImage = [[[UIImage alloc] initWithData:aConnection.data] autorelease];
+  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+  NSMutableDictionary* imageIcons = [NSMutableDictionary dictionaryWithDictionary:[ud objectForKey:@"imageIcons"]];
+  if (!imageIcons) {
+    imageIcons = [NSMutableDictionary dictionary];
+  }
+  NSData* imageData = UIImagePNGRepresentation(self.iconImage);
+  [imageIcons setObject:imageData forKey:[NSString stringWithFormat:@"%d", self.primaryKey]];
+  [ud setObject:imageIcons forKey:@"imageIcons"];
 }
 
 - (CLLocationCoordinate2D)coordinate{
@@ -146,6 +169,10 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_;
 - (BOOL)isEqual:(id)object{
   DungaMember* member = (DungaMember*)object;
   return primaryKey_ == member.primaryKey;
+}
+
+- (NSString*)description {
+  return [NSString stringWithFormat:@"%@(%d)", self.dispName, self.primaryKey];
 }
 
 @end

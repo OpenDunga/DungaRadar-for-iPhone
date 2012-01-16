@@ -84,6 +84,7 @@
 		0770DD5C14C2AD5D00008CA3 /* HttpAsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpAsyncConnection.m; path = models/HttpAsyncConnection.m; sourceTree = "<group>"; };
 		0770DD5E14C2B3EE00008CA3 /* DungaAsyncConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DungaAsyncConnection.h; path = models/DungaAsyncConnection.h; sourceTree = "<group>"; };
 		0770DD5F14C2B3EF00008CA3 /* DungaAsyncConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DungaAsyncConnection.m; path = models/DungaAsyncConnection.m; sourceTree = "<group>"; };
+		0783993B14C3CB95000B4225 /* KWAsyncConnectionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KWAsyncConnectionDelegate.h; path = utils/KWAsyncConnectionDelegate.h; sourceTree = "<group>"; };
 		078F5A39147CD5F200C2A958 /* CDataScanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDataScanner.h; sourceTree = "<group>"; };
 		078F5A3A147CD5F200C2A958 /* CDataScanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDataScanner.m; sourceTree = "<group>"; };
 		078F5A3C147CD5F200C2A958 /* CFilteringJSONSerializer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFilteringJSONSerializer.h; sourceTree = "<group>"; };
@@ -233,6 +234,7 @@
 				075634E1147CA4DE0090BFE9 /* EncryptExtention.m */,
 				078F5A64147CE72600C2A958 /* UIImageExtention.h */,
 				078F5A65147CE72700C2A958 /* UIImageExtention.m */,
+				0783993B14C3CB95000B4225 /* KWAsyncConnectionDelegate.h */,
 			);
 			name = utils;
 			sourceTree = "<group>";

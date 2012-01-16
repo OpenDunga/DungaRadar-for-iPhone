@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "KWAsyncConnectionDelegate.h"
 
-@interface HttpAsyncConnection : NSObject {
+@interface HttpAsyncConnection : NSObject <KWAsyncConnectionDelegate> {
   SEL responseSelector_;
   SEL dataSelector_;
   SEL finishSelector_;

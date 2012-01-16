@@ -97,6 +97,13 @@ const NSString* PATH_LOGIN	  = @"/api/login";
                                   path:path];
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+  [super connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response]; 
+  if (state_ == DungaAsyncStateLogin && self.urlRes.statusCode != 200) {
+    [connection cancel];
+  }
+}
+
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
   if (state_ == DungaAsyncStateLogin) {
     state_ = DungaAsyncStateData;
@@ -112,8 +119,7 @@ const NSString* PATH_LOGIN	  = @"/api/login";
       [self.delegate performSelector:self.finishSelector withObject:connection withObject:self];
     }
   } else {
-    if (self.finishSelector) {
-      NSLog(@"%@", [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease]);
+    if (self.finishSelector && self.delegate) {
       [self.delegate performSelector:self.finishSelector withObject:connection withObject:self];
     }	
   }

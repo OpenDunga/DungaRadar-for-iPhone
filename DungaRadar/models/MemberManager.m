@@ -66,8 +66,16 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
 }
 
 - (NSMutableArray*)membersFromStorage {
+  NSMutableArray* members = [NSMutableArray array];
   NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-  return [self membersFromInfo:[ud arrayForKey:@"members"]];
+  NSArray* memberData = [ud arrayForKey:@"members"];
+  if (!memberData) return members;
+  for (NSData* data in memberData) {
+    DungaMember* member = (DungaMember*)[NSKeyedUnarchiver unarchiveObjectWithData:data];
+    if (!member.primaryKey) continue;
+    [members addObject:member];
+  }
+  return members;
 }
 
 - (void)onSucceedLoadingMembers:(NSURLConnection *)connection aConnection:(DungaAsyncConnection *)aConnection {
@@ -75,11 +83,16 @@ const NSString* PATH_ALL_MEMBER_LOCATION = @"/api/location/all";
   NSDictionary* res = [NSDictionary dictionaryWithJSONString:aConnection.responseBody
                                                        error:&err];
   NSArray* memberInfos = (NSArray*)[res objectForKey:@"entries"];
-  [[NSUserDefaults standardUserDefaults] setObject:memberInfos forKey:@"members"];
   self.members = [self membersFromInfo:memberInfos];
-  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
-  [ud setObject:self.members forKey:@"members"];
   self.members = [self.members sortedArrayUsingSelector:@selector(sortByTimestamp:)];
+  NSUserDefaults* ud = [NSUserDefaults standardUserDefaults];
+  NSMutableArray* saveMembers = [NSMutableArray array];
+  for (DungaMember* member in self.members) {
+    if (!member.primaryKey) continue;
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:member];
+    [saveMembers addObject:data];
+  }
+  [ud setObject:saveMembers forKey:@"members"];
 }
 
 @end
