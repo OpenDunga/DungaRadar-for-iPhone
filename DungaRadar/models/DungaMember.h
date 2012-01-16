@@ -22,6 +22,7 @@
 - (NSComparisonResult)sortByTimestamp:(DungaMember*)otherMember;
 - (NSString*)descriptionDetailFromMember:(DungaMember*)member;
 - (NSArray*)historySinceDate:(NSDate*)date;
+- (void)startLoadingIcon;
 
 @property(readonly) int primaryKey;
 @property(readwrite, copy) NSString* dispName;

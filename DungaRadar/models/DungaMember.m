@@ -110,20 +110,24 @@ timestamp=timestamp_, iconImage=iconImage_, location=location_, history = histor
   return results;
 }
 
+- (void)startLoadingIcon {
+  DungaAsyncConnection* dac = [DungaAsyncConnection connection];
+  dac.delegate = self;
+  dac.finishSelector = @selector(onSucceedLoadingImage:aConnection:);
+  [dac connectToDungaWithAuth:[NSString stringWithFormat:@"%@%d", 
+                               (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
+                               self.primaryKey]  
+                       params:nil 
+                       method:@"GET"];
+}
+
 - (UIImage*)iconImage {
   if(iconImage_ == nil) {
     UIImage* storage = [self loadImageFromStorage];
     if (storage) {
       iconImage_ = [storage retain];
     } else if (self.primaryKey) {
-      DungaAsyncConnection* dac = [DungaAsyncConnection connection];
-      dac.delegate = self;
-      dac.finishSelector = @selector(onSucceedLoadingImage:aConnection:);
-      [dac connectToDungaWithAuth:[NSString stringWithFormat:@"%@%d", 
-                                   (NSString*)PATH_MEMBER_PROFILE_ICON_LOCATION, 
-                                   self.primaryKey]  
-                           params:nil 
-                           method:@"GET"];
+      [self startLoadingIcon];
     }
   }
   return iconImage_;

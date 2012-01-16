@@ -10,6 +10,7 @@
 #import "ConfigurationViewController.h"
 #import "LoginViewController.h"
 #import "Me.h"
+#import "MemberManager.h"
 
 @interface ConfigurationViewController()
 - (void)switchEnableRegistration:(id)sender;
@@ -148,6 +149,13 @@
             inComponent:0 animated:NO];
       [vc.view addSubview:picker];
       [self pushViewController:vc animated:YES];
+    }
+  } else if (section == 3) {
+    if (row == 0) {
+      MemberManager* manager = [MemberManager instance];
+      for (DungaMember* member in manager.members) {
+        [member startLoadingIcon];
+      }
     }
   }
 }
